@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".OperatorHomeScreen">
+
+    <TextView
+            android:id="@+id/operator_welcome_msg"
+            android:layout_width="290dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="30dp"
+            android:text="  Welcome Operator"
+            android:textColor="#00574B"
+            android:textSize="32sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+            android:id="@+id/operator_view_current_orders"
+            android:layout_width="250dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="30dp"
+            android:text="View_current_orders"
+            android:textColor="#000105"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/operator_welcome_msg" />
+
+    <Button
+            android:id="@+id/operator_view_schedule"
+            android:layout_width="250dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="30dp"
+            android:text="View Schedule"
+            android:textColor="#000105"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/operator_view_current_orders" />
+
+    <Button
+            android:id="@+id/operator_view_profile"
+            android:layout_width="250dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="30dp"
+            android:text="View Profile"
+            android:textColor="#000105"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/operator_view_schedule" />
+
+    <Button
+            android:id="@+id/operator_logout"
+            android:layout_width="250dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="30dp"
+            android:text="Logout"
+            android:textColor="#000105"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/operator_view_profile"
+            android:onClick="logout" />
+</androidx.constraintlayout.widget.ConstraintLayout>
