@@ -14,7 +14,6 @@ public class DBManager extends SQLiteOpenHelper
     private static final String dbname = "VendingVehicleMachine.db";
     public DBManager( Context context) {
         super(context,dbname , null, 1);
-        System.out.println("===============================================");
     }
 
     @Override
