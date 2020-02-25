@@ -35,6 +35,7 @@ public class ForgotPasswordScreen extends AppCompatActivity {
                 cv.put("password",newPassword);
                 SQLiteDatabase sqLiteDatabase = db.getWritableDatabase();
                 sqLiteDatabase.update("tbl_registerUser", cv, "email='"+email+"'", null);
+                Toast.makeText(getApplicationContext(),"Reset Password Successful",Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(this,MainActivity.class));
             }
         } else {
