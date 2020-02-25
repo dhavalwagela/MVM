@@ -13,6 +13,7 @@ import android.os.Bundle;
 
 public class MainActivity extends AppCompatActivity {
 
+    /*TODO Need to make fields Mandatory*/
     TextView textView;
     EditText username, password;
     @Override
