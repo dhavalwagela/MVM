@@ -50,35 +50,25 @@
             android:layout_height="57dp"
             android:layout_marginTop="30dp"
             android:text="View Profile"
+            android:onClick="viewProfile"
             android:textColor="#000105"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_view_cart" />
+            app:layout_constraintTop_toBottomOf="@+id/user_view_orders" />
 
     <Button
-            android:id="@+id/user_logout"
+            android:id="@+id/user_contact_us"
             android:layout_width="306dp"
             android:layout_height="57dp"
             android:layout_marginTop="30dp"
-            android:text="Logout"
+            android:text="Contact Us"
             android:textColor="#000105"
             android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/user_view_profile"
             tools:ignore="MissingConstraints"
-            android:onClick="logout"/>
+            android:onClick="contactUs"/>
 
-    <Button
-            android:id="@+id/user_view_cart"
-            android:layout_width="306dp"
-            android:layout_height="57dp"
-            android:layout_marginTop="30dp"
-            android:text="View Cart"
-            android:textColor="#000105"
-            android:textSize="20sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/user_view_orders" />
 </androidx.constraintlayout.widget.ConstraintLayout>
