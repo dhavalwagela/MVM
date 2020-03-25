@@ -2,9 +2,13 @@ package com.example.mvm;
 
 import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -17,6 +21,27 @@ public class Checkout extends AppCompatActivity {
     CardForm cardForm;
     Button buy;
     AlertDialog.Builder alertBuilder;
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.parent_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                startActivity(new Intent(this,MainActivity.class));
+                return true;
+            case R.id.cart:
+                startActivity(new Intent(this,ViewCart.class));
+                return true;
+            case R.id.home:
+                startActivity(new Intent(this,UserHomeScreen.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @SuppressLint("WrongConstant")
     @Override

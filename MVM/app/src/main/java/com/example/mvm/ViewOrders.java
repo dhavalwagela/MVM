@@ -3,6 +3,9 @@ package com.example.mvm;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -15,6 +18,27 @@ import java.util.List;
 
 public class ViewOrders extends AppCompatActivity {
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.parent_menu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.logout:
+                startActivity(new Intent(this,MainActivity.class));
+                return true;
+            case R.id.cart:
+                startActivity(new Intent(this,ViewCart.class));
+                return true;
+            case R.id.home:
+                startActivity(new Intent(this,UserHomeScreen.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {

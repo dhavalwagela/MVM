@@ -34,7 +34,7 @@ public class ViewCurrentOrders extends AppCompatActivity {
                 startActivity(new Intent(this,MainActivity.class));
                 return true;
             case R.id.home:
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this,OperatorHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

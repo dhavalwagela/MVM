@@ -17,7 +17,6 @@ public class UserHomeScreen extends AppCompatActivity {
     }
 
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
         switch (item.getItemId()) {
             case R.id.logout:
                 startActivity(new Intent(this,MainActivity.class));
@@ -26,7 +25,7 @@ public class UserHomeScreen extends AppCompatActivity {
                 startActivity(new Intent(this,ViewCart.class));
                 return true;
             case R.id.home:
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this,UserHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
