@@ -23,9 +23,10 @@
             android:layout_width="250dp"
             android:layout_height="57dp"
             android:layout_marginTop="30dp"
-            android:text="View_current_orders"
+            android:text="View Current Orders"
             android:textColor="#000105"
             android:textSize="18sp"
+            android:onClick="viewCurrentOrders"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
@@ -51,21 +52,23 @@
             android:text="View Profile"
             android:textColor="#000105"
             android:textSize="18sp"
+            android:onClick="viewProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/operator_view_schedule" />
 
     <Button
-            android:id="@+id/operator_logout"
+            android:id="@+id/contact_us"
             android:layout_width="250dp"
             android:layout_height="57dp"
             android:layout_marginTop="30dp"
-            android:text="Logout"
+            android:text="Contact Us"
             android:textColor="#000105"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/operator_view_profile"
-            android:onClick="logout" />
+            android:onClick="contactUs" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

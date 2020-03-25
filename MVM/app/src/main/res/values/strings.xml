@@ -1,3 +1,23 @@
 <resources>
     <string name="app_name">MVM</string>
+    <string-array name="vehicle_name">
+        <item>Vehicle_1</item>
+        <item>Vehicle_2</item>
+        <item>Vehicle_3</item>
+        <item>Vehicle_4</item>
+        <item>Vehicle_5</item>
+        <item>Vehicle_6</item>
+        <item>Vehicle_7</item>
+        <item>Vehicle_8</item>
+    </string-array>
+
+    <string-array name="operator_name">
+        <item>Operator 1</item>
+        <item>Operator 2</item>
+        <item>Operator 3</item>
+        <item>Operator 4</item>
+        <item>Operator 5</item>
+        <item>Operator 6</item>
+        <item>Operator 7</item>
+    </string-array>
 </resources>

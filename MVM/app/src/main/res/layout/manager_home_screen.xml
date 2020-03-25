@@ -37,6 +37,7 @@
             android:text="View Avilable Vehicles"
             android:textColor="#000105"
             android:textSize="18sp"
+            android:onClick="viewAvailableVehicles"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/manager_view_vehicle_inventory" />
@@ -46,9 +47,10 @@
             android:layout_width="306dp"
             android:layout_height="55dp"
             android:layout_marginTop="30dp"
-            android:text="View OPerator Details"
+            android:text="View Operator Details"
             android:textColor="#000105"
             android:textSize="18sp"
+            android:onClick="viewOperators"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/manager_view_available_vehicles" />
@@ -61,20 +63,21 @@
             android:text="View Profile"
             android:textColor="#000105"
             android:textSize="18sp"
+            android:onClick="viewProfile"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/manager_view_operator_details" />
 
     <Button
-            android:id="@+id/manager_logout"
+            android:id="@+id/manager_contactus"
             android:layout_width="306dp"
             android:layout_height="55dp"
             android:layout_marginTop="30dp"
-            android:text="Logout"
+            android:text="Contact Us"
             android:textColor="#000105"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/manager_view_profile"
-            android:onClick="logout" />
+            android:onClick="contactUs" />
 </androidx.constraintlayout.widget.ConstraintLayout>
