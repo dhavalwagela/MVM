@@ -40,5 +40,8 @@ public class UserHomeScreen extends AppCompatActivity {
         startActivity(new Intent(this,ContactUsActivity.class));
     }
     public void viewProfile(View view) {startActivity(new Intent(this,ViewProfile.class));}
+    public void searchVendingVehicle(View view) {startActivity(new Intent(this,SearchVendingVehicleUser.class)); }
+    public void viewOrders(View view) {startActivity(new Intent(this,ViewOrders.class)); }
+
 
 }

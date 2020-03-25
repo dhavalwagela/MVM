@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="190dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".SearchVendingVehicleManager">
+
+        <TextView
+                android:id="@+id/locationidLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="176dp"
+                android:text="Location Id"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.095"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TableLayout
+                android:id="@+id/tableid"
+                android:layout_width="409dp"
+                android:layout_height="346dp"
+                android:layout_marginTop="80dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/goButton">
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Vehicle Id"
+                        android:textSize="10dp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Vehicle Type"
+                        android:textSize="10dp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Location Id"
+                        android:textSize="10dp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Time Slot"
+                        android:textSize="10dp" />
+
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Assigned Operator"
+                        android:textSize="10dp" />
+
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="1"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Truck"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Location 2"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="2-4"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="David"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="4"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="Cart"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="Location 5"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="10-1"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="Evan"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="5"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="104dp"
+                        android:layout_height="match_parent"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="Cart"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="Location 1"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="5-7"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="3dp"
+                        android:text="Daniel"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+                android:id="@+id/titleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="120dp"
+                android:text="Search Vending Vehicle"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="118dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="56dp"
+                android:prompt="@string/country_prompt"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+
+        <TextView
+                android:id="@+id/vehicleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:text="Vehicle Id"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.091"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/locationidLabel" />
+
+        <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="109dp"
+                android:layout_height="29dp"
+                android:layout_marginTop="92dp"
+                android:prompt="@string/country_prompt1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.567"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
+
+        <Button
+                android:id="@+id/goButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="176dp"
+                android:text="Search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.38"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

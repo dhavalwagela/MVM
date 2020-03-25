@@ -6,6 +6,20 @@
         android:layout_height="match_parent"
         tools:context=".OperatorHomeScreen">
 
+    <Button
+            android:id="@+id/viewVehicleInventory"
+            android:layout_width="250dp"
+            android:layout_height="57dp"
+            android:layout_marginTop="28dp"
+            android:onClick="viewVehicleInventory"
+            android:text="View Vehicle Inventory"
+            android:textColor="#000105"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.503"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/operator_view_schedule" />
+
     <TextView
             android:id="@+id/operator_welcome_msg"
             android:layout_width="290dp"
@@ -40,6 +54,7 @@
             android:text="View Schedule"
             android:textColor="#000105"
             android:textSize="18sp"
+            android:onClick="viewSchedule"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/operator_view_current_orders" />
@@ -48,13 +63,13 @@
             android:id="@+id/operator_view_profile"
             android:layout_width="250dp"
             android:layout_height="57dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="116dp"
+            android:onClick="viewProfile"
             android:text="View Profile"
             android:textColor="#000105"
             android:textSize="18sp"
-            android:onClick="viewProfile"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/operator_view_schedule" />
 
@@ -62,13 +77,14 @@
             android:id="@+id/contact_us"
             android:layout_width="250dp"
             android:layout_height="57dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="36dp"
+            android:onClick="contactUs"
             android:text="Contact Us"
             android:textColor="#000105"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.496"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/operator_view_profile"
-            android:onClick="contactUs" />
+            app:layout_constraintTop_toBottomOf="@+id/operator_view_profile" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

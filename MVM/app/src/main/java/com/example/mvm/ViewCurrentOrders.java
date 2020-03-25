@@ -16,7 +16,7 @@ import android.os.Bundle;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CurrentOrders extends AppCompatActivity {
+public class ViewCurrentOrders extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -90,7 +90,7 @@ public class CurrentOrders extends AppCompatActivity {
 
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Dialog dialog = new Dialog(CurrentOrders.this);
+                    Dialog dialog = new Dialog(ViewCurrentOrders.this);
                     dialog.setContentView(R.layout.activity_dialog);
                     dialog.setTitle("Notification");
                     TextView textViewUser = (TextView) dialog.findViewById(R.id.textBrand);
