@@ -21,10 +21,10 @@ public class ContactUsActivity extends AppCompatActivity {
                 startActivity(new Intent(this,MainActivity.class));
                 return true;
             case R.id.cart:
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this,ViewCart.class));
                 return true;
             case R.id.home:
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this,UserHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

@@ -36,7 +36,7 @@ public class AssignOperatorScreen extends AppCompatActivity {
                 startActivity(new Intent(this,MainActivity.class));
                 return true;
             case R.id.home:
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this,ManagerHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
