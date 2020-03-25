@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="utf-8"?>
+<HorizontalScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="190dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".ViewVehicleInventoryOperator">
+
+        <Button
+                android:id="@+id/homeButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Home"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.086"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+                android:id="@+id/logoutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:text="Logout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.888"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+                android:id="@+id/locationidLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="152dp"
+                android:text="Location Id"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.095"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/homeButton" />
+
+        <TableLayout
+                android:layout_width="409dp"
+                android:layout_height="346dp"
+                android:layout_marginTop="128dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginRight="2dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner">
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Drinks"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="10"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Sandwiches"
+                        android:textSize="12dp" />
+
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="24"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+
+
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Snacks"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="12"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
+
+
+
+
+
+
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Duration"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="3"
+                        android:textAlignment="center"
+                        android:textSize="12dp" />
+
+
+
+
+
+
+
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Location"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Cooper and UTA Blvd"
+                        android:textAlignment="center"
+                        android:textSize="12dp" />
+
+
+            </TableRow>
+
+            <TableRow>
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="Total Revenue"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_span="1"
+                        android:padding="5dp"
+                        android:text="$500"
+                        android:textAlignment="center"
+                        android:textSize="12dp"
+                        android:gravity="center_horizontal" />
+            </TableRow>
+        </TableLayout>
+
+        <TextView
+                android:id="@+id/titleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="104dp"
+                android:text="View Vehicle Inventory"
+                android:textColor="@android:color/holo_blue_dark"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="118dp"
+                android:layout_height="34dp"
+                android:layout_marginTop="68dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.576"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+
+        <TextView
+                android:id="@+id/vehicleLabel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="56dp"
+                android:text="Vehicle Id"
+                android:textSize="24sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.091"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/locationidLabel" />
+
+        <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="109dp"
+                android:layout_height="29dp"
+                android:layout_marginTop="92dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.567"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
+
+        <Button
+                android:id="@+id/goButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="160dp"
+                android:text="Search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.919"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</HorizontalScrollView>

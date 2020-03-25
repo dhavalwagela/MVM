@@ -18,11 +18,12 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <Button
-            android:id="@+id/manager_view_vehicle_inventory"
+            android:id="@+id/manager_search_vending_vehicle"
             android:layout_width="290dp"
             android:layout_height="55dp"
             android:layout_marginTop="30dp"
-            android:text="View Vehicle Inventory"
+            android:onClick="searchVendingVehicle"
+            android:text="Search Vending Vehicle"
             android:textColor="#000105"
             android:textSize="18sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -34,13 +35,13 @@
             android:layout_width="306dp"
             android:layout_height="55dp"
             android:layout_marginTop="30dp"
-            android:text="View Avilable Vehicles"
+            android:text="View Available Vehicles"
             android:textColor="#000105"
             android:textSize="18sp"
             android:onClick="viewAvailableVehicles"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/manager_view_vehicle_inventory" />
+            app:layout_constraintTop_toBottomOf="@+id/manager_search_vending_vehicle" />
 
     <Button
             android:id="@+id/manager_view_operator_details"

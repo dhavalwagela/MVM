@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">MVM</string>
+    <string name="country_prompt">Country</string>
+    <string name="country_prompt1">Country prompt1</string>
     <string-array name="vehicle_name">
         <item>Vehicle_1</item>
         <item>Vehicle_2</item>
@@ -13,11 +15,21 @@
 
     <string-array name="operator_name">
         <item>Operator 1</item>
-        <item>Operator 2</item>
+        <item>Operator2</item>
         <item>Operator 3</item>
         <item>Operator 4</item>
         <item>Operator 5</item>
         <item>Operator 6</item>
         <item>Operator 7</item>
+    </string-array>
+
+    <string-array name="location_name">
+        <item>Location 1</item>
+        <item>Location 2</item>
+        <item>Location 3</item>
+        <item>Location 4</item>
+        <item>Location 5</item>
+        <item>Location 6</item>
+        <item>Location 7</item>
     </string-array>
 </resources>
