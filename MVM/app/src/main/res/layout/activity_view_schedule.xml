@@ -12,10 +12,9 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="40dp"
             android:text="Schedule"
-            android:textColor="#009688"
-            android:textSize="18sp"
-            android:typeface="serif"
-            app:fontFamily="sans-serif-condensed-medium"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />

@@ -129,7 +129,8 @@
                         android:padding="5dp"
                         android:text="3"
                         android:textAlignment="center"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
 
 
             </TableRow>
@@ -151,7 +152,8 @@
                         android:padding="5dp"
                         android:text="Cooper and UTA Blvd"
                         android:textAlignment="center"
-                        android:textSize="12dp" />
+                        android:textSize="12dp"
+                        tools:ignore="RtlCompat" />
 
 
             </TableRow>
@@ -184,8 +186,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="104dp"
                 android:text="View Vehicle Inventory"
-                android:textColor="@android:color/holo_blue_dark"
                 android:textSize="24sp"
+                android:textStyle="bold"
+                android:textColor="#000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
