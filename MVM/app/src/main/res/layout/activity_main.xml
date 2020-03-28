@@ -7,6 +7,7 @@
         tools:context=".MainActivity">
 
     <TextView
+            android:id="@+id/textView4"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="120dp"
@@ -16,10 +17,13 @@
             android:layout_marginRight="123dp"
             android:layout_marginBottom="652dp"
             android:ems="5"
-            android:text=" Welcome !"
-            android:textColor="#080908"
-            android:textSize="20sp"
-            android:typeface="sans"
+            android:text=" User Login"
+            android:textColor="#009688"
+            android:textSize="22sp"
+            android:typeface="serif"
+            android:textAllCaps="true"
+            app:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="bold"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.52"
@@ -32,25 +36,26 @@
             android:id="@+id/userText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="112dp"
+            android:layout_marginTop="28dp"
             android:ems="10"
             android:hint="Enter username"
             android:inputType="textPersonName"
             android:textCursorDrawable="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
     <EditText
             android:id="@+id/pwdText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="36dp"
             android:ems="10"
             android:hint="Enter password"
             android:inputType="textPersonName|textPassword"
             android:textCursorDrawable="@color/colorAccent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.505"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userText" />
 
@@ -59,7 +64,7 @@
             android:layout_width="119dp"
             android:layout_height="37dp"
             android:layout_centerInParent="true"
-            android:layout_marginTop="150dp"
+            android:layout_marginTop="20dp"
             android:gravity="center"
             android:onClick="forgotPassword"
             android:text="Forgot password ?"
@@ -69,61 +74,56 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pwdText" />
+            app:layout_constraintTop_toBottomOf="@+id/loginButton" />
 
     <Button
             android:id="@+id/loginButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
+            android:layout_marginStart="80dp"
+            android:layout_marginLeft="80dp"
+            android:layout_marginTop="30dp"
             android:onClick="checkValidUser"
             android:text="Login"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.306"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pwdText" />
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <Button
             android:id="@+id/regButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="68dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginRight="8dp"
             android:onClick="registerDetails"
             android:text="Register"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.721"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/pwdText" />
+            app:layout_constraintStart_toEndOf="@+id/loginButton"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
     <CheckBox
             android:id="@+id/checkBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="100dp"
-            android:layout_marginLeft="100dp"
-            android:layout_marginTop="209dp"
-            android:layout_marginEnd="100dp"
-            android:layout_marginRight="100dp"
-            android:layout_marginBottom="150dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginStart="95dp"
+            android:layout_marginLeft="124dp"
+            android:layout_marginTop="16dp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.191" />
+            app:layout_constraintTop_toBottomOf="@+id/pwdText" />
 
     <TextView
             android:id="@+id/textView2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="265dp"
-            android:layout_marginBottom="333dp"
+            android:layout_marginStart="140dp"
+            android:layout_marginLeft="171dp"
+            android:layout_marginTop="16dp"
             android:text="Show Password"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/pwdText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

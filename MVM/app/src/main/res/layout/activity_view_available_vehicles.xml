@@ -51,7 +51,7 @@
                                 android:layout_width="match_parent"
                                 android:layout_weight="1"
                                 android:textColor="#fff"
-                                android:text="Vehicle ID"/>
+                                android:text="Vehicle"/>
                         <TextView
                                 android:id="@+id/optr_name"
                                 android:textColor="#fff"
@@ -67,7 +67,7 @@
                                 android:layout_height="wrap_content"
                                 android:layout_width="match_parent"
                                 android:layout_weight="1"
-                                android:text="Location ID"/>
+                                android:text="Location"/>
                         <TextView
                                 android:textColor="#fff"
                                 android:id="@+id/time_slt"

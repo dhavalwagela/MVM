@@ -33,7 +33,7 @@ public class ViewCart extends AppCompatActivity {
                 startActivity(new Intent(this,ViewCart.class));
                 return true;
             case R.id.home:
-                startActivity(new Intent(this,MainActivity.class));
+                startActivity(new Intent(this,UserHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -53,15 +53,22 @@ public class ViewCart extends AppCompatActivity {
         child.add("1");
         child.add("Drinks");
         child.add("2");
-        child.add("$4.00");
+        child.add("$3.00");
         list.add(child);
 
         List<String> child1 = new ArrayList<>();
         child1.add("2");
         child1.add("Snacks");
-        child1.add("3");
-        child1.add("$9.00");
+        child1.add("4");
+        child1.add("$5.00");
         list.add(child1);
+
+        List<String> child2 = new ArrayList<>();
+        child2.add("3");
+        child2.add("Sandwiches");
+        child2.add("1");
+        child2.add("$5.75");
+        list.add(child2);
 
         for (int i = 2; i <= list.size() + 1; i++) {
             TableRow row = new TableRow(this);
@@ -73,7 +80,8 @@ public class ViewCart extends AppCompatActivity {
             for (String order : orders) {
                 TextView textView = new TextView(this);
                 textView.setText(order);
-                textView.setWidth(300);
+                textView.setWidth(310);
+                textView.setTextSize(16);
                 if (in == 3 || in == 2) {
                     textView.setWidth(340);
                     textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);

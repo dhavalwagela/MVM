@@ -18,7 +18,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="176dp"
-                android:text="Location Id"
+                android:text="Location"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.095"
@@ -46,7 +46,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:padding="5dp"
-                        android:text="Vehicle Id"
+                        android:text="Vehicle"
                         android:textSize="10dp" />
 
                 <TextView
@@ -62,7 +62,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:padding="5dp"
-                        android:text="Location Id"
+                        android:text="Location"
                         android:textSize="10dp" />
 
                 <TextView
@@ -280,7 +280,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="56dp"
-                android:text="Vehicle Id"
+                android:text="Vehicle"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.091"

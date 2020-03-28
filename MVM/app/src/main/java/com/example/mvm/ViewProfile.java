@@ -39,9 +39,9 @@ public class ViewProfile extends AppCompatActivity {
     public void logout(View view) {
         startActivity(new Intent(this,MainActivity.class));
     }
-/*    public void change_password(View view) {
+    public void changePasswordScreen(View view) {
         startActivity(new Intent(this,ChangePassword.class));
-    }*/
+    }
     public void update_profile(View view) {
         startActivity(new Intent(this,UpdateProfile.class));
     }

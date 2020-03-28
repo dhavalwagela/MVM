@@ -47,23 +47,34 @@ public class ViewCurrentOrders extends AppCompatActivity {
         TableLayout ll = findViewById(R.id.table_layout);
 
         List<List<String>> list = new ArrayList<>();
-        for (int i = 0; i < 4; i++) {
-            List<String> child = new ArrayList<>();
-            child.add("9932023");
+        List<String> child = new ArrayList<>();
+            child.add("1234");
             child.add("Bruce Wayne");
-            child.add("Completed");
-            child.add("03/09/2020");
+            child.add("Pending");
+            child.add("2");
             child.add("$12.00");
             list.add(child);
-        }
-        List<String> child = new ArrayList<>();
-        child.add("9111");
+        child = new ArrayList<>();
+        child.add("1235");
         child.add("Bruce Wayne");
-        child.add("Completed");
-        child.add("03/09/2020");
+        child.add("Pending");
+        child.add("4");
         child.add("$12.00");
         list.add(child);
-
+        child = new ArrayList<>();
+        child.add("1236");
+        child.add("Bruce Wayne");
+        child.add("Pending");
+        child.add("2");
+        child.add("$12.00");
+        list.add(child);
+        child = new ArrayList<>();
+        child.add("1237");
+        child.add("Bruce Wayne");
+        child.add("Pending");
+        child.add("3");
+        child.add("$12.00");
+        list.add(child);
         for (int i = 2; i <= list.size()+1; i++) {
             TableRow row = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);

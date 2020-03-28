@@ -22,9 +22,14 @@
                     android:id="@+id/registration_msg"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="                               REGISTRATION"
+                    android:text="                      REGISTRATION"
+                    android:layout_marginTop="20dp"
                     android:textColor="#009688"
-                    android:textSize="18sp" />
+                    android:textSize="22sp"
+                    android:typeface="serif"
+                    android:textAllCaps="true"
+                    app:fontFamily="sans-serif-condensed-medium"
+                    android:textStyle="bold" />
 
 
             <EditText

@@ -38,7 +38,7 @@ public class UpdateProfile extends AppCompatActivity {
         setContentView(R.layout.activity_update_profile);
     }
     public void update(View view) {
-        Toast.makeText(getApplicationContext(), "Updated Details Successfully", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), "Profile Updated Successfully", Toast.LENGTH_SHORT).show();
         startActivity(new Intent(this,ViewProfile.class));
     }
 }
