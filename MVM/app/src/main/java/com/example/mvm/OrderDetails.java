@@ -46,6 +46,29 @@ public class OrderDetails extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
+    public void cancelOrder(View view) {
+        onCancelOrder(getApplicationContext());
+    }
+    public void onCancelOrder(final Context context) {
+        alertBuilder = new AlertDialog.Builder(OrderDetails.this);
+        alertBuilder.setTitle("Confirm Cancel Order");
+        alertBuilder.setMessage("Are you sure you want to Cancel the Order ?");
+        alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(new Intent(context,OrderDetails.class));
+                dialogInterface.dismiss();
+            }
+        });
+        alertBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
