@@ -31,34 +31,24 @@
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Order ID"
+                    android:text="    Order ID"
                     android:textColor="#fff" />
 
             <TextView
                     android:id="@+id/ordersLocation"
                     android:layout_width="30dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
+                    android:layout_height="34dp"
                     android:layout_weight="1"
-                    android:text="Location ID"
+                    android:text="   Location"
                     android:textColor="#fff" />
 
             <TextView
                     android:id="@+id/ordersDate"
                     android:layout_width="10dp"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_weight="1"
-                    android:text="Date"
-                    android:textColor="#fff" />
-
-            <TextView
-                    android:id="@+id/ordersTimeSlot"
-                    android:layout_width="15dp"
-                    android:layout_height="wrap_content"
+                    android:layout_height="34dp"
                     android:layout_gravity="center"
                     android:layout_weight="1"
-                    android:text=" Time Slot"
+                    android:text="Pickup Date and Time"
                     android:textColor="#fff" />
 
             <TextView
@@ -66,7 +56,7 @@
                     android:layout_width="10dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Status"
+                    android:text="     Status"
                     android:textColor="#fff" />
 
         </TableRow>
@@ -84,8 +74,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
             android:text="Your Orders"
+            android:textColor="#009688"
+            android:textSize="22sp"
+            android:typeface="serif"
             android:textAllCaps="true"
-            android:textSize="18sp"
+            app:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"

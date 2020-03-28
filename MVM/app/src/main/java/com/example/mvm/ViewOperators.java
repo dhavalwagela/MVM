@@ -40,7 +40,7 @@ public class ViewOperators extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_operators);
-        String[] operators = {"Jacob Santiago", "Andy Oliver", "Dominic Woods", "Neil Phelps", "Tony Bush", "Herman Blake", "Nick Adkins"};
+        String[] operators = getResources().getStringArray(R.array.operator_name);
         ListView list = (ListView) findViewById(R.id.listView1);
 
         ListAdapter myadapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,operators);

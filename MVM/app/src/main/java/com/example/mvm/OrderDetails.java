@@ -51,18 +51,18 @@ public class OrderDetails extends AppCompatActivity {
         child.add("1");
         child.add("Drinks");
         child.add("2");
-        child.add("$4.00");
+        child.add("$3.00");
         list.add(child);
 
         List<String> child1 = new ArrayList<>();
         child1.add("2");
         child1.add("Snacks");
-        child1.add("3");
-        child1.add("$9.00");
+        child1.add("2");
+        child1.add("$2.50");
         list.add(child1);
         for (int i = 2; i <= list.size() + 1; i++) {
             TableRow row = new TableRow(this);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
             row.setLayoutParams(lp);
             List<String> orders = list.get(i - 2);
             int in = 0;
@@ -70,12 +70,9 @@ public class OrderDetails extends AppCompatActivity {
             for (String order : orders) {
                 TextView textView = new TextView(this);
                 textView.setText(order);
-                textView.setWidth(70);
-                if (in != 0) {
-                    textView.setWidth(340);
-                    textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-                } else
-                    textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                textView.setWidth(350);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+
                 row.addView(textView);
                 in++;
             }

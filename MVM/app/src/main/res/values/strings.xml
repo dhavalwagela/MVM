@@ -3,33 +3,33 @@
     <string name="country_prompt">Country</string>
     <string name="country_prompt1">Country prompt1</string>
     <string-array name="vehicle_name">
-        <item>Vehicle_1</item>
-        <item>Vehicle_2</item>
-        <item>Vehicle_3</item>
-        <item>Vehicle_4</item>
-        <item>Vehicle_5</item>
-        <item>Vehicle_6</item>
-        <item>Vehicle_7</item>
-        <item>Vehicle_8</item>
+        <item>Truck 1</item>
+        <item>Truck 2</item>
+        <item>Cart 1</item>
+        <item>Cart 2</item>
+        <item>Cart 3</item>
+        <item>Cart 4</item>
+        <item>Cart 5</item>
     </string-array>
 
     <string-array name="operator_name">
-        <item>Operator 1</item>
-        <item>Operator2</item>
-        <item>Operator 3</item>
-        <item>Operator 4</item>
-        <item>Operator 5</item>
-        <item>Operator 6</item>
-        <item>Operator 7</item>
+        <item>Andy Oliver</item>
+        <item>Dominic Woods</item>
+        <item>William Stinson</item>
+        <item>Jimmy Wayne</item>
+        <item>Jacob Ross</item>
+        <item>Mike Watson</item>
+        <item>Louis Black</item>
     </string-array>
 
     <string-array name="location_name">
-        <item>Location 1</item>
-        <item>Location 2</item>
-        <item>Location 3</item>
-        <item>Location 4</item>
-        <item>Location 5</item>
-        <item>Location 6</item>
-        <item>Location 7</item>
+        <item>Cooper &amp; UTA Blud</item>
+        <item>W Nedderman &amp; Greek Row</item>
+        <item>S Davis &amp; W Mitchell</item>
+        <item>Cooper &amp; W Mitchell</item>
+        <item>S Oak &amp; UTA Blud</item>
+        <item>Spaniolo &amp; W 1st</item>
+        <item>Spaniolo &amp; W Mitchell</item>
+        <item>S Center &amp; W Mitchell</item>
     </string-array>
 </resources>

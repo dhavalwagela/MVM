@@ -27,24 +27,24 @@
                 android:id="@+id/locationidLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="176dp"
-                android:text="Location Id"
+                android:layout_marginTop="28dp"
+                android:text="Location"
                 android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.095"
+                app:layout_constraintEnd_toStartOf="@+id/spinner2"
+                app:layout_constraintHorizontal_bias="0.256"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
         <TableLayout
                 android:layout_width="409dp"
                 android:layout_height="346dp"
-                android:layout_marginTop="332dp"
                 android:layout_marginEnd="2dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginRight="2dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toBottomOf="@+id/goButton">
 
             <TableRow
                     android:layout_width="match_parent"
@@ -55,7 +55,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:padding="20dp"
-                        android:text="Vehicle Id"
+                        android:text="Vehicle"
                         android:textSize="12dp" />
 
                 <TextView
@@ -71,7 +71,7 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:padding="20dp"
-                        android:text="Location Id"
+                        android:text="Location"
                         android:textSize="12dp" />
 
                 <TextView
@@ -207,10 +207,14 @@
                 android:id="@+id/titleLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="112dp"
+                android:layout_marginTop="35dp"
                 android:text="Search Vending Vehicle"
-                android:textColor="@android:color/holo_blue_dark"
-                android:textSize="24sp"
+                android:textColor="#009688"
+                android:textSize="22sp"
+                android:typeface="serif"
+                android:textAllCaps="true"
+                app:fontFamily="sans-serif-condensed-medium"
+                android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -219,31 +223,31 @@
                 android:id="@+id/spinner"
                 android:layout_width="118dp"
                 android:layout_height="34dp"
-                android:layout_marginTop="176dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.567"
+                app:layout_constraintHorizontal_bias="0.655"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
         <TextView
                 android:id="@+id/vehicleLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
-                android:text="Vehicle Id"
+                android:layout_marginTop="20dp"
+                android:text="Vehicle"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.091"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/locationidLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/locationidLabel" />
 
         <Spinner
                 android:id="@+id/spinner2"
                 android:layout_width="109dp"
                 android:layout_height="29dp"
-                android:layout_marginTop="92dp"
+                android:layout_marginTop="28dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.567"
+                app:layout_constraintHorizontal_bias="0.635"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
@@ -251,12 +255,12 @@
                 android:id="@+id/goButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="264dp"
+                android:layout_marginTop="30dp"
                 android:text="Seacrh"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.919"
+                app:layout_constraintHorizontal_bias="0.817"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toBottomOf="@+id/vehicleLabel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
