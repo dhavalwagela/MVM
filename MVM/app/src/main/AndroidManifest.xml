@@ -18,7 +18,7 @@
         <activity android:name=".ChangePassword" />
         <activity android:name=".ViewVehicleInventoryManager" />
         <activity android:name=".ViewVehicleInventoryUser" />
-        <activity android:name=".MainActivity" />
+        <activity android:name=".ViewCurrentOrders" />
         <activity android:name=".ViewProfile" />
         <activity android:name=".ViewSchedule" />
         <activity android:name=".ViewOperators" />
@@ -34,7 +34,7 @@
         <activity android:name=".OperatorHomeScreen" />
         <activity android:name=".UserHomeScreen" />
         <activity android:name=".ManagerHomeScreen" />
-        <activity android:name=".ViewCurrentOrders">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
