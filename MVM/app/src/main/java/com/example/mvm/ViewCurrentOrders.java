@@ -1,19 +1,20 @@
 package com.example.mvm;
 
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.*;
+import android.widget.TableLayout;
+import android.widget.TableRow;
+import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -123,31 +124,8 @@ public class ViewCurrentOrders extends AppCompatActivity {
 
             row.setOnClickListener(new View.OnClickListener() {
                 public void onClick(View v) {
-                    Dialog dialog = new Dialog(ViewCurrentOrders.this);
-                    dialog.setContentView(R.layout.activity_dialog);
-                    dialog.setTitle("Notification");
-                    TextView textViewUser = (TextView) dialog.findViewById(R.id.textBrand);
-                    Button hide = dialog.findViewById(R.id.assignLocation);
-                    hide.setVisibility(View.GONE);
-                    Button okButton = dialog.findViewById(R.id.ok);
-                    okButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                            startActivity(getIntent());
-                        }
-                    });
-                    textViewUser.setText(orderId);
-                    dialog.setOnDismissListener(new DialogInterface.OnDismissListener()
-                    {
-                        @Override
-                        public void onDismiss(DialogInterface dialog)
-                        {
-                            finish();
-                            startActivity(getIntent());
-                        }
-                    });
-                    dialog.show();
+                    Intent intent=new Intent(v.getContext(),OrderDetailsForOperator.class);
+                    startActivityForResult(intent,0);
                 }
             });
         }

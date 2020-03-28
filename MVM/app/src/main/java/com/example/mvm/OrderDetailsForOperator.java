@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -12,14 +11,16 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import android.os.Bundle;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrderDetails extends AppCompatActivity {
+public class OrderDetailsForOperator extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.parent_menu, menu);
@@ -27,7 +28,7 @@ public class OrderDetails extends AppCompatActivity {
     }
     AlertDialog.Builder alertBuilder;
     public void onLogoutClick(final Context context) {
-        alertBuilder = new AlertDialog.Builder(OrderDetails.this);
+        alertBuilder = new AlertDialog.Builder(OrderDetailsForOperator.this);
         alertBuilder.setTitle("Confirm Logout");
         alertBuilder.setMessage("Are you sure you want to logout ?");
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -46,17 +47,18 @@ public class OrderDetails extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
-    public void cancelOrder(View view) {
-        onCancelOrder(getApplicationContext());
+    public void completeOrder(View view) {
+        onCompleteOrder(getApplicationContext());
     }
-    public void onCancelOrder(final Context context) {
-        alertBuilder = new AlertDialog.Builder(OrderDetails.this);
-        alertBuilder.setTitle("Confirm Cancel Order");
-        alertBuilder.setMessage("Are you sure you want to Cancel the Order ?");
+    public void onCompleteOrder(final Context context) {
+        alertBuilder = new AlertDialog.Builder(OrderDetailsForOperator.this);
+        alertBuilder.setTitle("Confirm Complete Order");
+        alertBuilder.setMessage("Are you sure you want to Complete the Order ?");
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                startActivity(new Intent(context,OrderDetails.class));
+                Toast.makeText(getApplicationContext(), "Order 1234 Completed !!", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context,ViewCurrentOrders.class));
                 dialogInterface.dismiss();
             }
         });
@@ -89,7 +91,7 @@ public class OrderDetails extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_order_details);
+        setContentView(R.layout.activity_order_details_for_operator);
         TableLayout ll = findViewById(R.id.table_layout);
 
         List<List<String>> list = new ArrayList<>();
@@ -126,5 +128,4 @@ public class OrderDetails extends AppCompatActivity {
             ll.addView(row, i);
             row.setClickable(true);
         }
-    }
-}
+    }}
