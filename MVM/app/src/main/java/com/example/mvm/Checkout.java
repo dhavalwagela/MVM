@@ -1,6 +1,7 @@
 package com.example.mvm;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
@@ -26,11 +27,31 @@ public class Checkout extends AppCompatActivity {
         inflater.inflate(R.menu.parent_menu, menu);
         return true;
     }
-
+    AlertDialog.Builder alertBuilder1;
+    public void onLogoutClick(final Context context) {
+        alertBuilder1 = new AlertDialog.Builder(Checkout.this);
+        alertBuilder1.setTitle("Confirm Logout");
+        alertBuilder1.setMessage("Are you sure you want to logout ?");
+        alertBuilder1.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(new Intent(context,MainActivity.class));
+                dialogInterface.dismiss();
+            }
+        });
+        alertBuilder1.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = alertBuilder1.create();
+        alertDialog.show();
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                startActivity(new Intent(this,MainActivity.class));
+                onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
                 startActivity(new Intent(this,ViewCart.class));
