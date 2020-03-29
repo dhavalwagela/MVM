@@ -17,249 +17,222 @@
                 android:id="@+id/locationidLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="176dp"
                 android:text="Location"
                 android:textSize="24sp"
+                android:layout_marginTop="56dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.095"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/titleLabel" />
 
         <TableLayout
-                android:id="@+id/tableid"
-                android:layout_width="409dp"
+                android:layout_width="400dp"
                 android:layout_height="346dp"
-                android:layout_marginTop="80dp"
-                android:layout_marginEnd="2dp"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginEnd="10dp"
                 android:layout_marginRight="2dp"
+                android:layout_marginTop="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/goButton">
+                app:layout_constraintTop_toBottomOf="@+id/goButton">
 
             <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_width="100dp"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorBlack">
+
+
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="85dp"
+                        android:layout_height="40dp"
                         android:layout_span="1"
-                        android:padding="5dp"
+                        android:paddingTop="10dp"
                         android:text="Vehicle"
-                        android:textSize="10dp" />
+                        android:layout_gravity="center"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="140dp"
+                        android:layout_height="40dp"
                         android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Vehicle Type"
-                        android:textSize="10dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
+                        android:paddingTop="10dp"
                         android:text="Location"
-                        android:textSize="10dp" />
+                        android:layout_gravity="center"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="85dp"
+                        android:layout_height="40dp"
                         android:layout_span="1"
-                        android:padding="5dp"
+                        android:paddingTop="10dp"
                         android:text="Time Slot"
-                        android:textSize="10dp" />
-
+                        android:layout_gravity="center"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="85dp"
+                        android:layout_height="40dp"
                         android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Assigned Operator"
-                        android:textSize="10dp" />
+                        android:paddingTop="10dp"
+                        android:text="Operator"
+                        android:layout_gravity="center"
+                        android:textColor="#fff"
+                        android:textSize="12dp" />
+
 
             </TableRow>
+
+            <View
+                    android:layout_width="match_parent"
+                    android:layout_height="3dip"
+                    android:background="#ff0000" />
 
             <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
+
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
                         android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="1"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
+                        android:paddingTop="20dp"
+                        android:text=" Truck 1"
+                        android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Truck"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Location 2"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="2-4"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="David"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-            </TableRow>
-
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="4"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="Cart"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="Location 5"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="10-1"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="Evan"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-            </TableRow>
-
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="5"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-                <TextView
-                        android:layout_width="104dp"
+                        android:layout_width="100dp"
                         android:layout_height="match_parent"
                         android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="Cart"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
+                        android:paddingTop="20dp"
+                        android:layout_gravity="center"
+                        android:text="Cooper &amp; UTA Blud"
+                        android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
                         android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="Location 1"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
+                        android:paddingTop="20dp"
+                        android:text="14:00-16:00"
+                        android:layout_gravity="center"
+                        android:textSize="12dp" />
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="85dp"
+                        android:layout_height="match_parent"
                         android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="5-7"
-                        android:textAlignment="center"
-                        android:textSize="12dp"
-                        tools:ignore="RtlCompat" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="3dp"
-                        android:text="Daniel"
+                        android:paddingTop="20dp"
+                        android:text="Dominic"
                         android:textAlignment="center"
                         android:textSize="12dp"
                         tools:ignore="RtlCompat" />
             </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+
+                <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_span="1"
+                        android:paddingTop="20dp"
+                        android:text=" Cart 1"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_span="1"
+                        android:paddingTop="20dp"
+                        android:text="S Oak &amp; UTA Blud"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_span="1"
+                        android:paddingTop="20dp"
+                        android:text="10:00-13:00"
+                        android:textSize="12dp" />
+                <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_span="1"
+                        android:paddingTop="20dp"
+                        android:text="Jimmy"
+                        android:textSize="12dp" />
+            </TableRow>
+
+            <TableRow
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_span="1"
+                        android:paddingTop="20dp"
+                        android:text=" Cart 2"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_span="1"
+                        android:paddingTop="20dp"
+                        android:text="Spaniolo &amp; W 1st"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_span="1"
+                        android:paddingTop="20dp"
+                        android:text="17:00-19:00"
+                        android:textSize="12dp" />
+
+                <TextView
+                        android:layout_width="85dp"
+                        android:layout_height="60dp"
+                        android:layout_gravity="center"
+                        android:layout_span="1"
+                        android:paddingTop="20dp"
+                        android:text="Mike"
+                        android:textSize="12dp" />
+            </TableRow>
         </TableLayout>
+
+
+
 
         <TextView
                 android:id="@+id/titleLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="120dp"
+                android:layout_marginTop="30dp"
                 android:text="Search Vending Vehicle"
-                android:textSize="24sp"
+                android:textColor="#009688"
+                android:textSize="22sp"
+                android:typeface="serif"
+                android:textAllCaps="true"
+                app:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
-                android:textColor="#000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -305,7 +278,7 @@
                 android:layout_marginTop="176dp"
                 android:text="Search"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.38"
+                app:layout_constraintHorizontal_bias="0.811"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/titleLabel" />
 
