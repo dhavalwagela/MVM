@@ -91,6 +91,8 @@ public class Checkout extends AppCompatActivity {
                         public void onClick(DialogInterface dialogInterface, int i) {
                             dialogInterface.dismiss();
                             Toast.makeText(Checkout.this, "Thank you for purchase", Toast.LENGTH_LONG).show();
+                            Intent intent=new Intent(getApplicationContext(), OrderDetails.class);
+                            startActivityForResult(intent,0);
                         }
                     });
                     alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

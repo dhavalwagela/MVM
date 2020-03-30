@@ -47,6 +47,24 @@
                         android:textColor="#000"
                         android:textSize="16sp" />
 
+                <TextView
+                        android:id="@+id/location_id"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_margin="16dp"
+                        android:text="Location : "
+                        android:textColor="#000"
+                        android:textSize="16sp" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left"
+                        android:layout_margin="16dp"
+                        android:text="Time Slot : 9:00 - 11:00"
+                        android:textColor="#000"
+                        android:textSize="16sp" />
 
                 <TableLayout
                         android:id="@+id/table_layout"

@@ -68,7 +68,9 @@ public class ViewCart extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_cart);
         TextView vehicleId = findViewById(R.id.vehicle_id);
-        vehicleId.setText(vehicleId.getText()+"Vehicle_1");
+        vehicleId.setText(vehicleId.getText()+"Truck 1");
+        TextView locationId = findViewById(R.id.location_id);
+        locationId.setText(locationId.getText()+"Spaniolo & W 1st");
         TableLayout ll = findViewById(R.id.table_layout);
 
         List<List<String>> list = new ArrayList<>();
