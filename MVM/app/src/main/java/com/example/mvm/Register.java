@@ -8,8 +8,6 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-
-import static androidx.core.content.ContextCompat.startActivity;
 public class Register extends AppCompatActivity {
 
     EditText firstNameText,lastNameText,usernameText,passwordText,emailText,phoneText,addressText,cityText,
@@ -62,7 +60,7 @@ public class Register extends AppCompatActivity {
         /*String result= db.addRecord(firstNameText.getText().toString(),lastNameText.getText().toString(),
                 usernameText.getText().toString(), passwordText.getText().toString(),rdtext);*/
             Toast.makeText(this, result, Toast.LENGTH_LONG).show();
-            if (result.equals("Success"))
+            if (result.equals("Account Created Successfully"))
                 startActivity(new Intent(this, MainActivity.class));
 
             firstNameText.setText("");
