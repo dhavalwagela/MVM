@@ -1,9 +1,12 @@
 package com.example.mvm;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Bundle;
 import android.text.method.HideReturnsTransformationMethod;
 import android.text.method.LinkMovementMethod;
 import android.text.method.PasswordTransformationMethod;
@@ -13,7 +16,6 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 import androidx.appcompat.widget.AppCompatCheckBox;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,12 +23,14 @@ public class MainActivity extends AppCompatActivity {
     /*TODO Need to make fields Mandatory*/
     TextView textView;
     EditText username, password;
-
+    SharedPreferences sharedpreferences;
     EditText edtPassword;
+    public static final String MyPREFERENCES = "MyPrefs" ;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        sharedpreferences = getSharedPreferences(MyPREFERENCES, Context.MODE_PRIVATE);
         textView = findViewById(R.id.textViewLink);
         textView.setMovementMethod(LinkMovementMethod.getInstance());
         @SuppressLint("WrongViewCast") AppCompatCheckBox checkbox = (AppCompatCheckBox) findViewById(R.id.checkBox);
@@ -62,6 +66,10 @@ public class MainActivity extends AppCompatActivity {
                         data = cursor.getString(cursor.getColumnIndex("usertype"));
                     }
                     cursor.close();
+                    SharedPreferences.Editor session = sharedpreferences.edit();
+                    session.putString("username", username.getText().toString().trim());
+                    session.putString("userType", data);
+                    session.commit();
                     if (data.equals("Manager")) {
                         startActivity(new Intent(this, ManagerHomeScreen.class));
                     } else if (data.equals("Operator")) {
