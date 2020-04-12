@@ -60,6 +60,23 @@ public class ChangePassword extends AppCompatActivity {
         setContentView(R.layout.activity_change_password);
     }
     public void change_password(View view) {
-        startActivity(new Intent(this,MainActivity.class));
+        alertBuilder = new AlertDialog.Builder(ChangePassword.this);
+        alertBuilder.setTitle("Confirmation");
+        alertBuilder.setMessage("Are you sure you want to change the password ?");
+        alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                startActivity(new Intent(getApplicationContext(),MainActivity.class));
+                dialogInterface.dismiss();
+            }
+        });
+        alertBuilder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        AlertDialog alertDialog = alertBuilder.create();
+        alertDialog.show();
     }
 }
