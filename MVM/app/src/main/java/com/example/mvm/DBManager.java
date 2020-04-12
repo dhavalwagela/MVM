@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import androidx.annotation.Nullable;
-
 
 public class DBManager extends SQLiteOpenHelper
 {
@@ -21,6 +19,7 @@ public class DBManager extends SQLiteOpenHelper
         String qry = "create table tbl_registerUser(id integer primary key autoincrement, firstname text, " +
                 "lastname text, username text,password text,usertype text,email text,phone text,address text," +
                 "city text,state text,zipcode text,secques text, secans text)";
+
         /*String qry = "create table tbl_registerUsers(id integer primary key autoincrement, firstname text, " +
                 "lastname text, username text,password text,usertype text)";*/
         db.execSQL(qry);
@@ -28,10 +27,8 @@ public class DBManager extends SQLiteOpenHelper
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
         db.execSQL("DROP TABLE IF EXISTS tbl_registerUser");
         onCreate(db);
-
     }
 
     public String addRecord(String p1, String p2, String p3,String p4,String p5,String p6,
@@ -59,7 +56,7 @@ public class DBManager extends SQLiteOpenHelper
         if(res== -1)
             return "failed";
         else
-            return "Success";
+            return "Account Created Successfully";
 
     }
 }
