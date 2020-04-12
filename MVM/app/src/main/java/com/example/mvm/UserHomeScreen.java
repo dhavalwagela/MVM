@@ -3,6 +3,7 @@ package com.example.mvm;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -48,10 +49,14 @@ public class UserHomeScreen extends AppCompatActivity {
     public void onLogoutClick(final Context context) {
         alertBuilder = new AlertDialog.Builder(UserHomeScreen.this);
         alertBuilder.setTitle("Confirm Logout");
+        SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        final SharedPreferences.Editor session = sharedpreferences.edit();
         alertBuilder.setMessage("Are you sure you want to logout ?");
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
