@@ -320,7 +320,7 @@
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/stateText" />
-
+<!--
         <TextView
                 android:id="@+id/employeeidLabel"
                 android:layout_width="wrap_content"
@@ -348,7 +348,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.921"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/stateText" />
+                app:layout_constraintTop_toBottomOf="@+id/stateText" />-->
 
         <Button
                 android:id="@+id/updateprofileButton"
@@ -361,7 +361,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.38"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/employeeidLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/zipcodeLabel" />
 
         <Button
                 android:id="@+id/changepasswordbutton"
