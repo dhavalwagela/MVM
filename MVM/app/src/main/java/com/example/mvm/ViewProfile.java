@@ -66,8 +66,11 @@ public class ViewProfile extends AppCompatActivity {
         UserDAO db = new UserDAO(this);
         SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();
+        if (sessionMap == null || sessionMap.isEmpty()) {
+            startActivity(new Intent(this,MainActivity.class));
+            return;
+        }
         Cursor cursor = db.getUserDetails((sessionMap.get("username")).toString());
-
         while(cursor.moveToNext()) {
             ((EditText) findViewById(R.id.firstnameText)).setText(cursor.getString(cursor.getColumnIndex("firstname")));
             ((EditText) findViewById(R.id.lastnameText)).setText(cursor.getString(cursor.getColumnIndex("lastname")));
