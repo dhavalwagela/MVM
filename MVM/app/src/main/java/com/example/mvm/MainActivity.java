@@ -76,6 +76,8 @@ public class MainActivity extends AppCompatActivity {
                         startActivity(new Intent(this, OperatorHomeScreen.class));
                     } else
                         startActivity(new Intent(this, UserHomeScreen.class));
+                    username.setText("");
+                    password.setText("");
                 }
             } else {
                 Toast.makeText(getApplicationContext(), "Invalid Username or Password", Toast.LENGTH_SHORT).show();

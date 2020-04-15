@@ -12,6 +12,8 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Map;
+
 public class UserHomeScreen extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -38,6 +40,12 @@ public class UserHomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.user_home_screen);
+        SharedPreferences sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Map sessionMap = sharedpreferences.getAll();
+        if (sessionMap == null || sessionMap.isEmpty()) {
+            startActivity(new Intent(this, MainActivity.class));
+            return;
+        }
     }
     public void contactUs(View view) {
         startActivity(new Intent(this,ContactUsActivity.class));
