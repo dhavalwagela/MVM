@@ -13,10 +13,36 @@ public class UserDAO extends SQLiteOpenHelper {
     }
     public Cursor getUserDetails(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        ContentValues cv = new ContentValues();
         String[] columns = new String[]{"id", "firstname", "lastname", "username", "usertype", "email", "phone", "address", "city", "state", "zipcode", "secques", "secans"};
         Cursor cursor = db.query("tbl_registerUser", columns, "username = '"+username+"'", null, null, null, null);
         return cursor;
+    }
+    public void updateProfile(String username, String firstname, String lastname, String phone, String email, String address, String city, String state, String zipCode) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("firstname",firstname);
+        cv.put("lastname",lastname);
+        cv.put("email",email);
+        cv.put("phone",phone);
+        cv.put("address",address);
+        cv.put("city",city);
+        cv.put("state",state);
+        cv.put("zipcode",zipCode);
+        db.update("tbl_registerUser", cv, "username = '"+username+"'", null );
+    }
+
+    public boolean checkPassword(String username, String password) {
+        SQLiteDatabase sqldb = this.getReadableDatabase();
+        String queryForCheckingPassword = "Select * from tbl_registerUser where username = '" + username + "' and password = '"+password+"'";
+        Cursor cursor = sqldb.rawQuery(queryForCheckingPassword, null);
+        return cursor.getCount() > 0;
+    }
+
+    public void changePassword(String username, String newPassword) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("password",newPassword);
+        db.update("tbl_registerUser", cv, "username = '"+username+"'", null );
     }
 
     @Override
