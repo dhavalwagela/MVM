@@ -4,18 +4,24 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.widget.*;
+import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.Spinner;
+import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.os.Bundle;
-import android.view.View;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 public class AssignOperatorScreen extends AppCompatActivity {
 
@@ -71,14 +77,37 @@ public class AssignOperatorScreen extends AppCompatActivity {
         setContentView(R.layout.activity_assign_operator_screen);
 
         Spinner spinner = findViewById(R.id.vehicle_spinner);
+        OperatorDAO optDb = new OperatorDAO(this);
+        UserDAO userDb = new UserDAO(this);
 
+
+        Cursor cursorForOperators = optDb.getOperators();
+
+        List<String> listOfOperators = new ArrayList<>();
+        List<String> listOfOperatorNames = new ArrayList<>();
+
+        while (cursorForOperators.moveToNext()) {
+            listOfOperators.add(cursorForOperators.getString(cursorForOperators.getColumnIndex("username")));
+            listOfOperatorNames.add(userDb.getUserFullName(cursorForOperators.getString(cursorForOperators.getColumnIndex("username"))));
+        }
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(AssignOperatorScreen.this,
-                android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.vehicle_name));
+                android.R.layout.simple_spinner_item, new ArrayList<String>());
 
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        String selectedOperator = listOfOperators.get(spinner.getSelectedItemPosition());
         spinner.setAdapter(adapter);
 
         Spinner spinner1 = findViewById(R.id.operator_spinner);
+
+        Cursor cursorForVehicles = optDb.getVehicles();
+
+        List<String> listOfVehicles = new ArrayList<>();
+        List<String> listOfVehicleNames = new ArrayList<>();
+
+        while (cursorForOperators.moveToNext()) {
+            listOfVehicles.add(cursorForVehicles.getString(cursorForOperators.getColumnIndex("vehicleId")));
+            listOfVehicleNames.add(cursorForVehicles.getString(cursorForOperators.getColumnIndex("description")));
+        }
 
         ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(AssignOperatorScreen.this,
                 android.R.layout.simple_spinner_item, getResources().getStringArray(R.array.operator_name));

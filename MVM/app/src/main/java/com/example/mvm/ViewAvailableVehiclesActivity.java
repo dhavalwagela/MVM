@@ -1,9 +1,12 @@
 package com.example.mvm;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -14,10 +17,6 @@ import android.widget.TextView;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class ViewAvailableVehiclesActivity extends AppCompatActivity {
 
@@ -63,60 +62,49 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_available_vehicles);
+        OperatorDAO optDb = new OperatorDAO(this);
+        UserDAO userDb = new UserDAO(this);
         TableLayout ll = findViewById(R.id.table_layout);
+        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation();
 
-        List<List<String>> list = new ArrayList<>();
-        List<String> child = new ArrayList<>();
-        child.add("Truck 1");
-        child.add("William Stinson");
-        child.add("Cooper & UTA Blud");
-        child.add("9:00-11:00");
-        list.add(child);
-        child = new ArrayList<>();
-        child.add("Truck 2");
-        child.add("Jimmy Wayne");
-        child.add("W Nedderman & Greek Row");
-        child.add("9:00-10:00");
-        list.add(child);
-        child = new ArrayList<>();
-        child.add("Cart 1");
-        child.add("Jacob Ross");
-        child.add("S Davis & W Mitchell");
-        child.add("9:00-11:00");
-        list.add(child);
-        child = new ArrayList<>();
-        child.add("Cart 2");
-        child.add("Mike Watson");
-        child.add("Cooper & W Mitchell");
-        child.add("9:00-12:00");
-        list.add(child);
-        child = new ArrayList<>();
-        child.add("Cart 3");
-        child.add("Louis Black");
-        child.add("S Oak & UTA Blud");
-        child.add("9:00-11:00");
-        list.add(child);
-
-        for (int i = 2; i <= list.size() + 1; i++) {
+        int i = 2;
+        while (cursor.moveToNext()) {
             TableRow row = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
-            List<String> orders = list.get(i - 2);
-            int in = 0;
-            final String orderId = orders.get(0);
-            for (String order : orders) {
+
                 TextView textView = new TextView(this);
-                textView.setText(order);
-                    textView.setWidth(350);
+                textView.setText(optDb.getDescription("vehicle", cursor.getString(cursor.getColumnIndex("vehicleId"))));
+                textView.setWidth(250);
                 row.addView(textView);
-                in++;
-            }
+
+                textView = new TextView(this);
+                String username = cursor.getString(cursor.getColumnIndex("username"));
+                if (username != null && username.length() > 0) {
+                    textView.setText(userDb.getUserFullName(username));
+                } else
+                    textView.setText("John Wright");
+                textView.setWidth(250);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setText(optDb.getDescription("location", cursor.getString(cursor.getColumnIndex("locationId"))));
+                textView.setWidth(250);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setText(cursor.getString(cursor.getColumnIndex("startTime")) + ":00  -  " + cursor.getString(cursor.getColumnIndex("endTime"))+":00");
+                textView.setWidth(550);
+                row.addView(textView);
+
             ll.addView(row, i);
+            i++;
         }
     }
     public void assignOperatorScreen(View view) {
