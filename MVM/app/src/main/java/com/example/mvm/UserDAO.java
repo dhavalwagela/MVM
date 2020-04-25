@@ -13,7 +13,7 @@ public class UserDAO extends SQLiteOpenHelper {
     }
     public Cursor getUserDetails(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = new String[]{"id", "firstname", "lastname", "username", "usertype", "email", "phone", "address", "city", "state", "zipcode", "secques", "secans"};
+        String[] columns = new String[]{"firstname", "lastname", "username", "usertype", "email", "phone", "address", "city", "state", "zipcode", "secques", "secans"};
         Cursor cursor = db.query("tbl_registerUser", columns, "username = '"+username+"'", null, null, null, null);
         return cursor;
     }
@@ -45,6 +45,15 @@ public class UserDAO extends SQLiteOpenHelper {
         db.update("tbl_registerUser", cv, "username = '"+username+"'", null );
     }
 
+    public String getUserFullName(String username) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        String[] columns = new String[]{"firstName", "lastName"};
+        Cursor cursor = db.query("tbl_registerUser", columns, "username = '"+username+"'", null, null, null, null);
+        while (cursor.moveToNext()) {
+            return cursor.getString(cursor.getColumnIndex("firstName")) + " "+cursor.getString(cursor.getColumnIndex("lastName"));
+        }
+        return new String();
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
 

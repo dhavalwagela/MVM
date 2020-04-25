@@ -16,9 +16,9 @@
         <TableLayout
                 android:layout_width="409dp"
                 android:layout_height="346dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
-                android:layout_marginTop="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -26,8 +26,8 @@
 
             <TableRow
                     android:layout_width="329dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp">
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -47,38 +47,22 @@
                         android:textSize="16dp"
                         tools:ignore="RtlCompat" />
 
-                <Button
-                        android:id="@+id/decrease"
-                        android:layout_width="44dp"
-                        android:layout_height="wrap_content"
-                        android:onClick="decreaseInteger"
-                        android:text="-" />
-
-                <TextView
-                        android:id="@+id/integer_number"
+                <EditText
+                        android:id="@+id/editText"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="28dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="0"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                <Button
-                        android:id="@+id/increase"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:onClick="increaseInteger"
-                        android:text="+" />
-
+                        android:textSize="16dp"
+                        android:inputType="number" />
             </TableRow>
 
             <TableRow
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp">
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -98,39 +82,23 @@
                         android:textSize="16dp"
                         tools:ignore="RtlCompat" />
 
-                <Button
-                        android:id="@+id/decrease1"
-                        android:layout_width="44dp"
-                        android:layout_height="wrap_content"
-                        android:onClick="decreaseInteger1"
-                        android:text="-" />
-
-                <TextView
-                        android:id="@+id/integer_number1"
+                <EditText
+                        android:id="@+id/editText1"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="28dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="0"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                <Button
-                        android:id="@+id/increase1"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:onClick="increaseInteger1"
-                        android:text="+" />
-
+                        android:textSize="16dp"
+                        android:inputType="number" />
 
             </TableRow>
 
             <TableRow
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp">
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -150,39 +118,25 @@
                         android:textSize="16dp"
                         tools:ignore="RtlCompat" />
 
-                <Button
-                        android:id="@+id/decrease2"
-                        android:layout_width="44dp"
-                        android:layout_height="wrap_content"
-                        android:onClick="decreaseInteger2"
-                        android:text="-" />
-
-                <TextView
-                        android:id="@+id/integer_number2"
+                <EditText
+                        android:id="@+id/editText2"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="28dp"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:text="0"
-                        android:textSize="20dp"
-                        android:textStyle="bold" />
-
-                <Button
-                        android:id="@+id/increase2"
-                        android:layout_width="40dp"
-                        android:layout_height="wrap_content"
-                        android:onClick="increaseInteger2"
-                        android:text="+" />
+                        android:textSize="16dp"
+                        android:ems="10"
+                        android:inputType="number" />
 
 
             </TableRow>
 
             <TableRow
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="10dp">
 
 
                 <TextView
@@ -206,9 +160,8 @@
 
             <TableRow
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
                     android:layout_height="match_parent"
-                    >
+                    android:layout_marginLeft="10dp">
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -236,13 +189,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:text="Vehicle Inventory"
+                android:textAllCaps="true"
                 android:textColor="#009688"
                 android:textSize="22sp"
-                android:typeface="serif"
-                android:textAllCaps="true"
-                app:fontFamily="sans-serif-condensed-medium"
                 android:textStyle="bold"
+                android:typeface="serif"
+                app:fontFamily="sans-serif-condensed-medium"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+                android:id="@+id/button3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="161dp"
+                android:layout_marginLeft="161dp"
+                android:layout_marginTop="473dp"
+                android:text="Add to Cart"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
