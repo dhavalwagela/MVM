@@ -45,10 +45,8 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-        updateInventory();
-    }
-    public void updateInventory() {
-        /*TODO:  Need to add code to update inventory regularly !!*/
+        OperatorDAO oprdb = new OperatorDAO(this);
+        oprdb.updateInventory();
     }
     public void checkValidUser(View view) {
         username = findViewById(R.id.userText);

@@ -1,5 +1,6 @@
 package com.example.mvm;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -46,6 +47,40 @@ public class OperatorDAO extends SQLiteOpenHelper {
         String[] columns = new String[]{"vehicleId", "description"};
         Cursor cursor = db.query("Vehicle", columns, null, null, null, null, null);
         return cursor;
+    }
+    public void updateInventory() {
+        db = this.getWritableDatabase();
+        String currentDate = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
+        Cursor cursor = db.query("Inventory", null, "thruDate < '"+currentDate+"'", null, null, null, null);
+
+        while (cursor.moveToNext()) {
+            ContentValues cv = new ContentValues();
+            String vehicleType = cursor.getString(cursor.getColumnIndex("vehicleType"));
+            String itemId = cursor.getString(cursor.getColumnIndex("itemId"));
+            String vehicleId = cursor.getString(cursor.getColumnIndex("vehicleId"));
+            if (vehicleType.equals("Truck")) {
+                if (itemId.equals("SNACKS")) {
+                    cv.put("quantity", 40);
+                } else if (itemId.equals("DRINKS")) {
+                    cv.put("quantity", 50);
+                } else
+                    cv.put("quantity", 35);
+            } else {
+                if (itemId.equals("SNACKS")) {
+                    cv.put("quantity", 30);
+                } else if (itemId.equals("DRINKS")) {
+                    cv.put("quantity", 30);
+                } else
+                    cv.put("quantity", 5);
+            }
+            cv.put("itemId", itemId);
+            cv.put("vehicleType", vehicleType);
+            cv.put("vehicleId", vehicleId);
+            cv.put("placeQuantity",0);
+            cv.put("thruDate", currentDate);
+            String whereClause = "itemId = '"+itemId+"' and vehicleType = '"+vehicleType+"' and vehicleId = '"+vehicleId+"'";
+            db.update("Inventory", cv, whereClause , null );
+        }
     }
     @Override
     public void onCreate(SQLiteDatabase db) {
