@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         SQLiteDatabase sqldb = this.openOrCreateDatabase("VendingVehicleMachine.db", MODE_PRIVATE, null);
-        Cursor cursor = sqldb.rawQuery("select name FROM sqlite_master WHERE type='table' AND name='tbl_registerUser'", null);
+        Cursor cursor = sqldb.rawQuery("select name FROM sqlite_master WHERE type='table' AND name='Inventory'", null);
         if (cursor.getCount() > 0) {
             OperatorDAO oprdb = new OperatorDAO(this);
             oprdb.updateInventory();

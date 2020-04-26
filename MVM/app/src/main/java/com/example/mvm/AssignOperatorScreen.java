@@ -153,7 +153,7 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
         button.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View view) {
-                Dialog dialog = new Dialog(AssignOperatorScreen.this);
+                final Dialog dialog = new Dialog(AssignOperatorScreen.this);
                 dialog.setContentView(R.layout.activity_dialog);
                 TextView textViewUser = (TextView) dialog.findViewById(R.id.textBrand);
                 if (listOfOperators.size() > 0)
@@ -167,7 +167,12 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
                         finish();
                         if (listOfOperators.size() > 0) {
                             OperatorDAO optdb = new OperatorDAO(AssignOperatorScreen.this);
-                            optdb.assignOperator(selectedOperator, selectedVehicleId, operatorAssignedDate);
+                            if (optdb.canAssignOperator(selectedOperator, selectedVehicleId, operatorAssignedDate))
+                                optdb.assignOperator(selectedOperator, selectedVehicleId, operatorAssignedDate);
+                            else {
+                                Toast.makeText(getApplicationContext(), "Vehicle has already been assigned !!", Toast.LENGTH_SHORT).show();
+                                dialog.dismiss();
+                            }
                         }
                         startActivity(getIntent());
                     }

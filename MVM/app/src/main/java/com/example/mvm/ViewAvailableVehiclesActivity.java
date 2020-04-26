@@ -71,13 +71,15 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
         OperatorDAO optDb = new OperatorDAO(this);
         UserDAO userDb = new UserDAO(this);
         TableLayout ll = findViewById(R.id.table_layout);
-        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation();
+        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation(null, null);
 
         int i = 2;
-        while (cursor.moveToNext()) {
-            TableRow row = new TableRow(this);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-            row.setLayoutParams(lp);
+
+        if (cursor.getCount() > 0) {
+            while (cursor.moveToNext()) {
+                TableRow row = new TableRow(this);
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                row.setLayoutParams(lp);
 
                 TextView textView = new TextView(this);
                 textView.setText(optDb.getDescription("vehicle", cursor.getString(cursor.getColumnIndex("vehicleId"))));
@@ -89,22 +91,59 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
                 if (username != null && username.length() > 0) {
                     textView.setText(userDb.getUserFullName(username));
                 } else
-                    textView.setText("John Wright");
+                    textView.setText("-");
                 textView.setWidth(250);
                 row.addView(textView);
 
                 textView = new TextView(this);
-                textView.setText(optDb.getDescription("location", cursor.getString(cursor.getColumnIndex("locationId"))));
+                String locationId = cursor.getString(cursor.getColumnIndex("locationId"));
+                if (locationId != null && locationId.length() > 0) {
+                    textView.setText(optDb.getDescription("location", cursor.getString(cursor.getColumnIndex("locationId"))));
+                } else
+                    textView.setText("-");
                 textView.setWidth(250);
                 row.addView(textView);
 
                 textView = new TextView(this);
-                textView.setText(cursor.getString(cursor.getColumnIndex("startTime")) + ":00  -  " + cursor.getString(cursor.getColumnIndex("endTime"))+":00");
+                if (cursor.getString(cursor.getColumnIndex("startTime")) != null)
+                    textView.setText(cursor.getString(cursor.getColumnIndex("startTime")) + ":00  -  " + cursor.getString(cursor.getColumnIndex("endTime")) + ":00");
+                else
+                    textView.setText("-");
                 textView.setWidth(550);
                 row.addView(textView);
 
-            ll.addView(row, i);
-            i++;
+                ll.addView(row, i);
+                i++;
+            }
+        } else {
+            Cursor cursorForVehicles = optDb.getVehicles();
+            while (cursorForVehicles.moveToNext()) {
+                TableRow row = new TableRow(this);
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                row.setLayoutParams(lp);
+
+                TextView textView = new TextView(this);
+                textView.setText(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("description")));
+                textView.setWidth(250);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setText("-");
+                textView.setWidth(250);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setWidth(250);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setText("-");
+                textView.setWidth(550);
+                row.addView(textView);
+
+                ll.addView(row, i);
+                i++;
+            }
         }
     }
     public void assignOperatorScreen(View view) {

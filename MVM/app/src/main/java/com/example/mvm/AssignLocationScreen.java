@@ -174,36 +174,6 @@ public class AssignLocationScreen extends AppCompatActivity {
             });
             vehicleSpinner.setAdapter(vehicleSpinnerAdapter);
         }
-
-        /*Cursor cursorForTimeSlots = optDb.getTimeSlot(selectedLocation);
-
-        while (cursorForTimeSlots.moveToNext()) {
-            listOfStartTime.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("startTime")));
-            listOfEndTime.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("endTime")));
-            listOfTimeSlotsToDisplay.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("startTime")) + ":00 -" + cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("endTime")) +":00");
-        }
-        if (listOfStartTime.size() > 0 && listOfEndTime.size() > 0) {
-            ArrayAdapter<String> timeSlotSpinnerAdapter = new ArrayAdapter<String>(AssignLocationScreen.this,
-                    android.R.layout.simple_spinner_item, listOfTimeSlotsToDisplay);
-
-            timeSlotSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            selectedStartTime = listOfStartTime.get(0);
-            selectedEndTime = listOfEndTime.get(0);
-            timeSlotSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-
-                public void onItemSelected(AdapterView<?> parentView,
-                                           View selectedItemView, int position, long id) {
-                    selectedStartTime = listOfStartTime.get(position);
-                    selectedEndTime = listOfEndTime.get(position);
-                }
-
-                public void onNothingSelected(AdapterView<?> arg0) {// do nothing
-                }
-
-            });
-            timeSlotSpinner.setAdapter(timeSlotSpinnerAdapter);
-        }
-*/
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
@@ -232,7 +202,12 @@ public class AssignLocationScreen extends AppCompatActivity {
                     public void onClick(View v) {
                         finish();
                         OperatorDAO optdb = new OperatorDAO(AssignLocationScreen.this);
-//                        optdb.assignLocation(selectedLocation, selectedVehicleId, selectedStartTime, selectedEndTime);
+                        if (optdb.canAssignLocation(selectedVehicleId))
+                            optdb.assignLocation(selectedLocation, selectedVehicleId, selectedStartTime, selectedEndTime);
+                        else {
+                            Toast.makeText(getApplicationContext(), "Operator not assigned !!", Toast.LENGTH_SHORT).show();
+                            dialog.dismiss();
+                        }
                         startActivity(getIntent());
                     }
                 });

@@ -10,7 +10,7 @@
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
         <activity android:name=".DialogBox"></activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".AssignLocationScreen" />
         <activity android:name=".OrderDetailsForOperator" />
         <activity android:name=".UpdateProfile" />
         <activity android:name=".ViewOrders" />
@@ -37,7 +37,7 @@
         <activity android:name=".OperatorHomeScreen" />
         <activity android:name=".UserHomeScreen" />
         <activity android:name=".ManagerHomeScreen" />
-        <activity android:name=".AssignLocationScreen">
+        <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -26,6 +26,7 @@
                 app:layout_constraintTop_toTopOf="@+id/titleLabel" />
 
         <TableLayout
+                android:id="@+id/table_layout"
                 android:layout_width="400dp"
                 android:layout_height="346dp"
                 android:layout_marginStart="10dp"
@@ -93,7 +94,7 @@
                     android:layout_height="3dip"
                     android:background="#ff0000" />
 
-            <TableRow
+            <!--<TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -215,7 +216,7 @@
                         android:paddingTop="20dp"
                         android:text="Mike"
                         android:textSize="12dp" />
-            </TableRow>
+            </TableRow>-->
         </TableLayout>
 
 
@@ -277,6 +278,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="176dp"
                 android:text="Search"
+                android:onClick="searchVehicle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.811"
                 app:layout_constraintStart_toStartOf="parent"
