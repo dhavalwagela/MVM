@@ -23,9 +23,9 @@ import java.util.List;
 public class AssignLocationScreen extends AppCompatActivity {
 
     private Button button;
-    private Spinner operatorName;
+    private Spinner locationName;
     private Spinner vehicleName;
-    private String selectedOperator, selectedVehicleId, operatorAssignedDate;
+    private String selectedLocation, selectedVehicleId, operatorAssignedDate, selectedStartTime, selectedEndTime;
     AlertDialog.Builder alertBuilder;
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -75,34 +75,73 @@ public class AssignLocationScreen extends AppCompatActivity {
         OperatorDAO optDb = new OperatorDAO(this);
         UserDAO userDb = new UserDAO(this);
 
-        Cursor cursorForLocations = optDb.getLocations();
-
         final List<String> listOfLocations = new ArrayList<>();
         List<String> locationOfLocationNames = new ArrayList<>();
-
-        Spinner vehicleSpinner = findViewById(R.id.vehicles_spinner1);
-        Spinner locationSpinner = findViewById(R.id.location_spinner);
-
-        Cursor cursorForVehicles = optDb.getVehicles();
 
         final List<String> listOfVehicles = new ArrayList<>();
         List<String> listOfVehicleNames = new ArrayList<>();
 
+        final List<String> listOfStartTime = new ArrayList<>();
+        final List<String> listOfEndTime = new ArrayList<>();
+        final List<String> listOfTimeSlotsToDisplay = new ArrayList<>();
+
+        Spinner vehicleSpinner = findViewById(R.id.vehicles_spinner1);
+        Spinner locationSpinner = findViewById(R.id.location_spinner);
+        final Spinner timeSlotSpinner = findViewById(R.id.time_slot_spinner);
+
+        Cursor cursorForLocations = optDb.getLocations();
+        Cursor cursorForVehicles = optDb.getVehicles();
+
         while (cursorForLocations.moveToNext()) {
             listOfLocations.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("locationId")));
-            locationOfLocationNames.add(userDb.getUserFullName(cursorForLocations.getString(cursorForLocations.getColumnIndex("description"))));
+            locationOfLocationNames.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("description")));
         }
         if (listOfLocations.size() > 0) {
             ArrayAdapter<String> locationSpinnerAdapter = new ArrayAdapter<String>(AssignLocationScreen.this,
                     android.R.layout.simple_spinner_item, locationOfLocationNames);
 
             locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            selectedOperator = listOfLocations.get(0);
+            selectedLocation = listOfLocations.get(0);
             locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 public void onItemSelected(AdapterView<?> parentView,
                                            View selectedItemView, int position, long id) {
-                    selectedOperator = listOfLocations.get(position);
+                    selectedLocation = listOfLocations.get(position);
+
+                    Cursor cursorForTimeSlots = new OperatorDAO(AssignLocationScreen.this).getTimeSlot(selectedLocation);
+                    listOfStartTime.clear();
+                    listOfEndTime.clear();
+                    listOfTimeSlotsToDisplay.clear();
+
+                    while (cursorForTimeSlots.moveToNext()) {
+                        listOfStartTime.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("startTime")));
+                        listOfEndTime.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("endTime")));
+                        listOfTimeSlotsToDisplay.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("startTime")) + ":00 -" + cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("endTime")) +":00");
+                    }
+                    if (listOfStartTime.size() > 0 && listOfEndTime.size() > 0) {
+                        ArrayAdapter<String> timeSlotSpinnerAdapter = new ArrayAdapter<String>(AssignLocationScreen.this,
+                                android.R.layout.simple_spinner_item, listOfTimeSlotsToDisplay);
+
+                        timeSlotSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                        selectedStartTime = listOfStartTime.get(0);
+                        selectedEndTime = listOfEndTime.get(0);
+                        timeSlotSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                            public void onItemSelected(AdapterView<?> parentView,
+                                                       View selectedItemView, int position, long id) {
+                                selectedStartTime = listOfStartTime.get(position);
+                                selectedEndTime = listOfEndTime.get(position);
+                            }
+
+                            public void onNothingSelected(AdapterView<?> arg0) {// do nothing
+                            }
+
+                        });
+                        timeSlotSpinner.setAdapter(timeSlotSpinnerAdapter);
+                    }
+
+
+
                 }
 
                 public void onNothingSelected(AdapterView<?> arg0) {// do nothing
@@ -135,38 +174,74 @@ public class AssignLocationScreen extends AppCompatActivity {
             });
             vehicleSpinner.setAdapter(vehicleSpinnerAdapter);
         }
-        TextView dateText = findViewById(R.id.tomrw_date);
+
+        /*Cursor cursorForTimeSlots = optDb.getTimeSlot(selectedLocation);
+
+        while (cursorForTimeSlots.moveToNext()) {
+            listOfStartTime.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("startTime")));
+            listOfEndTime.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("endTime")));
+            listOfTimeSlotsToDisplay.add(cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("startTime")) + ":00 -" + cursorForTimeSlots.getString(cursorForTimeSlots.getColumnIndex("endTime")) +":00");
+        }
+        if (listOfStartTime.size() > 0 && listOfEndTime.size() > 0) {
+            ArrayAdapter<String> timeSlotSpinnerAdapter = new ArrayAdapter<String>(AssignLocationScreen.this,
+                    android.R.layout.simple_spinner_item, listOfTimeSlotsToDisplay);
+
+            timeSlotSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            selectedStartTime = listOfStartTime.get(0);
+            selectedEndTime = listOfEndTime.get(0);
+            timeSlotSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                public void onItemSelected(AdapterView<?> parentView,
+                                           View selectedItemView, int position, long id) {
+                    selectedStartTime = listOfStartTime.get(position);
+                    selectedEndTime = listOfEndTime.get(position);
+                }
+
+                public void onNothingSelected(AdapterView<?> arg0) {// do nothing
+                }
+
+            });
+            timeSlotSpinner.setAdapter(timeSlotSpinnerAdapter);
+        }
+*/
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         operatorAssignedDate = simpleDateFormat.format(tomorrow);
-        dateText.setText(simpleDateFormat.format(tomorrow));
 
-        button = (Button) findViewById(R.id.assignLocation);
-        operatorName = findViewById(R.id.location_spinner);
+        button = (Button) findViewById(R.id.assign_loc_time);
+        locationName = findViewById(R.id.location_spinner);
         vehicleName = findViewById(R.id.vehicles_spinner1);
         button.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View view) {
-                Dialog dialog = new Dialog(AssignLocationScreen.this);
-                dialog.setContentView(R.layout.activity_dialog);
+                final Dialog dialog = new Dialog(AssignLocationScreen.this);
+                dialog.setContentView(R.layout.activity_dialog_box);
                 TextView textViewUser = (TextView) dialog.findViewById(R.id.textBrand);
-                if (listOfLocations.size() > 0) {
-                    textViewUser.setText("Vehicle: " + vehicleName.getSelectedItem().toString() + "\n" + "Assigned Operator: " + operatorName.getSelectedItem().toString());
-                    Button okButton = dialog.findViewById(R.id.ok);
-                    okButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
-                            OperatorDAO optdb = new OperatorDAO(AssignLocationScreen.this);
-                            optdb.assignOperator(selectedOperator, selectedVehicleId, operatorAssignedDate);
-                            startActivity(getIntent());
-                        }
-                    });
-                } else
-                    textViewUser.setText("No operators available");
+                Button okButton = dialog.findViewById(R.id.ok);
+                Button cancelButton = dialog.findViewById(R.id.assignLocation);
+                cancelButton.setText("Cancel");
+                textViewUser.setTextSize(17);
+                dialog.setTitle("Confirmation");
+                textViewUser.setText("Vehicle: " + vehicleName.getSelectedItem().toString() + "\n" + "Location: " + locationName.getSelectedItem().toString() +"\nTime slot:   " + selectedStartTime+":00 - "+selectedEndTime+":00");
+
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        OperatorDAO optdb = new OperatorDAO(AssignLocationScreen.this);
+//                        optdb.assignLocation(selectedLocation, selectedVehicleId, selectedStartTime, selectedEndTime);
+                        startActivity(getIntent());
+                    }
+                });
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
                 dialog.show();
             }
         });

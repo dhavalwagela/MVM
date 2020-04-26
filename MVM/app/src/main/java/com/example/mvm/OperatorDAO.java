@@ -62,6 +62,21 @@ public class OperatorDAO extends SQLiteOpenHelper {
         cv.put("vehicleId", vehicleId);
         db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"'" , null );
     }
+    public void assignLocation(String locationId, String vehicleId, String startTime, String endTime) {
+        db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("locationId", locationId);
+        cv.put("startTime", startTime);
+        cv.put("endTime", endTime);
+        cv.put("vehicleId", vehicleId);
+        db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"' and locationId = '"+locationId+"'" , null );
+    }
+    public Cursor getTimeSlot(String locationId) {
+        db = this.getWritableDatabase();
+        String[] columns = new String[]{"startTime", "endTime"};
+        Cursor cursor = db.query("LocationDuration", columns, "locationId = '"+locationId+"'", null, null, null, null);
+        return cursor;
+    }
     public void updateInventory() {
         db = this.getWritableDatabase();
         String sql = "SELECT name FROM sqlite_master WHERE type='table' AND name='Inventory'";
