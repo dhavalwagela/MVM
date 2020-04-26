@@ -47,10 +47,10 @@ public class UserDAO extends SQLiteOpenHelper {
 
     public String getUserFullName(String username) {
         SQLiteDatabase db = this.getWritableDatabase();
-        String[] columns = new String[]{"firstName", "lastName"};
+        String[] columns = new String[]{"firstname", "lastname"};
         Cursor cursor = db.query("tbl_registerUser", columns, "username = '"+username+"'", null, null, null, null);
         while (cursor.moveToNext()) {
-            return cursor.getString(cursor.getColumnIndex("firstName")) + " "+cursor.getString(cursor.getColumnIndex("lastName"));
+            return cursor.getString(cursor.getColumnIndex("firstname")) + " "+cursor.getString(cursor.getColumnIndex("lastname"));
         }
         return new String();
     }

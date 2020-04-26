@@ -22,7 +22,7 @@ public class OperatorDAO extends SQLiteOpenHelper {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyyMMdd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String[] columns = new String[]{"vehicleId", "username", "locationId", "startTime", "endTime"};
         Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date < '"+ simpleDateFormat.format(tomorrow)+"' OR date is null" , null, null, null, null);
         return cursor;
@@ -39,7 +39,7 @@ public class OperatorDAO extends SQLiteOpenHelper {
     public Cursor getOperators() {
         db = this.getWritableDatabase();
         String[] columns = new String[]{"username"};
-        Cursor cursor = db.query("tbl_registerUser", columns, "role = 'Operator'", null, null, null, null);
+        Cursor cursor = db.query("tbl_registerUser", columns, "userType = 'Operator'", null, null, null, null);
         return cursor;
     }
     public Cursor getVehicles() {
@@ -48,8 +48,27 @@ public class OperatorDAO extends SQLiteOpenHelper {
         Cursor cursor = db.query("Vehicle", columns, null, null, null, null, null);
         return cursor;
     }
+    public Cursor getLocations() {
+        db = this.getWritableDatabase();
+        String[] columns = new String[]{"locationId", "description"};
+        Cursor cursor = db.query("Location", columns, null, null, null, null, null);
+        return cursor;
+    }
+    public void assignOperator(String username, String vehicleId, String date) {
+        db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put("username", username);
+        cv.put("date", date);
+        cv.put("vehicleId", vehicleId);
+        db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"'" , null );
+    }
     public void updateInventory() {
         db = this.getWritableDatabase();
+        String sql = "SELECT name FROM sqlite_master WHERE type='table' AND name='Inventory'";
+        Cursor mCursor = db.rawQuery(sql, null);
+        if (mCursor.getCount() <= 0) {
+            return;
+        }
         String currentDate = (new SimpleDateFormat("yyyy-MM-dd")).format(new Date());
         Cursor cursor = db.query("Inventory", null, "thruDate < '"+currentDate+"'", null, null, null, null);
 

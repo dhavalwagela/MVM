@@ -110,4 +110,7 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
     public void assignOperatorScreen(View view) {
         startActivity(new Intent(this,AssignOperatorScreen.class));
     }
+    public void assignLocationScreen(View view) {
+        startActivity(new Intent(this,AssignLocationScreen.class));
+    }
 }
