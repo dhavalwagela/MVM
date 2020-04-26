@@ -156,20 +156,22 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
                 Dialog dialog = new Dialog(AssignOperatorScreen.this);
                 dialog.setContentView(R.layout.activity_dialog);
                 TextView textViewUser = (TextView) dialog.findViewById(R.id.textBrand);
-                if (listOfOperators.size() > 0) {
+                if (listOfOperators.size() > 0)
                     textViewUser.setText("Vehicle: " + vehicleName.getSelectedItem().toString() + "\n" + "Assigned Operator: " + operatorName.getSelectedItem().toString());
-                    Button okButton = dialog.findViewById(R.id.ok);
-                    okButton.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            finish();
+                else
+                    textViewUser.setText("No operators available");
+                Button okButton = dialog.findViewById(R.id.ok);
+                okButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        finish();
+                        if (listOfOperators.size() > 0) {
                             OperatorDAO optdb = new OperatorDAO(AssignOperatorScreen.this);
                             optdb.assignOperator(selectedOperator, selectedVehicleId, operatorAssignedDate);
-                            startActivity(getIntent());
                         }
-                    });
-                } else
-                    textViewUser.setText("No operators available");
+                        startActivity(getIntent());
+                    }
+                });
                 dialog.show();
             }
         });
