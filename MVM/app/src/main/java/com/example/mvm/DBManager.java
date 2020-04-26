@@ -209,7 +209,7 @@ public class DBManager extends SQLiteOpenHelper
         cv.put("startTime",9);
         cv.put("endTime",10);
         db.insert("LocationDuration", null,cv );
-        cv.put("locationId","S_CENTER_W_MITCHELL");
+        cv.put("locationId","S_CENTER_W_MITCHELL;");
         cv.put("startTime",10);
         cv.put("endTime", 11);
         db.insert("LocationDuration", null,cv );
@@ -277,9 +277,6 @@ public class DBManager extends SQLiteOpenHelper
         db.insert("Vehicle", null,cv );
 
         qry = "create table VehicleOperatorAndLocation (vehicleId text, locationId text, username text default null, startTime integer, endTime integer, date text default null, foreign key (locationId) references Location(locationId), foreign key (vehicleId) references Vehicle(vehicleId), foreign key (username) references tbl_registerUser(username))";
-        db.execSQL(qry);
-
-        qry = "insert into VehicleOperatorAndLocation (vehicleId, locationId, startTime, endTime) select vehicleId, locationId, startTime, endTime from Vehicle INNER JOIN LocationDuration";
         db.execSQL(qry);
 
         qry = "create table Item (itemId text primary key, description text, unitCost real)";

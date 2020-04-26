@@ -13,18 +13,26 @@ import java.util.Date;
 public class OperatorDAO extends SQLiteOpenHelper {
     private static final String dbname = "VendingVehicleMachine.db";
     private SQLiteDatabase db;
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     public OperatorDAO( Context context) {
         super(context,dbname , null, 1);
     }
 
-    public Cursor getAllVehiclesWithAssignedOperatorAndLocation() {
+    public Cursor getAllVehiclesWithAssignedOperatorAndLocation(String vehicleId, String locationId) {
         db = this.getWritableDatabase();
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String[] columns = new String[]{"vehicleId", "username", "locationId", "startTime", "endTime"};
-        Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date < '"+ simpleDateFormat.format(tomorrow)+"' OR date is null" , null, null, null, null);
+        String condition = "";
+        if (vehicleId != null)
+            condition+= "vehicleId = '"+vehicleId+"'";
+        if (locationId != null) {
+            if (condition.length() > 0)
+                condition+=" and ";
+            condition+= "locationId = '"+locationId+"'";
+        }
+        Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date = '"+simpleDateFormat.format(tomorrow)+"'"+(condition.length() > 0 ? " and "+condition : "") , null, null, null, null);
         return cursor;
     }
     public String getDescription(String table, String id) {
@@ -54,22 +62,46 @@ public class OperatorDAO extends SQLiteOpenHelper {
         Cursor cursor = db.query("Location", columns, null, null, null, null, null);
         return cursor;
     }
+    public boolean canAssignOperator(String username, String vehicleId, String date) {
+        db = this.getWritableDatabase();
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " username = '"+username+"' and date = '"+date+"' and vehicleId != '"+vehicleId+"'" , null, null, null, null);
+        if (cursor != null && cursor.getCount() > 0)
+            return false;
+        return true;
+    }
     public void assignOperator(String username, String vehicleId, String date) {
         db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " vehicleId = '"+vehicleId+"' and date = '"+date+"'" , null, null, null, null);
         cv.put("username", username);
         cv.put("date", date);
         cv.put("vehicleId", vehicleId);
-        db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"'" , null );
+        if (cursor.getCount() > 0)
+            db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"' and date = '"+date+"'" , null );
+        else
+            db.insert("VehicleOperatorAndLocation", null, cv);
+    }
+    public boolean canAssignLocation(String vehicleId) {
+        db = this.getWritableDatabase();
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " vehicleId = '"+vehicleId+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null, null, null, null);
+        if (cursor != null && cursor.getCount() > 0)
+            return true;
+        return false;
     }
     public void assignLocation(String locationId, String vehicleId, String startTime, String endTime) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
         db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put("locationId", locationId);
         cv.put("startTime", startTime);
         cv.put("endTime", endTime);
         cv.put("vehicleId", vehicleId);
-        db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"' and locationId = '"+locationId+"'" , null );
+        db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null );
     }
     public Cursor getTimeSlot(String locationId) {
         db = this.getWritableDatabase();

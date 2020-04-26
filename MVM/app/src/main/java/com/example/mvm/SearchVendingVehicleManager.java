@@ -3,19 +3,22 @@ package com.example.mvm;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.Spinner;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class SearchVendingVehicleManager extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+import java.util.ArrayList;
+import java.util.List;
+
+public class SearchVendingVehicleManager extends AppCompatActivity {
+
+    private String selectedVehicleId, selectedLocationId;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -63,33 +66,133 @@ public class SearchVendingVehicleManager extends AppCompatActivity implements Ad
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_vending_vehicle_manager);
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
-        Spinner spinner_next = (Spinner) findViewById(R.id.spinner2);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
-                R.array.location_name, android.R.layout.simple_spinner_item);
+        Intent receiverIntent = getIntent();
 
-        ArrayAdapter<CharSequence> adapter1 = ArrayAdapter.createFromResource(this,
-                R.array.vehicle_name, android.R.layout.simple_spinner_item);
+        selectedLocationId = receiverIntent.getStringExtra("selectedLocationId");
+        selectedVehicleId = receiverIntent.getStringExtra("selectedVehicleId");
 
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        Spinner locationSpinner = (Spinner) findViewById(R.id.spinner);
+        Spinner vehicleSpinner = (Spinner) findViewById(R.id.spinner2);
+        OperatorDAO optDb = new OperatorDAO(this);
 
-        adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
-        spinner.setOnItemSelectedListener(this);
+        Cursor cursorForVehicles = optDb.getVehicles();
+        Cursor cursorForLocations = optDb.getLocations();
 
-        spinner_next.setAdapter(adapter1);
-        spinner_next.setOnItemSelectedListener(this);
+        final List<String> listOfVehicles = new ArrayList<>();
+        final List<String> listOfVehicleNames = new ArrayList<>();
+
+        final List<String> listOfLocations = new ArrayList<>();
+        final List<String> listOfLocationNames = new ArrayList<>();
+
+        while (cursorForVehicles.moveToNext()) {
+            listOfVehicles.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("vehicleId")));
+            listOfVehicleNames.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("description")));
+        }
+        if (listOfVehicles.size() > 0) {
+            ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(SearchVendingVehicleManager.this,
+                    android.R.layout.simple_spinner_item, listOfVehicleNames);
+
+            adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            if (selectedVehicleId == null)
+                selectedVehicleId = listOfVehicles.get(0);
+
+            vehicleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                public void onItemSelected(AdapterView<?> parentView,
+                                           View selectedItemView, int position, long id) {
+                    selectedVehicleId = listOfVehicles.get(position);
+                }
+
+                public void onNothingSelected(AdapterView<?> arg0) {// do nothing
+                }
+
+            });
+            vehicleSpinner.setAdapter(adapter1);
+            vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
+        }
+
+        while (cursorForLocations.moveToNext()) {
+            listOfLocations.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("locationId")));
+            listOfLocationNames.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("description")));
+        }
+        if (listOfLocations.size() > 0) {
+            ArrayAdapter<String> locationSpinnerAdapter = new ArrayAdapter<String>(SearchVendingVehicleManager.this,
+                    android.R.layout.simple_spinner_item, listOfLocationNames);
+
+            locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+            if (selectedLocationId == null)
+                selectedLocationId = listOfLocations.get(0);
+            locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+                public void onItemSelected(AdapterView<?> parentView,
+                                           View selectedItemView, int position, long id) {
+                        selectedLocationId = listOfLocations.get(position);
+                }
+
+                public void onNothingSelected(AdapterView<?> arg0) {// do nothing
+                }
+
+            });
+            locationSpinner.setAdapter(locationSpinnerAdapter);
+            locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
+        }
+
+        TableLayout ll = findViewById(R.id.table_layout);
+
+        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId);
+        UserDAO userDb = new UserDAO(this);
+
+        int i = 2;
+
+        if (assignedVehicles.getCount() > 0) {
+            while (assignedVehicles.moveToNext()) {
+                TableRow row = new TableRow(this);
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                row.setLayoutParams(lp);
+
+                TextView textView = new TextView(this);
+                textView.setText(optDb.getDescription("vehicle", assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"))));
+                textView.setWidth(85);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                String locationId = assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"));
+                if (locationId != null && locationId.length() > 0) {
+                    textView.setText(optDb.getDescription("location", assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"))));
+                } else
+                    textView.setText("-");
+                textView.setWidth(85);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                if (assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) != null)
+                    textView.setText(assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) + ":00  -  " + assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime")) + ":00");
+                else
+                    textView.setText("-");
+                textView.setWidth(90);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                String username = assignedVehicles.getString(assignedVehicles.getColumnIndex("username"));
+                if (username != null && username.length() > 0) {
+                    textView.setText(userDb.getUserFullName(username));
+                } else
+                    textView.setText("-");
+                textView.setWidth(85);
+                row.addView(textView);
+
+                ll.addView(row, i);
+                i++;
+            }
+        }
+
     }
 
-
-    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        String text = parent.getItemAtPosition(position).toString();
-        Toast.makeText(parent.getContext(), text, Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
-
+    public void searchVehicle(View view) {
+        Intent intent = new Intent(this,SearchVendingVehicleManager.class);
+        intent.putExtra("selectedVehicleId", selectedVehicleId);
+        intent.putExtra("selectedLocationId", selectedLocationId);
+        startActivity(intent);
     }
 }
