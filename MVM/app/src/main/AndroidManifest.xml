@@ -9,6 +9,7 @@
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/AppTheme">
+        <activity android:name=".AssignLocationScreen"></activity>
         <activity android:name=".OrderDetailsForOperator"/>
         <activity android:name=".UpdateProfile" />
         <activity android:name=".ViewOrders" />
