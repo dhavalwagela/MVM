@@ -62,7 +62,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="left"
                         android:layout_margin="16dp"
-                        android:text="Time Slot : 9:00 - 11:00"
+                        android:id="@+id/duration"
+                        android:text="Time Slot : "
                         android:textColor="#000"
                         android:textSize="16sp" />
 
@@ -129,8 +130,7 @@
                         android:layout_height="30dp"
                         android:layout_marginTop="10dp"
                         android:textSize="18dp"
-
-                        android:text="                                                 Grand Total : $13.75"
+                        android:text="                                               Grand Total : $"
                         android:textStyle="bold" />
 
                 <Button
