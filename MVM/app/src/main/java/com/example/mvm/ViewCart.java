@@ -1,9 +1,12 @@
 package com.example.mvm;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
+import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -11,15 +14,18 @@ import android.view.View;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-import android.os.Bundle;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ViewCart extends AppCompatActivity {
+    SharedPreferences sharedpreferences;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -53,7 +59,11 @@ public class ViewCart extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                startActivity(new Intent(this,ViewCart.class));
+                Map sessionMap = sharedpreferences.getAll();
+                if (sessionMap.get("cart") != null)
+                    startActivity(new Intent(this,ViewCart.class));
+                else
+                    Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
                 return true;
             case R.id.home:
                 startActivity(new Intent(this,UserHomeScreen.class));
@@ -62,49 +72,67 @@ public class ViewCart extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_cart);
+
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Map sessionMap = sharedpreferences.getAll();
+        OperatorDAO optDb = new OperatorDAO(this);
         TextView vehicleId = findViewById(R.id.vehicle_id);
-        vehicleId.setText(vehicleId.getText()+"Truck 1");
+        vehicleId.setText(vehicleId.getText()+(optDb.getDescription("vehicle", (String) sessionMap.get("vehicle"))));
         TextView locationId = findViewById(R.id.location_id);
-        locationId.setText(locationId.getText()+"Spaniolo & W 1st");
+        locationId.setText(locationId.getText()+((String) sessionMap.get("pickupLocation")));
         TableLayout ll = findViewById(R.id.table_layout);
+        TextView duration = findViewById(R.id.duration);
+        duration.setText(duration.getText()+(String)(sessionMap.get("timeSlot")));
+        float sandwitchesCost = ((Integer) sessionMap.get("sandwitches")) * Float.parseFloat(optDb.getUnitCost("SANDWITCHES"));
+        float snacksCost = ((Integer) sessionMap.get("snacks")) * Float.parseFloat(optDb.getUnitCost("SNACKS"));
+        float drinksCost = ((Integer) sessionMap.get("drinks")) * Float.parseFloat(optDb.getUnitCost("DRINKS"));
+        DecimalFormat df = new DecimalFormat("0.00");
 
         List<List<String>> list = new ArrayList<>();
         List<String> child = new ArrayList<>();
-        child.add("1");
-        child.add("Drinks");
-        child.add("2");
-        child.add("$3.00");
-        list.add(child);
 
-        List<String> child1 = new ArrayList<>();
-        child1.add("2");
-        child1.add("Snacks");
-        child1.add("4");
-        child1.add("$5.00");
-        list.add(child1);
+        int sno = 1;
+        if (drinksCost > 0) {
+            child.add(String.valueOf(sno));
+            child.add("Drinks");
+            child.add((String.valueOf(sessionMap.get("drinks"))));
+            child.add("$"+df.format(drinksCost));
+            list.add(child);
+            sno++;
+        }
+        if (snacksCost > 0) {
+            List<String> child1 = new ArrayList<>();
+            child1.add(String.valueOf(sno));
+            child1.add("Snacks");
+            child1.add((String.valueOf(sessionMap.get("snacks"))));
+            child1.add("$"+df.format(snacksCost));
+            list.add(child1);
+        }
 
-        List<String> child2 = new ArrayList<>();
-        child2.add("3");
-        child2.add("Sandwiches");
-        child2.add("1");
-        child2.add("$5.75");
-        list.add(child2);
+        if (sandwitchesCost > 0) {
+            List<String> child2 = new ArrayList<>();
+            child2.add(String.valueOf(sno));
+            child2.add("Sandwiches");
+            child2.add((String.valueOf(sessionMap.get("sandwitches"))));
+            child2.add("$"+df.format(sandwitchesCost));
+            list.add(child2);
+        }
 
         for (int i = 2; i <= list.size() + 1; i++) {
             TableRow row = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
             row.setLayoutParams(lp);
-            List<String> orders = list.get(i - 2);
+            List<String> columns = list.get(i - 2);
             int in = 0;
-            final String orderId = orders.get(0);
-            for (String order : orders) {
+            for (String column : columns) {
                 TextView textView = new TextView(this);
-                textView.setText(order);
+                textView.setText(column);
                 textView.setWidth(310);
                 textView.setTextSize(16);
                 if (in == 3 || in == 2) {
@@ -117,9 +145,9 @@ public class ViewCart extends AppCompatActivity {
                 in++;
             }
             ll.addView(row, i);
-            row.setClickable(true);
         }
-
+        TextView grandTotal = findViewById(R.id.grandTotal);
+        grandTotal.setText(grandTotal.getText()+(String.valueOf(df.format(sessionMap.get("grandTotal")))));
     }
     public void checkout(View view) {
         startActivity(new Intent(this,Checkout.class));

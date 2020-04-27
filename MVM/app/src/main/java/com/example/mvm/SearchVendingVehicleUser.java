@@ -3,6 +3,7 @@ package com.example.mvm;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -14,13 +15,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class SearchVendingVehicleUser extends AppCompatActivity {
     private String selectedVehicleId, selectedLocationId;
+    SharedPreferences sharedpreferences;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -54,8 +53,11 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                startActivity(new Intent(this,ViewCart.class));
-                return true;
+                Map sessionMap = sharedpreferences.getAll();
+                if (sessionMap.get("cart") != null)
+                    startActivity(new Intent(this,ViewCart.class));
+                else
+                    Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
             case R.id.home:
                 startActivity(new Intent(this,UserHomeScreen.class));
                 return true;

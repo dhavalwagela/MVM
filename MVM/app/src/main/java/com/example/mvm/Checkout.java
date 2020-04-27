@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputType;
@@ -18,7 +19,11 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.braintreepayments.cardform.view.CardForm;
 
+import java.util.Map;
+
 public class Checkout extends AppCompatActivity {
+    SharedPreferences sharedpreferences;
+
     CardForm cardForm;
     Button buy;
     AlertDialog.Builder alertBuilder;
@@ -54,8 +59,11 @@ public class Checkout extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                startActivity(new Intent(this,ViewCart.class));
-                return true;
+                Map sessionMap = sharedpreferences.getAll();
+                if (sessionMap.get("cart") != null)
+                    startActivity(new Intent(this,ViewCart.class));
+                else
+                    Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
             case R.id.home:
                 startActivity(new Intent(this,UserHomeScreen.class));
                 return true;

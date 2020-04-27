@@ -20,6 +20,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Map;
 
 public class ViewVehicleInventoryUser extends AppCompatActivity {
     SharedPreferences sharedpreferences;
@@ -58,8 +59,11 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                startActivity(new Intent(this,ViewCart.class));
-                return true;
+                Map sessionMap = sharedpreferences.getAll();
+                if (sessionMap.get("cart") != null)
+                    startActivity(new Intent(this,ViewCart.class));
+                else
+                    Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
             case R.id.home:
                 startActivity(new Intent(this,UserHomeScreen.class));
                 return true;
@@ -71,7 +75,7 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_vehicle_inventory_user);
-        Intent receiverIntent = getIntent();
+        final Intent receiverIntent = getIntent();
         OperatorDAO optDb = new OperatorDAO(this);
         OrderDAO orderDb = new OrderDAO(this);
         String location = receiverIntent.getStringExtra("selectedLocationId");
@@ -130,12 +134,14 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                     session.putInt("snacks", snacks);
                     session.putString("pickupLocation", pickupLocation);
                     session.putString("timeSlot", duration);
+                    session.putString("vehicle", receiverIntent.getStringExtra("selectedVehicleId"));
                     float costOfSandwitch = optDb.getUnitCost("SANDWITCHES").length() == 0 ? 0 : Float.parseFloat(optDb.getUnitCost("SANDWITCHES"));
                     float costOfDrink = optDb.getUnitCost("DRINKS").length() == 0 ? 0 : Float.parseFloat(optDb.getUnitCost("DRINKS"));
                     float costOfSnack = optDb.getUnitCost("SNACKS").length() == 0 ? 0 : Float.parseFloat(optDb.getUnitCost("SNACKS"));
                     session.putFloat("subtotal", ((costOfDrink * drinks) + (costOfSnack * snacks) + (costOfSandwitch * sandwitches)));
                     session.putFloat("grandTotal", ((costOfDrink * drinks) + (costOfSnack * snacks) + (costOfSandwitch * sandwitches))*8.25f/100  +((costOfDrink * drinks) + (costOfSnack * snacks) + (costOfSandwitch * sandwitches)));
                     session.putBoolean("cart", true);
+                    session.commit();
                     startActivity(new Intent(ViewVehicleInventoryUser.this, ViewCart.class));
                 }
             }

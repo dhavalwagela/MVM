@@ -3,20 +3,24 @@ package com.example.mvm;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
+import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public class ViewOrders extends AppCompatActivity {
+    SharedPreferences sharedpreferences;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -50,8 +54,11 @@ public class ViewOrders extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                startActivity(new Intent(this,ViewCart.class));
-                return true;
+                Map sessionMap = sharedpreferences.getAll();
+                if (sessionMap.get("cart") != null)
+                    startActivity(new Intent(this,ViewCart.class));
+                else
+                    Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
             case R.id.home:
                 startActivity(new Intent(this,UserHomeScreen.class));
                 return true;

@@ -3,15 +3,19 @@ package com.example.mvm;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
-public class ContactUsActivity extends AppCompatActivity {
+import java.util.Map;
 
+public class ContactUsActivity extends AppCompatActivity {
+    SharedPreferences sharedpreferences;
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.parent_menu, menu);
@@ -44,8 +48,11 @@ public class ContactUsActivity extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                startActivity(new Intent(this,ViewCart.class));
-                return true;
+                Map sessionMap = sharedpreferences.getAll();
+                if (sessionMap.get("cart") != null)
+                    startActivity(new Intent(this,ViewCart.class));
+                else
+                    Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
             case R.id.home:
                 startActivity(new Intent(this,UserHomeScreen.class));
                 return true;
