@@ -113,6 +113,14 @@ public class OperatorDAO extends SQLiteOpenHelper {
         Cursor cursor = db.query("Inventory", null, condition, null, null, null, null);
         return cursor;
     }
+    public String getUnitCost(String itemId) {
+        db = this.getWritableDatabase();
+        String condition = "itemId = '"+itemId+"'";
+        Cursor cursor = db.query("Item", null, condition, null, null, null, null);
+        while (cursor.moveToNext())
+            return cursor.getString(cursor.getColumnIndex("unitCost"));
+        return "";
+    }
     public void updateInventory() {
         db = this.getWritableDatabase();
         String sql = "SELECT name FROM sqlite_master WHERE type='table' AND name='Inventory'";
