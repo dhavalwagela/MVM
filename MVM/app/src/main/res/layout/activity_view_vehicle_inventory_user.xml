@@ -43,20 +43,20 @@
                         android:layout_span="1"
                         android:padding="5dp"
                         android:text="10"
+                        android:id="@+id/drinksQuantity"
                         android:textAlignment="center"
                         android:textSize="16dp"
                         tools:ignore="RtlCompat" />
 
                 <EditText
-                        android:id="@+id/editText"
+                        android:id="@+id/addDrinkQuantity"
                         android:layout_width="wrap_content"
-                        android:layout_height="28dp"
+                        android:layout_height="36dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:textSize="16dp"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:textSize="15dp" />
             </TableRow>
 
             <TableRow
@@ -79,18 +79,18 @@
                         android:padding="5dp"
                         android:text="24"
                         android:textAlignment="center"
+                        android:id="@+id/sandwitchQuantity"
                         android:textSize="16dp"
                         tools:ignore="RtlCompat" />
 
                 <EditText
-                        android:id="@+id/editText1"
+                        android:id="@+id/addSandwitchQuantity"
                         android:layout_width="wrap_content"
-                        android:layout_height="28dp"
+                        android:layout_height="36dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:textSize="16dp"
+                        android:textSize="15dp"
                         android:inputType="number" />
 
             </TableRow>
@@ -114,19 +114,19 @@
                         android:layout_span="1"
                         android:padding="5dp"
                         android:text="12"
+                        android:id="@+id/snacksQuantity"
                         android:textAlignment="center"
                         android:textSize="16dp"
                         tools:ignore="RtlCompat" />
 
                 <EditText
-                        android:id="@+id/editText2"
+                        android:id="@+id/addSnacksQuantity"
                         android:layout_width="wrap_content"
-                        android:layout_height="28dp"
+                        android:layout_height="36dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="10dp"
                         android:layout_marginRight="10dp"
                         android:layout_marginBottom="10dp"
-                        android:textSize="16dp"
+                        android:textSize="15dp"
                         android:ems="10"
                         android:inputType="number" />
 
@@ -153,6 +153,7 @@
                         android:layout_span="1"
                         android:padding="5dp"
                         android:text="3"
+                        android:id="@+id/duration"
                         android:textAlignment="center"
                         android:textSize="16dp"
                         tools:ignore="RtlCompat" />
@@ -177,6 +178,7 @@
                         android:layout_span="1"
                         android:padding="5dp"
                         android:text="Cooper and UTA Blvd"
+                        android:id="@+id/location_id"
                         android:textAlignment="center"
                         android:textSize="16dp"
                         tools:ignore="RtlCompat" />

@@ -13,7 +13,10 @@ import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class SearchVendingVehicleManager extends AppCompatActivity {
@@ -85,6 +88,11 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
         final List<String> listOfLocations = new ArrayList<>();
         final List<String> listOfLocationNames = new ArrayList<>();
 
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 0);
+        Date today = calendar.getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
         while (cursorForVehicles.moveToNext()) {
             listOfVehicles.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("vehicleId")));
             listOfVehicleNames.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("description")));
@@ -140,7 +148,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
         TableLayout ll = findViewById(R.id.table_layout);
 
-        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId);
+        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId, simpleDateFormat.format(today));
         UserDAO userDb = new UserDAO(this);
 
         int i = 2;
@@ -175,8 +183,9 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
                 textView = new TextView(this);
                 String username = assignedVehicles.getString(assignedVehicles.getColumnIndex("username"));
+                String fullName = userDb.getUserFullName(username);
                 if (username != null && username.length() > 0) {
-                    textView.setText(userDb.getUserFullName(username));
+                    textView.setText(fullName);
                 } else
                     textView.setText("-");
                 textView.setWidth(85);
@@ -184,6 +193,24 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
                 ll.addView(row, i);
                 i++;
+                final String currentEndTime = assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime"));
+                final String currentStartTime = assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime"));
+                final String currentVehicle = assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"));
+                final String currentLocation = assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"));
+                final String currentOperator = fullName;
+                row.setClickable(true);
+
+                row.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(v.getContext(),ViewVehicleInventoryManager.class);
+                        intent.putExtra("selectedVehicleId", currentVehicle);
+                        intent.putExtra("selectedLocationId", currentLocation);
+                        intent.putExtra("selectedStartTime", currentStartTime);
+                        intent.putExtra("selectedEndTime", currentEndTime);
+                        intent.putExtra("selectedOperator", currentOperator);
+                        startActivityForResult(intent,0);
+                    }
+                });
             }
         }
 

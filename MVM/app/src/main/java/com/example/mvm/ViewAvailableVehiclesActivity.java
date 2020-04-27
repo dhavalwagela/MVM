@@ -18,6 +18,10 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
 public class ViewAvailableVehiclesActivity extends AppCompatActivity {
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -71,7 +75,12 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
         OperatorDAO optDb = new OperatorDAO(this);
         UserDAO userDb = new UserDAO(this);
         TableLayout ll = findViewById(R.id.table_layout);
-        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation(null, null);
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 1);
+        Date tomorrow = calendar.getTime();
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+
+        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation(null, null, simpleDateFormat.format(tomorrow));
 
         int i = 2;
 
