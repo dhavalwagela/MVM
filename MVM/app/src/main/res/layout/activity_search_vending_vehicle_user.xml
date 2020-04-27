@@ -43,6 +43,7 @@
                 android:layout_marginEnd="10dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginTop="28dp"
+                android:id="@+id/table_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -92,7 +93,7 @@
                     android:layout_height="3dip"
                     android:background="#ff0000" />
 
-            <TableRow
+           <!-- <TableRow
                     android:layout_width="match_parent"
                     android:layout_height="match_parent">
 
@@ -187,7 +188,7 @@
                         android:padding="12dp"
                         android:text="17:00-19:00"
                         android:textSize="12dp" />
-            </TableRow>
+            </TableRow>-->
         </TableLayout>
 
         <TextView
@@ -244,6 +245,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
                 android:text="Seacrh"
+                android:onClick="searchVehicle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.817"
                 app:layout_constraintStart_toStartOf="parent"

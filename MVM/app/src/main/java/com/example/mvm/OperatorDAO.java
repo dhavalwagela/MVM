@@ -18,21 +18,19 @@ public class OperatorDAO extends SQLiteOpenHelper {
         super(context,dbname , null, 1);
     }
 
-    public Cursor getAllVehiclesWithAssignedOperatorAndLocation(String vehicleId, String locationId) {
+    public Cursor getAllVehiclesWithAssignedOperatorAndLocation(String vehicleId, String locationId, String date) {
         db = this.getWritableDatabase();
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        Date tomorrow = calendar.getTime();
+
         String[] columns = new String[]{"vehicleId", "username", "locationId", "startTime", "endTime"};
         String condition = "";
         if (vehicleId != null)
             condition+= "vehicleId = '"+vehicleId+"'";
         if (locationId != null) {
             if (condition.length() > 0)
-                condition+=" and ";
+                condition+=" or ";
             condition+= "locationId = '"+locationId+"'";
         }
-        Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date = '"+simpleDateFormat.format(tomorrow)+"'"+(condition.length() > 0 ? " and "+condition : "") , null, null, null, null);
+        Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date = '"+date+"'"+(condition.length() > 0 ? " and "+condition : "") , null, null, null, null);
         return cursor;
     }
     public String getDescription(String table, String id) {
@@ -107,6 +105,12 @@ public class OperatorDAO extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
         String[] columns = new String[]{"startTime", "endTime"};
         Cursor cursor = db.query("LocationDuration", columns, "locationId = '"+locationId+"'", null, null, null, null);
+        return cursor;
+    }
+    public Cursor getVehicleInventory(String vehicleId) {
+        db = this.getWritableDatabase();
+        String condition = "vehicleId = '"+vehicleId+"'";
+        Cursor cursor = db.query("Inventory", null, condition, null, null, null, null);
         return cursor;
     }
     public void updateInventory() {
