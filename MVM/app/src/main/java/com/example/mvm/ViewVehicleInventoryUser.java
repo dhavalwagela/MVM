@@ -24,7 +24,7 @@ import java.util.Date;
 public class ViewVehicleInventoryUser extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     private Button button;
-    private String drinksTotalQuantity, snacksTotalQuantity, sandwitchesTotalQuantity;
+    private String drinksTotalQuantity, snacksTotalQuantity, sandwitchesTotalQuantity, pickupLocation, operator, duration;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -96,9 +96,10 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                 ((TextView) findViewById(R.id.sandwitchQuantity)).setText(sandwitchesTotalQuantity);
             }
         }
-        ((TextView) findViewById(R.id.location_id)).setText(optDb.getDescription("location", location));
-        int duration = Integer.parseInt(receiverIntent.getStringExtra("selectedEndTime")) - (Integer.parseInt(receiverIntent.getStringExtra("selectedStartTime")));
-        ((TextView) findViewById(R.id.duration)).setText(String.valueOf(duration));
+        pickupLocation = optDb.getDescription("location", location);
+        ((TextView) findViewById(R.id.location_id)).setText(pickupLocation);
+        duration = receiverIntent.getStringExtra("selectedStartTime")+":00 - "+receiverIntent.getStringExtra("selectedEndTime")+":00";
+        ((TextView) findViewById(R.id.duration)).setText(duration);
 
         button = (Button) findViewById(R.id.button3);
         button.setOnClickListener(new View.OnClickListener()
@@ -123,18 +124,22 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(), "Invalid quantity of items", Toast.LENGTH_SHORT).show();
                 }
                 else {
+                    OperatorDAO optDb = new OperatorDAO(ViewVehicleInventoryUser.this);
                     session.putInt("sandwitches", sandwitches);
                     session.putInt("drinks", drinks);
                     session.putInt("snacks", snacks);
-                    session.putInt("subtotal", sandwitches+drinks+snacks);
-                    session.putFloat("grandTotal", (float) (8.75 + snacks + drinks + sandwitches));
+                    session.putString("pickupLocation", pickupLocation);
+                    session.putString("timeSlot", duration);
+                    float costOfSandwitch = optDb.getUnitCost("SANDWITCHES").length() == 0 ? 0 : Float.parseFloat(optDb.getUnitCost("SANDWITCHES"));
+                    float costOfDrink = optDb.getUnitCost("DRINKS").length() == 0 ? 0 : Float.parseFloat(optDb.getUnitCost("DRINKS"));
+                    float costOfSnack = optDb.getUnitCost("SNACKS").length() == 0 ? 0 : Float.parseFloat(optDb.getUnitCost("SNACKS"));
+                    session.putFloat("subtotal", ((costOfDrink * drinks) + (costOfSnack * snacks) + (costOfSandwitch * sandwitches)));
+                    session.putFloat("grandTotal", ((costOfDrink * drinks) + (costOfSnack * snacks) + (costOfSandwitch * sandwitches))*8.25f/100  +((costOfDrink * drinks) + (costOfSnack * snacks) + (costOfSandwitch * sandwitches)));
                     session.putBoolean("cart", true);
+                    startActivity(new Intent(ViewVehicleInventoryUser.this, ViewCart.class));
                 }
-
             }
         });
-
         vehicleInventory.close();
-
     }
 }
