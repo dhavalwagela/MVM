@@ -164,50 +164,52 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
 
         if (assignedVehicles.getCount() > 0) {
             while (assignedVehicles.moveToNext()) {
-                TableRow row = new TableRow(this);
-                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-                row.setLayoutParams(lp);
+                if (assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId")) != null && assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId")).length() > 0) {
+                    TableRow row = new TableRow(this);
+                    TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
+                    row.setLayoutParams(lp);
 
-                TextView textView = new TextView(this);
-                textView.setText(optDb.getDescription("vehicle", assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"))));
-                textView.setWidth(85);
-                row.addView(textView);
+                    TextView textView = new TextView(this);
+                    textView.setText(optDb.getDescription("vehicle", assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"))));
+                    textView.setWidth(85);
+                    row.addView(textView);
 
-                textView = new TextView(this);
-                String locationId = assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"));
-                if (locationId != null && locationId.length() > 0) {
-                    textView.setText(optDb.getDescription("location", assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"))));
-                } else
-                    textView.setText("-");
-                textView.setWidth(85);
-                row.addView(textView);
+                    textView = new TextView(this);
+                    String locationId = assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"));
+                    if (locationId != null && locationId.length() > 0) {
+                        textView.setText(optDb.getDescription("location", assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"))));
+                    } else
+                        textView.setText("-");
+                    textView.setWidth(85);
+                    row.addView(textView);
 
-                textView = new TextView(this);
-                if (assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) != null)
-                    textView.setText(assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) + ":00  -  " + assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime")) + ":00");
-                else
-                    textView.setText("-");
-                textView.setWidth(90);
-                row.addView(textView);
+                    textView = new TextView(this);
+                    if (assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) != null)
+                        textView.setText(assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) + ":00  -  " + assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime")) + ":00");
+                    else
+                        textView.setText("-");
+                    textView.setWidth(90);
+                    row.addView(textView);
 
-                ll.addView(row, i);
-                i++;
-                final String currentEndTime = assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime"));
-                final String currentStartTime = assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime"));
-                final String currentVehicle = assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"));
-                final String currentLocation = assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"));
-                row.setClickable(true);
+                    ll.addView(row, i);
+                    i++;
+                    final String currentEndTime = assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime"));
+                    final String currentStartTime = assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime"));
+                    final String currentVehicle = assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"));
+                    final String currentLocation = assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"));
+                    row.setClickable(true);
 
-                row.setOnClickListener(new View.OnClickListener() {
-                    public void onClick(View v) {
-                        Intent intent = new Intent(v.getContext(),ViewVehicleInventoryUser.class);
-                        intent.putExtra("selectedVehicleId", currentVehicle);
-                        intent.putExtra("selectedLocationId", currentLocation);
-                        intent.putExtra("selectedStartTime", currentStartTime);
-                        intent.putExtra("selectedEndTime", currentEndTime);
-                        startActivityForResult(intent,0);
-                    }
-                });
+                    row.setOnClickListener(new View.OnClickListener() {
+                        public void onClick(View v) {
+                            Intent intent = new Intent(v.getContext(), ViewVehicleInventoryUser.class);
+                            intent.putExtra("selectedVehicleId", currentVehicle);
+                            intent.putExtra("selectedLocationId", currentLocation);
+                            intent.putExtra("selectedStartTime", currentStartTime);
+                            intent.putExtra("selectedEndTime", currentEndTime);
+                            startActivityForResult(intent, 0);
+                        }
+                    });
+                }
             }
         }
 
