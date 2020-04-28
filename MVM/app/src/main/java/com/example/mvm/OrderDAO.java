@@ -55,6 +55,11 @@ public class OrderDAO extends SQLiteOpenHelper {
             return false;
         return true;
     }
+    public Cursor getOrders(String username) {
+        db = this.getWritableDatabase();
+        Cursor cursor = db.query("Orders", null, "username = '"+username+"'", null, null, null, null);
+        return cursor;
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
 
