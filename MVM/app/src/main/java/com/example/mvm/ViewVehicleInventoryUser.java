@@ -25,7 +25,7 @@ import java.util.Map;
 public class ViewVehicleInventoryUser extends AppCompatActivity {
     SharedPreferences sharedpreferences;
     private Button button;
-    private String drinksTotalQuantity, snacksTotalQuantity, sandwitchesTotalQuantity, pickupLocation, operator, duration;
+    private String drinksTotalQuantity, snacksTotalQuantity, sandwitchesTotalQuantity, operator, duration, location;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -63,8 +63,10 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
             case R.id.cart:
                 if (sessionMap.get("cart") != null)
                     startActivity(new Intent(this,ViewCart.class));
-                else
+                else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
             case R.id.home:
                 if (sessionMap == null)
                     return false;
@@ -86,7 +88,7 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
         final Intent receiverIntent = getIntent();
         OperatorDAO optDb = new OperatorDAO(this);
         OrderDAO orderDb = new OrderDAO(this);
-        String location = receiverIntent.getStringExtra("selectedLocationId");
+        location = receiverIntent.getStringExtra("selectedLocationId");
         String vehicle = receiverIntent.getStringExtra("selectedVehicleId");
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 0);
@@ -108,7 +110,7 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                 ((TextView) findViewById(R.id.sandwitchQuantity)).setText(sandwitchesTotalQuantity);
             }
         }
-        pickupLocation = optDb.getDescription("location", location);
+        String pickupLocation = optDb.getDescription("location", location);
         ((TextView) findViewById(R.id.location_id)).setText(pickupLocation);
         duration = receiverIntent.getStringExtra("selectedStartTime")+":00 - "+receiverIntent.getStringExtra("selectedEndTime")+":00";
         ((TextView) findViewById(R.id.duration)).setText(duration);
@@ -140,7 +142,7 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                     session.putInt("sandwitches", sandwitches);
                     session.putInt("drinks", drinks);
                     session.putInt("snacks", snacks);
-                    session.putString("pickupLocation", pickupLocation);
+                    session.putString("pickupLocation", location);
                     session.putString("timeSlot", duration);
                     session.putString("vehicle", receiverIntent.getStringExtra("selectedVehicleId"));
                     float costOfSandwitch = optDb.getUnitCost("SANDWITCHES").length() == 0 ? 0 : Float.parseFloat(optDb.getUnitCost("SANDWITCHES"));

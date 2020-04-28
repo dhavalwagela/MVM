@@ -121,7 +121,27 @@ public class OperatorDAO extends SQLiteOpenHelper {
             return cursor.getString(cursor.getColumnIndex("unitCost"));
         return "";
     }
-    public void updateInventory() {
+    public boolean updateInventory(String date, String itemId, String vehicleId, int placedQuantity) {
+        db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        Cursor inventory = getVehicleInventory(vehicleId);
+        int totalQuantity = 0;
+        while(inventory.moveToNext()) {
+            String currentItem = inventory.getString(inventory.getColumnIndex("itemId"));
+            if (currentItem.equals(itemId)) {
+                totalQuantity = Integer.parseInt(inventory.getString(inventory.getColumnIndex("quantity")));
+                break;
+            }
+        }
+        if (placedQuantity > totalQuantity)
+            return false;
+        cv.put("quantity", totalQuantity - placedQuantity);
+        cv.put("placeQuantity", placedQuantity);
+        String condition = "vehicleId = '"+vehicleId+"' and itemId = '"+itemId+"' and thruDate = '"+date+"'";
+        long result = db.update("Inventory", cv, condition, null);
+        return result < 0 ? false : true;
+    }
+    public void fullfilInventory() {
         db = this.getWritableDatabase();
         String sql = "SELECT name FROM sqlite_master WHERE type='table' AND name='Inventory'";
         Cursor mCursor = db.rawQuery(sql, null);

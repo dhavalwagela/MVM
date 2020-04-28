@@ -19,6 +19,8 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import com.braintreepayments.cardform.view.CardForm;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 public class Checkout extends AppCompatActivity {
@@ -63,8 +65,10 @@ public class Checkout extends AppCompatActivity {
             case R.id.cart:
                 if (sessionMap.get("cart") != null)
                     startActivity(new Intent(this,ViewCart.class));
-                else
+                else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
             case R.id.home:
                 if (sessionMap == null)
                     return false;
@@ -105,10 +109,70 @@ public class Checkout extends AppCompatActivity {
                     alertBuilder.setPositiveButton("Confirm", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialogInterface, int i) {
-                            dialogInterface.dismiss();
-                            Toast.makeText(Checkout.this, "Thank you for purchase", Toast.LENGTH_LONG).show();
-                            Intent intent=new Intent(getApplicationContext(), OrderDetails.class);
-                            startActivityForResult(intent,0);
+                            OrderDAO orderDao = new OrderDAO(Checkout.this);
+                            OperatorDAO optDb = new OperatorDAO(Checkout.this);
+                            sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                            Map sessionMap = sharedpreferences.getAll();
+                            String username = (String) sessionMap.get("username");
+                            String vehicleId = (String) sessionMap.get("vehicle");
+                            String pickupTime = (String) sessionMap.get("duration");
+                            String locationId = (String) sessionMap.get("pickupLocation");
+                            float grandTotal = (float) sessionMap.get("grandTotal");
+                            int drinks = Integer.parseInt(String.valueOf(sessionMap.get("drinks")));
+                            int sandwitches = Integer.parseInt(String.valueOf(sessionMap.get("sandwitches")));
+                            int snacks = Integer.parseInt(String.valueOf(sessionMap.get("snacks")));
+                            SimpleDateFormat formatForOrderId = new SimpleDateFormat("yyyyMMddHHmmss");
+                            SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+                            Date date = new Date();
+                            String orderId = formatForOrderId.format(date);
+                            boolean updatedInventoryForDrinks = true, updatedInventoryForSandwitches = true, updatedInventoryForSnacks = true;
+                            if (drinks > 0)
+                                updatedInventoryForDrinks = optDb.updateInventory(simpleDateFormat.format(date), "DRINKS", vehicleId, drinks);
+                            if (updatedInventoryForDrinks) {
+                                if (sandwitches > 0)
+                                    updatedInventoryForSandwitches = optDb.updateInventory(simpleDateFormat.format(date), "SANDWITCHES", vehicleId, sandwitches);
+                                if (updatedInventoryForSandwitches) {
+                                    if (snacks > 0)
+                                        updatedInventoryForSnacks = optDb.updateInventory(simpleDateFormat.format(date), "SNACKS", vehicleId, snacks);
+                                    if (!updatedInventoryForSnacks)
+                                        Toast.makeText(Checkout.this, "Invalid quantity of snacks were added", Toast.LENGTH_LONG).show();
+                                } else {
+                                    Toast.makeText(Checkout.this, "Invalid quantity of sandwitches were added", Toast.LENGTH_LONG).show();
+                                }
+                            } else
+                                Toast.makeText(Checkout.this, "Invalid quantity of drinks were added", Toast.LENGTH_LONG).show();
+                            if (updatedInventoryForDrinks && updatedInventoryForSandwitches && updatedInventoryForSnacks) {
+                                boolean placedOrder = orderDao.placeOrder(orderId, username, vehicleId, locationId, pickupTime, grandTotal);
+                                boolean addedDrinkToOrder = true, addedSnacksToOrder = true, addedSandwitchesToOrder = true;
+                                if (placedOrder) {
+                                    if (drinks > 0)
+                                        addedDrinkToOrder = orderDao.addOrderItems(orderId, "DRINKS", drinks, ((Integer) sessionMap.get("drinks")) * Float.parseFloat(optDb.getUnitCost("DRINKS")));
+                                    if (sandwitches > 0)
+                                        addedSandwitchesToOrder = orderDao.addOrderItems(orderId, "SANDWITCHES", sandwitches, ((Integer) sessionMap.get("sandwitches")) * Float.parseFloat(optDb.getUnitCost("SANDWITCHES")));
+                                    if (snacks > 0)
+                                        addedSnacksToOrder = orderDao.addOrderItems(orderId, "SNACKS", snacks, ((Integer) sessionMap.get("snacks")) * Float.parseFloat(optDb.getUnitCost("SNACKS")));
+                                    if (addedSnacksToOrder && addedSandwitchesToOrder && addedDrinkToOrder) {
+                                        Toast.makeText(Checkout.this, "Thank you for purchase", Toast.LENGTH_LONG).show();
+                                        SharedPreferences.Editor session = sharedpreferences.edit();
+                                        session.remove("cart");
+                                        session.remove("drinks");
+                                        session.remove("snacks");
+                                        session.remove("grandTotal");
+                                        session.remove("sandwitches");
+                                        session.remove("subtotal");
+                                        session.remove("pickupLocation");
+                                        session.remove("timeSlot");
+                                        session.remove("location");
+                                        session.remove("vehicle");
+                                        session.commit();
+                                        dialogInterface.dismiss();
+                                        Intent intent = new Intent(getApplicationContext(), OrderDetails.class);
+                                        intent.putExtra("orderId", orderId);
+                                        startActivityForResult(intent, 0);
+                                    }
+                                } else
+                                    Toast.makeText(Checkout.this, "Unable to place order, Try again", Toast.LENGTH_LONG).show();
+                            }
                         }
                     });
                     alertBuilder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {

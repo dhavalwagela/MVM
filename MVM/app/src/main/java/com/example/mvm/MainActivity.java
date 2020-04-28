@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         Cursor cursor = sqldb.rawQuery("select name FROM sqlite_master WHERE type='table' AND name='Inventory'", null);
         if (cursor.getCount() > 0) {
             OperatorDAO oprdb = new OperatorDAO(this);
-            oprdb.updateInventory();
+            oprdb.fullfilInventory();
         }
     }
     public void checkValidUser(View view) {

@@ -85,8 +85,10 @@ public class OrderDetailsForOperator extends AppCompatActivity {
             case R.id.cart:
                 if (sessionMap.get("cart") != null)
                     startActivity(new Intent(this,ViewCart.class));
-                else
+                else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
+                    return false;
+                }
             case R.id.home:
                 if (sessionMap == null)
                     return false;

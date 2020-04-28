@@ -63,9 +63,10 @@ public class ViewCart extends AppCompatActivity {
             case R.id.cart:
                 if (sessionMap.get("cart") != null)
                     startActivity(new Intent(this,ViewCart.class));
-                else
+                else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
-                return true;
+                    return false;
+                }
             case R.id.home:
                 if (sessionMap == null)
                     return false;
@@ -93,7 +94,7 @@ public class ViewCart extends AppCompatActivity {
         TextView vehicleId = findViewById(R.id.vehicle_id);
         vehicleId.setText(vehicleId.getText()+(optDb.getDescription("vehicle", (String) sessionMap.get("vehicle"))));
         TextView locationId = findViewById(R.id.location_id);
-        locationId.setText(locationId.getText()+((String) sessionMap.get("pickupLocation")));
+        locationId.setText(locationId.getText()+((optDb.getDescription("location", (String) sessionMap.get("pickupLocation")))));
         TableLayout ll = findViewById(R.id.table_layout);
         TextView duration = findViewById(R.id.duration);
         duration.setText(duration.getText()+(String)(sessionMap.get("timeSlot")));
