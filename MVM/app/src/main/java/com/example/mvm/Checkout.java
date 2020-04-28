@@ -115,7 +115,7 @@ public class Checkout extends AppCompatActivity {
                             Map sessionMap = sharedpreferences.getAll();
                             String username = (String) sessionMap.get("username");
                             String vehicleId = (String) sessionMap.get("vehicle");
-                            String pickupTime = (String) sessionMap.get("duration");
+                            String pickupTime = (String) sessionMap.get("timeSlot");
                             String locationId = (String) sessionMap.get("pickupLocation");
                             float grandTotal = (float) sessionMap.get("grandTotal");
                             int drinks = Integer.parseInt(String.valueOf(sessionMap.get("drinks")));
