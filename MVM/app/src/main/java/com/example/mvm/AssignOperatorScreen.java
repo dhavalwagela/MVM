@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,10 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 public class AssignOperatorScreen extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
@@ -26,6 +24,7 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
     private Spinner operatorName;
     private Spinner vehicleName;
     private String selectedOperator, selectedVehicleId, operatorAssignedDate;
+    SharedPreferences sharedpreferences;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -58,12 +57,21 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
         alertDialog.show();
     }
     public boolean onOptionsItemSelected(MenuItem item) {
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Map sessionMap = sharedpreferences.getAll();
         switch (item.getItemId()) {
             case R.id.logout:
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.home:
-                startActivity(new Intent(this,ManagerHomeScreen.class));
+                if (sessionMap == null)
+                    return false;
+                if ((sessionMap.get("userType")).equals("Manager"))
+                    startActivity(new Intent(this,ManagerHomeScreen.class));
+                else if ((sessionMap.get("userType")).equals("Operator"))
+                    startActivity(new Intent(this,OperatorHomeScreen.class));
+                else
+                    startActivity(new Intent(this,UserHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);

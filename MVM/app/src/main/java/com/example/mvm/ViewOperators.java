@@ -3,6 +3,7 @@ package com.example.mvm;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -15,7 +16,10 @@ import android.widget.ListView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Map;
+
 public class ViewOperators extends AppCompatActivity {
+    SharedPreferences sharedpreferences;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -48,12 +52,21 @@ public class ViewOperators extends AppCompatActivity {
         alertDialog.show();
     }
     public boolean onOptionsItemSelected(MenuItem item) {
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Map sessionMap = sharedpreferences.getAll();
         switch (item.getItemId()) {
             case R.id.logout:
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.home:
-                startActivity(new Intent(this,ManagerHomeScreen.class));
+                if (sessionMap == null)
+                    return false;
+                if ((sessionMap.get("userType")).equals("Manager"))
+                    startActivity(new Intent(this,ManagerHomeScreen.class));
+                else if ((sessionMap.get("userType")).equals("Operator"))
+                    startActivity(new Intent(this,OperatorHomeScreen.class));
+                else
+                    startActivity(new Intent(this,UserHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
