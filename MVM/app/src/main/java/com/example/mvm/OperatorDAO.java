@@ -30,7 +30,8 @@ public class OperatorDAO extends SQLiteOpenHelper {
                 condition+=" or ";
             condition+= "locationId = '"+locationId+"'";
         }
-        Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date = '"+date+"'"+(condition.length() > 0 ? " and "+condition : "") , null, null, null, null);
+
+        Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date = '"+date+"'"+(condition.length() > 0 ? " and ("+condition+")" : "") , null, null, null, null);
         return cursor;
     }
     public String getDescription(String table, String id) {
