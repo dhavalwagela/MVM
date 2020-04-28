@@ -80,6 +80,18 @@ public class OperatorDAO extends SQLiteOpenHelper {
         else
             db.insert("VehicleOperatorAndLocation", null, cv);
     }
+    public String getCurrentVehicle(String username) {
+        db = this.getWritableDatabase();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String date = dateFormat.format(new Date());
+        String vehicleId = "";
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " username = '"+username+"' and date = '"+date+"'", null, null, null, null);
+        while (cursor.moveToNext()) {
+            vehicleId = cursor.getString(cursor.getColumnIndex("vehicleId"));
+            return vehicleId;
+        }
+        return vehicleId;
+    }
     public boolean canAssignLocation(String vehicleId) {
         db = this.getWritableDatabase();
         Calendar calendar = Calendar.getInstance();
