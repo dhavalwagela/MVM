@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -12,7 +13,11 @@ import android.view.View;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.Map;
+
 public class ManagerHomeScreen extends AppCompatActivity {
+    SharedPreferences sharedpreferences;
+
     @SuppressLint("ResourceType")
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -26,13 +31,21 @@ public class ManagerHomeScreen extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle item selection
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Map sessionMap = sharedpreferences.getAll();
         switch (item.getItemId()) {
             case R.id.logout:
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.home:
-                startActivity(new Intent(this,ManagerHomeScreen.class));
+                if (sessionMap == null)
+                    return false;
+                if ((sessionMap.get("userType")).equals("Manager"))
+                    startActivity(new Intent(this,ManagerHomeScreen.class));
+                else if ((sessionMap.get("userType")).equals("Operator"))
+                    startActivity(new Intent(this,OperatorHomeScreen.class));
+                else
+                    startActivity(new Intent(this,UserHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
