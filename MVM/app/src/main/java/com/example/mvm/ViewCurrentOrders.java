@@ -1,9 +1,11 @@
 package com.example.mvm;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
@@ -17,8 +19,7 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DecimalFormat;
 import java.util.Map;
 
 public class ViewCurrentOrders extends AppCompatActivity {
@@ -75,71 +76,72 @@ public class ViewCurrentOrders extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_orders);
         TableLayout ll = findViewById(R.id.table_layout);
 
-        List<List<String>> list = new ArrayList<>();
-        List<String> child = new ArrayList<>();
-            child.add("1234");
-            child.add("Bruce Wayne");
-            child.add("Pending");
-            child.add("2");
-            child.add("$12.00");
-            list.add(child);
-        child = new ArrayList<>();
-        child.add("1235");
-        child.add("Bruce Wayne");
-        child.add("Pending");
-        child.add("4");
-        child.add("$12.00");
-        list.add(child);
-        child = new ArrayList<>();
-        child.add("1236");
-        child.add("Bruce Wayne");
-        child.add("Pending");
-        child.add("2");
-        child.add("$12.00");
-        list.add(child);
-        child = new ArrayList<>();
-        child.add("1237");
-        child.add("Bruce Wayne");
-        child.add("Pending");
-        child.add("3");
-        child.add("$12.00");
-        list.add(child);
-        for (int i = 2; i <= list.size()+1; i++) {
-            TableRow row = new TableRow(this);
-            TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
-            row.setLayoutParams(lp);
-            List<String> orders = list.get(i-2);
-            int in = 0;
-            final String orderId = orders.get(0);
-            for (String order : orders) {
-                TextView textView = new TextView(this);
-                textView.setText(order);
-                if(in == 1)
-                    textView.setWidth(300);
-                else
-                    textView.setWidth(265);
-                if (in == 4) {
-                    textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
-                } else
-                    textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_START);
-                row.addView(textView);
-                in++;
-            }
-            ll.addView(row,i);
-            row.setClickable(true);  //allows you to select a specific row
+        OrderDAO orderDAO = new OrderDAO(this);
+        OperatorDAO optDb = new OperatorDAO(this);
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Map sessionMap = sharedpreferences.getAll();
+        String vehicleId = optDb.getCurrentVehicle((String) sessionMap.get("username"));
+        DecimalFormat df = new DecimalFormat("0.00");
 
-            row.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    Intent intent=new Intent(v.getContext(),OrderDetailsForOperator.class);
-                    startActivityForResult(intent,0);
-                }
-            });
+        int i = 2;
+
+        if (vehicleId.length() > 0) {
+            Cursor orders = orderDAO.getCurrentOrderForVehicle(vehicleId);
+            while (orders.moveToNext()) {
+                TableRow row = new TableRow(this);
+                TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
+                row.setLayoutParams(lp);
+
+                TextView textView = new TextView(this);
+                textView.setText(orders.getString(orders.getColumnIndex("orderId")));
+                textView.setWidth(250);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setText(new UserDAO(this).getUserFullName(orders.getString(orders.getColumnIndex("username"))));
+                textView.setWidth(250);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setText(orders.getString(orders.getColumnIndex("orderStatus")));
+                textView.setWidth(250);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setText(orders.getString(orders.getColumnIndex("orderDate")));
+                textView.setWidth(300);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                row.addView(textView);
+
+                textView = new TextView(this);
+                textView.setText("$"+ df.format(Float.parseFloat(orders.getString(orders.getColumnIndex("grandTotal")))));
+                textView.setWidth(250);
+                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                row.addView(textView);
+
+                final String selectedOrderId = orders.getString(orders.getColumnIndex("orderId"));
+                ll.addView(row, i);
+                i++;
+                row.setClickable(true);
+
+                row.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        Intent intent = new Intent(v.getContext(), OrderDetailsForOperator.class);
+                        intent.putExtra("orderId", selectedOrderId);
+                        startActivityForResult(intent, 0);
+                    }
+                });
+            }
         }
     }
 }

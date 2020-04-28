@@ -60,6 +60,13 @@ public class OrderDAO extends SQLiteOpenHelper {
         Cursor cursor = db.query("Orders", null, "username = '"+username+"'", null, null, null, null);
         return cursor;
     }
+    public Cursor getCurrentOrderForVehicle(String vehicleId) {
+        db = this.getWritableDatabase();
+        SimpleDateFormat formatForDate = new SimpleDateFormat("yyyy-MM-dd");
+        String date = formatForDate.format(new Date());
+        Cursor cursor = db.query("Orders", null, "vehicleId = '"+vehicleId+"' and orderDate = '"+date+"'", null, null, null, null);
+        return cursor;
+    }
     @Override
     public void onCreate(SQLiteDatabase db) {
 
