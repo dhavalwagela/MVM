@@ -25,7 +25,7 @@
             app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-            android:id="@+id/txt_OrderID"
+            android:id="@+id/orderId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -37,7 +37,7 @@
             app:layout_constraintTop_toBottomOf="@+id/txt_orderDetails" />
 
     <TextView
-            android:id="@+id/txt_OrderFirstName"
+            android:id="@+id/firstname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -46,10 +46,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.12"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderID" />
+            app:layout_constraintTop_toBottomOf="@+id/orderId" />
 
     <TextView
-            android:id="@+id/txt_OrderLastName"
+            android:id="@+id/lastname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -58,10 +58,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.124"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderFirstName" />
+            app:layout_constraintTop_toBottomOf="@+id/firstname" />
 
     <TextView
-            android:id="@+id/txt_OrderPhoneNumber"
+            android:id="@+id/contactNo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -70,7 +70,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.179"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderLastName" />
+            app:layout_constraintTop_toBottomOf="@+id/lastname" />
 
     <TextView
             android:id="@+id/txt_OrderItemDetails"
@@ -82,10 +82,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.104"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderPhoneNumber" />
+            app:layout_constraintTop_toBottomOf="@+id/contactNo" />
 
     <TextView
-            android:id="@+id/txt_OrderPickupTime"
+            android:id="@+id/pickupTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Pickup Time : 14:00-16:00"
@@ -97,7 +97,7 @@
             app:layout_constraintTop_toBottomOf="@+id/grandTotal" />
 
     <TextView
-            android:id="@+id/txt_OrderDate"
+            android:id="@+id/orderDate"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -106,10 +106,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.121"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderPickupTime" />
+            app:layout_constraintTop_toBottomOf="@+id/pickupTime" />
 
     <TextView
-            android:id="@+id/txt_OrderLocationID"
+            android:id="@+id/locationId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -118,10 +118,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.176"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderDate" />
+            app:layout_constraintTop_toBottomOf="@+id/orderDate" />
 
     <TextView
-            android:id="@+id/txt_OrderVehicleID"
+            android:id="@+id/vehicleId"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -130,10 +130,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.106"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderLocationID" />
+            app:layout_constraintTop_toBottomOf="@+id/locationId" />
 
     <TextView
-            android:id="@+id/txt_OrderStatus"
+            android:id="@+id/orderStatus"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -142,7 +142,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.123"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderVehicleID" />
+            app:layout_constraintTop_toBottomOf="@+id/vehicleId" />
 
     <TableLayout
             android:id="@+id/table_layout"
@@ -233,6 +233,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt_OrderStatus"
+            app:layout_constraintTop_toBottomOf="@+id/orderStatus"
             app:layout_constraintVertical_bias="0.199" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,29 +1,32 @@
 package com.example.mvm;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.TableLayout;
-import android.widget.TableRow;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.widget.*;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.text.DecimalFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 public class OrderDetails extends AppCompatActivity {
     SharedPreferences sharedpreferences;
+    private int drinks = 0, sandwitches = 0, snacks = 0;
+    private String vehicleId="";
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -61,7 +64,17 @@ public class OrderDetails extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                startActivity(new Intent(context,OrderDetails.class));
+                String orderId = getIntent().getStringExtra("orderId");
+                OrderDAO orderDAO = new OrderDAO(OrderDetails.this);
+                OperatorDAO operatorDAO = new OperatorDAO(OrderDetails.this);
+                orderDAO.changeOrderStatus(orderId, "Cancelled");
+                if (drinks > 0)
+                    operatorDAO.refillOrderItems(vehicleId, "DRINKS", drinks);
+                if (sandwitches > 0)
+                    operatorDAO.refillOrderItems(vehicleId, "DRINKS", sandwitches);
+                if (snacks > 0)
+                    operatorDAO.refillOrderItems(vehicleId, "SNACKS", snacks);
+
                 dialogInterface.dismiss();
             }
         });
@@ -103,46 +116,118 @@ public class OrderDetails extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_order_details);
         TableLayout ll = findViewById(R.id.table_layout);
+        OrderDAO orderDAO = new OrderDAO(this);
+        UserDAO userDAO = new UserDAO(this);
+        OperatorDAO operatorDAO = new OperatorDAO(this);
+        String orderId = getIntent().getStringExtra("orderId");
+        Cursor orderDetails = orderDAO.getOrderDetails(orderId);
+        Cursor orderItems = orderDAO.getOrderItems(orderId);
+        DecimalFormat df = new DecimalFormat("0.00");
 
-        List<List<String>> list = new ArrayList<>();
-        List<String> child = new ArrayList<>();
-        child.add("1");
-        child.add("Drinks");
-        child.add("2");
-        child.add("$3.00");
-        list.add(child);
+        orderDetails.moveToNext();
 
-        List<String> child1 = new ArrayList<>();
-        child1.add("2");
-        child1.add("Snacks");
-        child1.add("2");
-        child1.add("$2.50");
-        list.add(child1);
-        for (int i = 2; i <= list.size() + 1; i++) {
+        String username = orderDetails.getString(orderDetails.getColumnIndex("username"));
+        Cursor userDetails = userDAO.getUserDetails(username);
+        userDetails.moveToNext();
+
+        TextView orderIdView = findViewById(R.id.orderId);
+        orderIdView.setText("Order ID : "+orderId);
+
+        TextView firstNameText = findViewById(R.id.firstname);
+        firstNameText.setText("First Name : "+userDetails.getString(userDetails.getColumnIndex("firstname")));
+
+        TextView lastnameText = findViewById(R.id.lastname);
+        lastnameText.setText("Last Name : "+userDetails.getString(userDetails.getColumnIndex("lastname")));
+
+        TextView contactnoText = findViewById(R.id.contactNo);
+        contactnoText.setText("Phone Number : "+userDetails.getString(userDetails.getColumnIndex("phone")));
+
+        TextView pickupTimeText = findViewById(R.id.pickupTime);
+        pickupTimeText.setText("Pickup Time : "+orderDetails.getString(orderDetails.getColumnIndex("pickupTime")));
+
+        TextView orderDateText = findViewById(R.id.orderDate);
+        orderDateText.setText("Date : "+orderDetails.getString(orderDetails.getColumnIndex("orderDate")));
+
+        TextView vehicleText = findViewById(R.id.vehicleId);
+        vehicleText.setText("Vehicle : "+operatorDAO.getDescription("vehicle", orderDetails.getString(orderDetails.getColumnIndex("vehicleId"))));
+
+        TextView locationText = findViewById(R.id.locationId);
+        locationText.setText("Location : "+operatorDAO.getDescription("location", orderDetails.getString(orderDetails.getColumnIndex("locationId"))));
+
+        TextView orderStatusText = findViewById(R.id.orderStatus);
+        orderStatusText.setText(" Order Status : "+orderDetails.getString(orderDetails.getColumnIndex("orderStatus")));
+
+        TextView grandTotalText = findViewById(R.id.grandTotal);
+        grandTotalText.setText("     Grand Total : $"+df.format(Float.parseFloat(orderDetails.getString(orderDetails.getColumnIndex("grandTotal")))));
+
+        vehicleId = orderDetails.getString(orderDetails.getColumnIndex("vehicleId"));
+
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Button cancelOrder = findViewById(R.id.btn_CancelOrder);
+
+        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed")) {
+            cancelOrder.setEnabled(false);
+        }
+        try {
+            Date orderDate = simpleDateFormat.parse(orderDetails.getString(orderDetails.getColumnIndex("orderDate")));
+            if(simpleDateFormat.parse(simpleDateFormat.format(new Date())) .after(orderDate)) {
+                cancelOrder.setEnabled(false);
+                if (!orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed"))
+                    orderStatusText.setText(" Order Status : Not Completed");
+            }
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int i = 2;
+        while (orderItems.moveToNext()) {
             TableRow row = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
             row.setLayoutParams(lp);
-            List<String> orders = list.get(i - 2);
-            int in = 0;
-            final String orderId = orders.get(0);
-            for (String order : orders) {
-                TextView textView = new TextView(this);
-                textView.setText(order);
-                textView.setWidth(350);
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
 
-                row.addView(textView);
-                in++;
-            }
-            System.out.println(i);
+            TextView textView = new TextView(this);
+            textView.setText(String.valueOf(i-1));
+            textView.setWidth(350);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            row.addView(textView);
+
+            textView = new TextView(this);
+            textView.setText(operatorDAO.getDescription("item", orderItems.getString(orderItems.getColumnIndex("itemId"))));
+            textView.setWidth(350);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            row.addView(textView);
+
+            textView = new TextView(this);
+            textView.setText(orderItems.getString(orderItems.getColumnIndex("quantity")));
+            textView.setWidth(350);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            row.addView(textView);
+
+            textView = new TextView(this);
+            textView.setText("$"+df.format(Float.parseFloat(orderItems.getString(orderItems.getColumnIndex("totalCost")))));
+            textView.setWidth(350);
+            textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+            row.addView(textView);
+
+            if (orderItems.getString(orderItems.getColumnIndex("itemId")).equals("DRINKS"))
+                drinks = Integer.parseInt(orderItems.getString(orderItems.getColumnIndex("quantity")));
+            else if (orderItems.getString(orderItems.getColumnIndex("itemId")).equals("SNACKS"))
+                snacks = Integer.parseInt(orderItems.getString(orderItems.getColumnIndex("quantity")));
+            else
+                sandwitches = Integer.parseInt(orderItems.getString(orderItems.getColumnIndex("quantity")));
+
+
             ll.addView(row, i);
-            row.setClickable(true);
+            i++;
+
         }
+        orderDetails.close();
+        orderItems.close();
     }
 }
