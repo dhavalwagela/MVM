@@ -13,18 +13,6 @@
             android:layout_height="match_parent"
             tools:context=".ViewVehicleInventoryOperator">
 
-        <TextView
-                android:id="@+id/locationidLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:text="Location"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.095"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
-
         <TableLayout
                 android:layout_width="409dp"
                 android:layout_height="346dp"
@@ -34,7 +22,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/goButton">
+                app:layout_constraintTop_toBottomOf="@+id/titleLabel">
 
             <TableRow
                     android:layout_width="329dp"
@@ -229,49 +217,6 @@
                 app:layout_constraintHorizontal_bias="0.497"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-        <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="200dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.583"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
-
-        <TextView
-                android:id="@+id/vehicleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="22dp"
-                android:text="Vehicle"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.091"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationidLabel" />
-
-        <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="100dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.395"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner" />
-
-        <Button
-                android:id="@+id/goButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Search"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.82"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </HorizontalScrollView>

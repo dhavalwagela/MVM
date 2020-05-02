@@ -157,7 +157,8 @@ public class OrderDetailsForOperator extends AppCompatActivity {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Button cancelOrder = findViewById(R.id.btn_CancelOrder);
-
+        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled"))
+            cancelOrder.setEnabled(false);
         int i = 2;
         while (orderItems.moveToNext()) {
             TableRow row = new TableRow(this);

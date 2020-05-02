@@ -79,7 +79,7 @@ public class OperatorHomeScreen extends AppCompatActivity {
         startActivity(new Intent(this,ViewCurrentOrders.class));
     }
     public void viewProfile(View view) {startActivity(new Intent(this,ViewProfile.class));}
-    public void viewVehicleInventory(View view) {startActivity(new Intent(this,ViewVehicleInventoryOperator.class));}
+    public void viewVehicleInventory(View view) {startActivity(new Intent(this,ViewVehicleInventory.class));}
     public void viewSchedule(View view) {startActivity(new Intent(this,ViewSchedule.class));}
 
 }

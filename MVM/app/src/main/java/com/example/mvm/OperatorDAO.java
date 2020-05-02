@@ -107,12 +107,29 @@ public class OperatorDAO extends SQLiteOpenHelper {
         calendar.add(Calendar.DAY_OF_YEAR, 1);
         Date tomorrow = calendar.getTime();
         db = this.getWritableDatabase();
+        String operator = "";
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, "vehicleId = '"+vehicleId+"' and date = '"+simpleDateFormat.format(tomorrow)+"'", null, null, null, null);
+        boolean insert = false;
+        while (cursor.moveToNext()) {
+            if (cursor.getString(cursor.getColumnIndex("startTime")) != null && Integer.parseInt(cursor.getString(cursor.getColumnIndex("startTime"))) > 0) {
+                operator = cursor.getString(cursor.getColumnIndex("username"));
+                insert = true;
+                break;
+            }
+        }
         ContentValues cv = new ContentValues();
         cv.put("locationId", locationId);
         cv.put("startTime", startTime);
         cv.put("endTime", endTime);
         cv.put("vehicleId", vehicleId);
-        db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null );
+        cv.put("date", simpleDateFormat.format(tomorrow));
+        if (!insert)
+            db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null );
+        else {
+            if (operator.length() > 0)
+                cv.put("username", operator);
+            db.insert("VehicleOperatorAndLocation", null, cv);
+        }
     }
     public Cursor getTimeSlot(String locationId) {
         db = this.getWritableDatabase();

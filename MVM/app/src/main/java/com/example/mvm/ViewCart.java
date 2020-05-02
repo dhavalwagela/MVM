@@ -155,6 +155,9 @@ public class ViewCart extends AppCompatActivity {
             }
             ll.addView(row, i);
         }
+        float taxAmount = (drinksCost + snacksCost + sandwitchesCost) * 8.25f/100;
+        TextView tax = findViewById(R.id.tax_amnt);
+        tax.setText(tax.getText()+df.format(taxAmount));
         TextView grandTotal = findViewById(R.id.grandTotal);
         grandTotal.setText(grandTotal.getText()+(String.valueOf(df.format(sessionMap.get("grandTotal")))));
     }
