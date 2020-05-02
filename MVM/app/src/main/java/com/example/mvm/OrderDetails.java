@@ -71,7 +71,7 @@ public class OrderDetails extends AppCompatActivity {
                 if (drinks > 0)
                     operatorDAO.refillOrderItems(vehicleId, "DRINKS", drinks);
                 if (sandwitches > 0)
-                    operatorDAO.refillOrderItems(vehicleId, "DRINKS", sandwitches);
+                    operatorDAO.refillOrderItems(vehicleId, "SANDWITCHES", sandwitches);
                 if (snacks > 0)
                     operatorDAO.refillOrderItems(vehicleId, "SNACKS", snacks);
 
@@ -172,7 +172,7 @@ public class OrderDetails extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Button cancelOrder = findViewById(R.id.btn_CancelOrder);
 
-        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed")) {
+        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled")) {
             cancelOrder.setEnabled(false);
         }
         try {

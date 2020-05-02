@@ -18,7 +18,12 @@ public class OrderDAO extends SQLiteOpenHelper {
 
     public String getOrderRevenue(String vehicleId, String locationId, String date) {
         SQLiteDatabase db = this.getWritableDatabase();
-        Cursor cursor = db.query("Orders", null, "vehicleId = '"+vehicleId+"' and locationId = '"+locationId+"' and orderDate = '"+date+"'", null, null, null, null);
+        String condition;
+        if (locationId != null)
+           condition = "vehicleId = '"+vehicleId+"' and locationId = '"+locationId+"' and orderDate = '"+date+"'";
+        else
+            condition = "vehicleId = '"+vehicleId+"' and orderDate = '"+date+"'";
+        Cursor cursor = db.query("Orders", null, condition, null, null, null, null);
         while(cursor.moveToNext()) {
             return cursor.getString(cursor.getColumnIndex("grandTotal"));
         }

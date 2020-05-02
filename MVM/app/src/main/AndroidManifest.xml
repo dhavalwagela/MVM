@@ -19,7 +19,7 @@
         <activity android:name=".SearchVendingVehicleManager" />
         <activity android:name=".SearchVendingVehicleUser" />
         <activity android:name=".ChangePassword" />
-        <activity android:name=".ViewVehicleInventoryManager" />
+        <activity android:name=".ViewVehicleInventory" />
         <activity android:name=".ViewVehicleInventoryUser" />
         <activity android:name=".ViewCurrentOrders" />
         <activity android:name=".ViewProfile" />

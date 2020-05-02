@@ -10,8 +10,9 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
+            android:id="@+id/layout"
             android:layout_height="match_parent"
-            tools:context=".ViewVehicleInventoryManager">
+            tools:context=".ViewVehicleInventory">
 
         <TableLayout
                 android:layout_width="409dp"
@@ -19,6 +20,7 @@
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
                 android:layout_marginTop="30dp"
+                android:id="@+id/table_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -118,6 +120,7 @@
                         android:layout_span="1"
                         android:padding="5dp"
                         android:text="Duration"
+                        android:id="@+id/durationLabel"
                         android:textSize="16dp" />
 
                 <TextView
@@ -144,6 +147,7 @@
                         android:layout_span="1"
                         android:padding="5dp"
                         android:text="Location"
+                        android:id="@+id/locationLabel"
                         android:textSize="16dp" />
 
                 <TextView

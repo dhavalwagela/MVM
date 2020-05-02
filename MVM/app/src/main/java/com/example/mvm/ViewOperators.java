@@ -3,23 +3,22 @@ package com.example.mvm;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
-import android.widget.ListView;
+import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ViewOperators extends AppCompatActivity {
-    SharedPreferences sharedpreferences;
 
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -51,22 +50,15 @@ public class ViewOperators extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
+
+
     public boolean onOptionsItemSelected(MenuItem item) {
-        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
-        Map sessionMap = sharedpreferences.getAll();
         switch (item.getItemId()) {
             case R.id.logout:
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.home:
-                if (sessionMap == null)
-                    return false;
-                if ((sessionMap.get("userType")).equals("Manager"))
-                    startActivity(new Intent(this,ManagerHomeScreen.class));
-                else if ((sessionMap.get("userType")).equals("Operator"))
-                    startActivity(new Intent(this,OperatorHomeScreen.class));
-                else
-                    startActivity(new Intent(this,UserHomeScreen.class));
+                startActivity(new Intent(this,ManagerHomeScreen.class));
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -77,16 +69,60 @@ public class ViewOperators extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_operators);
         String[] operators = getResources().getStringArray(R.array.operator_name);
-        ListView list = (ListView) findViewById(R.id.listView1);
+//        final List<String> listItem = new ArrayList<>();
+        final List<String> listItemNames = new ArrayList<>();
+        final Map<String, String> map = new HashMap<>();
+        final ListView list = (ListView) findViewById(R.id.listView1);
 
-        ListAdapter myadapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,operators);
+        OperatorDAO db = new OperatorDAO(this);
+        UserDAO userDAO = new UserDAO(this);
+        Cursor cursor = db.getOperators();
+
+        if(cursor.getCount() == 0){
+            list.setVisibility(View.INVISIBLE);
+            Toast.makeText(this,"No Data",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            while(cursor.moveToNext()) {
+//                listItem.add(cursor.getString(cursor.getColumnIndex("username")));
+                //TODO: Need to change hashmap implementation
+                listItemNames.add(userDAO.getUserFullName(cursor.getString(cursor.getColumnIndex("username"))));
+                map.put(userDAO.getUserFullName(cursor.getString(cursor.getColumnIndex("username"))), cursor.getString(cursor.getColumnIndex("username")));
+            }
+        }
+
+        final ListAdapter myadapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listItemNames);
         list.setAdapter(myadapter);
+
         list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapter, View view, int position, long arg) {
+                String name = map.get((String) list.getAdapter().getItem(position));
                 Intent intent = new Intent(ViewOperators.this, VehicleOperatorDetailsActivity.class);
+                intent.putExtra("Name", name);
                 startActivity(intent);
             }
         });
+        SearchView searchView = (SearchView) findViewById(R.id.searchView);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+
+                if (listItemNames.contains(query)){
+                    ((ArrayAdapter) myadapter).getFilter().filter(query);
+                } else {
+                    Toast.makeText(ViewOperators.this, "No Match found",Toast.LENGTH_LONG).show();
+                }
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ((ArrayAdapter) myadapter).getFilter().filter(newText);
+                return false;
+            }
+        });
     }
+
+
 }

@@ -169,6 +169,8 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
                 else
                     textViewUser.setText("No operators available");
                 Button okButton = dialog.findViewById(R.id.ok);
+                Button cancelButton = dialog.findViewById(R.id.assignLocation);
+                cancelButton.setText("Cancel");
                 okButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -185,6 +187,11 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
                         startActivity(getIntent());
                     }
                 });
+                cancelButton.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }});
                 dialog.show();
             }
         });

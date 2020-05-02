@@ -210,7 +210,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
                 row.setOnClickListener(new View.OnClickListener() {
                     public void onClick(View v) {
-                        Intent intent = new Intent(v.getContext(),ViewVehicleInventoryManager.class);
+                        Intent intent = new Intent(v.getContext(),ViewVehicleInventory.class);
                         intent.putExtra("selectedVehicleId", currentVehicle);
                         intent.putExtra("selectedLocationId", currentLocation);
                         intent.putExtra("selectedStartTime", currentStartTime);

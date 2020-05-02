@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-public class ViewVehicleInventoryManager extends AppCompatActivity {
+public class ViewVehicleInventory extends AppCompatActivity {
     SharedPreferences sharedpreferences;
 
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -32,7 +33,7 @@ public class ViewVehicleInventoryManager extends AppCompatActivity {
     }
     AlertDialog.Builder alertBuilder;
     public void onLogoutClick(final Context context) {
-        alertBuilder = new AlertDialog.Builder(ViewVehicleInventoryManager.this);
+        alertBuilder = new AlertDialog.Builder(ViewVehicleInventory.this);
         alertBuilder.setTitle("Confirm Logout");
         alertBuilder.setMessage("Are you sure you want to logout ?");
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -78,30 +79,61 @@ public class ViewVehicleInventoryManager extends AppCompatActivity {
         setContentView(R.layout.activity_view_vehicle_inventory_manager);
         Intent receiverIntent = getIntent();
         OperatorDAO optDb = new OperatorDAO(this);
+        UserDAO userDAO = new UserDAO(this);
         OrderDAO orderDb = new OrderDAO(this);
-        String location = receiverIntent.getStringExtra("selectedLocationId");
-        String vehicle = receiverIntent.getStringExtra("selectedVehicleId");
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Map sessionMap = sharedpreferences.getAll();
+
+        String location = new String();
+        String vehicle = new String();
+        if ((sessionMap.get("userType")).equals("Manager"))
+            location = receiverIntent.getStringExtra("selectedLocationId");
+        if ((sessionMap.get("userType")).equals("Operator"))
+            vehicle = optDb.getCurrentVehicle(sessionMap.get("username").toString());
+        else
+            vehicle = receiverIntent.getStringExtra("selectedVehicleId");
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 0);
         Date today = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String date = simpleDateFormat.format(today);
         Cursor vehicleInventory = optDb.getVehicleInventory(vehicle);
-        while (vehicleInventory.moveToNext()) {
-            String itemId = vehicleInventory.getString(vehicleInventory.getColumnIndex("itemId"));
-            if (itemId.equals("DRINKS"))
-                ((TextView) findViewById(R.id.drinksQuantity)).setText(vehicleInventory.getString(vehicleInventory.getColumnIndex("quantity")));
-            else if (itemId.equals("SNACKS"))
-                ((TextView) findViewById(R.id.snacksQuantity)).setText(vehicleInventory.getString(vehicleInventory.getColumnIndex("quantity")));
-            else
-                ((TextView) findViewById(R.id.sandwitchQuantity)).setText(vehicleInventory.getString(vehicleInventory.getColumnIndex("quantity")));
+        if (vehicleInventory.getCount() > 0) {
+            while (vehicleInventory.moveToNext()) {
+                String itemId = vehicleInventory.getString(vehicleInventory.getColumnIndex("itemId"));
+                if (itemId.equals("DRINKS"))
+                    ((TextView) findViewById(R.id.drinksQuantity)).setText(vehicleInventory.getString(vehicleInventory.getColumnIndex("quantity")));
+                else if (itemId.equals("SNACKS"))
+                    ((TextView) findViewById(R.id.snacksQuantity)).setText(vehicleInventory.getString(vehicleInventory.getColumnIndex("quantity")));
+                else
+                    ((TextView) findViewById(R.id.sandwitchQuantity)).setText(vehicleInventory.getString(vehicleInventory.getColumnIndex("quantity")));
+            }
+        } else {
+            (findViewById(R.id.table_layout)).setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.titleLabel)).setText(((TextView) findViewById(R.id.titleLabel)).getText()+"\n \n No Vehicle assigned \n to you");
         }
-        ((TextView) findViewById(R.id.location_id)).setText(optDb.getDescription("location", location));
-        int duration = Integer.parseInt(receiverIntent.getStringExtra("selectedEndTime")) - (Integer.parseInt(receiverIntent.getStringExtra("selectedStartTime")));
-        ((TextView) findViewById(R.id.duration)).setText(String.valueOf(duration));
-        ((TextView) findViewById(R.id.operator)).setText(receiverIntent.getStringExtra("selectedOperator"));
-        String revenue = orderDb.getOrderRevenue(vehicle, location, date);
-        ((TextView) findViewById(R.id.revenue)).setText("$ "+revenue);
-        vehicleInventory.close();
+            if ((sessionMap.get("userType")).equals("Manager"))
+                ((TextView) findViewById(R.id.location_id)).setText(optDb.getDescription("location", location));
+            else {
+                ((TextView) findViewById(R.id.location_id)).setVisibility(View.INVISIBLE);
+                ((TextView) findViewById(R.id.locationLabel)).setVisibility(View.INVISIBLE);
+            }
+            if (receiverIntent.getStringExtra("selectedStartTime") != null)
+                ((TextView) findViewById(R.id.duration)).setText(receiverIntent.getStringExtra("selectedStartTime") + ":00 - " + receiverIntent.getStringExtra("selectedEndTime") + ": 00");
+            else {
+                ((TextView) findViewById(R.id.durationLabel)).setVisibility(View.INVISIBLE);
+                ((TextView) findViewById(R.id.duration)).setVisibility(View.INVISIBLE);
+            }
+            if (receiverIntent.getStringExtra("selectedOperator") != null)
+                ((TextView) findViewById(R.id.operator)).setText(receiverIntent.getStringExtra("selectedOperator"));
+            else
+                ((TextView) findViewById(R.id.operator)).setText(userDAO.getUserFullName(sessionMap.get("username").toString()));
+            String revenue;
+            if ((sessionMap.get("userType")).equals("Manager"))
+                revenue = orderDb.getOrderRevenue(vehicle, location, date);
+            else
+                revenue = orderDb.getOrderRevenue(vehicle, null, date);
+            ((TextView) findViewById(R.id.revenue)).setText("$ " + revenue);
+            vehicleInventory.close();
     }
 }
