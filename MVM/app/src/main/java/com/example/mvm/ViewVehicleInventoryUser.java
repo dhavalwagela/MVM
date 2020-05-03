@@ -175,10 +175,16 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                     if (snacks == 0 && sandwitches == 0 && drinks == 0) {
                         session.remove("cart");
                         session.commit();
-                        Toast.makeText(getApplicationContext(), "Cart is Empty", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "No items added to the cart", Toast.LENGTH_SHORT).show();
                     }
-                    else
-                        startActivity(new Intent(ViewVehicleInventoryUser.this, ViewCart.class));
+                    else {
+                        Intent intent = new Intent(ViewVehicleInventoryUser.this, ViewVehicleInventoryUser.class);
+                        intent.putExtra("selectedVehicleId", receiverIntent.getStringExtra("selectedVehicleId"));
+                        intent.putExtra("selectedLocationId", location);
+                        intent.putExtra("selectedStartTime", receiverIntent.getStringExtra("selectedStartTime"));
+                        intent.putExtra("selectedEndTime", receiverIntent.getStringExtra("selectedEndTime"));
+                        startActivityForResult(intent, 0);
+                    }
                 }
             }
         });
