@@ -50,7 +50,10 @@ public class ViewOperators extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
-
+    public void onBackPressed() {
+        startActivity(new Intent(this,ManagerHomeScreen.class));
+        finish();
+    }
 
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {

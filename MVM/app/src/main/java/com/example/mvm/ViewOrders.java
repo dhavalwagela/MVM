@@ -51,6 +51,10 @@ public class ViewOrders extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,UserHomeScreen.class));
+        finish();
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();
@@ -59,8 +63,10 @@ public class ViewOrders extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                if (sessionMap.get("cart") != null)
-                    startActivity(new Intent(this,ViewCart.class));
+                if (sessionMap.get("cart") != null) {
+                    startActivity(new Intent(this, ViewCart.class));
+                    return true;
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
                     return false;

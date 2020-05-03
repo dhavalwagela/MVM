@@ -49,6 +49,10 @@ public class OrderDetailsForOperator extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,ViewCurrentOrders.class));
+        finish();
+    }
     public void completeOrder(View view) {
         onCompleteOrder(getApplicationContext());
     }

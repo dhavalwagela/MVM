@@ -61,8 +61,10 @@ public class ViewCart extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                if (sessionMap.get("cart") != null)
-                    startActivity(new Intent(this,ViewCart.class));
+                if (sessionMap.get("cart") != null) {
+                    startActivity(new Intent(this, ViewCart.class));
+                    return true;
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
                     return false;

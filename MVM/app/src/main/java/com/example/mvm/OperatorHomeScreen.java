@@ -71,6 +71,8 @@ public class OperatorHomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.operator_home_screen);
+        OperatorDAO oprdb = new OperatorDAO(this);
+        oprdb.fullfilInventory();
     }
     public void contactUs(View view) {
         startActivity(new Intent(this,ContactUsActivity.class));

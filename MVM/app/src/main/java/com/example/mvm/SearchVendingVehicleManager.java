@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -74,6 +76,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +90,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
         Spinner locationSpinner = (Spinner) findViewById(R.id.spinner);
         Spinner vehicleSpinner = (Spinner) findViewById(R.id.spinner2);
         OperatorDAO optDb = new OperatorDAO(this);
-
+        optDb.fullfilInventory();
         Cursor cursorForVehicles = optDb.getVehicles();
         Cursor cursorForLocations = optDb.getLocations();
 

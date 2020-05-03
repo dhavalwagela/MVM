@@ -34,6 +34,10 @@ public class ViewCurrentOrders extends AppCompatActivity {
         cartItem.setEnabled(false);
         return true;
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,OperatorHomeScreen.class));
+        finish();
+    }
     AlertDialog.Builder alertBuilder;
     public void onLogoutClick(final Context context) {
         alertBuilder = new AlertDialog.Builder(ViewCurrentOrders.this);

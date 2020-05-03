@@ -57,6 +57,10 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,ManagerHomeScreen.class));
+        finish();
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();

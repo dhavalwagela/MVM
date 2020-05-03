@@ -27,6 +27,13 @@ public class MainActivity extends AppCompatActivity {
     EditText edtPassword;
     public static final String MyPREFERENCES = "MyPrefs" ;
     @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(intent);
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -45,12 +52,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
             });
-        SQLiteDatabase sqldb = this.openOrCreateDatabase("VendingVehicleMachine.db", MODE_PRIVATE, null);
-        Cursor cursor = sqldb.rawQuery("select name FROM sqlite_master WHERE type='table' AND name='Inventory'", null);
-        if (cursor.getCount() > 0) {
-            OperatorDAO oprdb = new OperatorDAO(this);
-            oprdb.fullfilInventory();
-        }
     }
     public void checkValidUser(View view) {
         username = findViewById(R.id.userText);

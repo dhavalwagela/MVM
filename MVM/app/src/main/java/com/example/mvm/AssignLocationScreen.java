@@ -36,6 +36,10 @@ public class AssignLocationScreen extends AppCompatActivity {
         cartItem.setEnabled(false);
         return true;
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,ViewAvailableVehiclesActivity.class));
+        finish();
+    }
     public void onLogoutClick(final Context context) {
         alertBuilder = new AlertDialog.Builder(AssignLocationScreen.this);
         alertBuilder.setTitle("Confirm Logout");
