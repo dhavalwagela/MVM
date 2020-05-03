@@ -38,6 +38,10 @@ public class ViewOrders extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }

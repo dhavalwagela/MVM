@@ -40,6 +40,10 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -136,7 +140,7 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                 int totalDrinks = Integer.parseInt(drinksTotalQuantity);
                 int totalSnacks = Integer.parseInt(snacksTotalQuantity);
 
-                if (totalSandwitches < sandwitches || totalDrinks < drinks || totalSnacks < snacks || (snacks == 0 && sandwitches == 0 && drinks == 0)) {
+                if (totalSandwitches < sandwitches || totalDrinks < drinks || totalSnacks < snacks) {
                     Toast.makeText(getApplicationContext(), "Invalid quantity of items", Toast.LENGTH_SHORT).show();
                 }
                 else {
@@ -154,7 +158,13 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                     session.putFloat("grandTotal", ((costOfDrink * drinks) + (costOfSnack * snacks) + (costOfSandwitch * sandwitches))*8.25f/100  +((costOfDrink * drinks) + (costOfSnack * snacks) + (costOfSandwitch * sandwitches)));
                     session.putBoolean("cart", true);
                     session.commit();
-                    startActivity(new Intent(ViewVehicleInventoryUser.this, ViewCart.class));
+                    if (snacks == 0 && sandwitches == 0 && drinks == 0) {
+                        session.remove("cart");
+                        session.commit();
+                        Toast.makeText(getApplicationContext(), "Cart is Empty", Toast.LENGTH_SHORT).show();
+                    }
+                    else
+                        startActivity(new Intent(ViewVehicleInventoryUser.this, ViewCart.class));
                 }
             }
         });
