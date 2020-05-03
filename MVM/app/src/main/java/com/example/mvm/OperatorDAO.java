@@ -92,23 +92,17 @@ public class OperatorDAO extends SQLiteOpenHelper {
         }
         return vehicleId;
     }
-    public boolean canAssignLocation(String vehicleId) {
+    public boolean canAssignLocation(String vehicleId, String date) {
         db = this.getWritableDatabase();
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        Date tomorrow = calendar.getTime();
-        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " vehicleId = '"+vehicleId+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null, null, null, null);
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " vehicleId = '"+vehicleId+"' and date = '"+date+"'" , null, null, null, null);
         if (cursor != null && cursor.getCount() > 0)
             return true;
         return false;
     }
-    public void assignLocation(String locationId, String vehicleId, String startTime, String endTime) {
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, 1);
-        Date tomorrow = calendar.getTime();
+    public void assignLocation(String locationId, String vehicleId, String startTime, String endTime, String date) {
         db = this.getWritableDatabase();
         String operator = "";
-        Cursor cursor = db.query("VehicleOperatorAndLocation", null, "vehicleId = '"+vehicleId+"' and date = '"+simpleDateFormat.format(tomorrow)+"'", null, null, null, null);
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, "vehicleId = '"+vehicleId+"' and date = '"+date+"'", null, null, null, null);
         boolean insert = false;
         while (cursor.moveToNext()) {
             if (cursor.getString(cursor.getColumnIndex("startTime")) != null && Integer.parseInt(cursor.getString(cursor.getColumnIndex("startTime"))) > 0) {
@@ -122,9 +116,9 @@ public class OperatorDAO extends SQLiteOpenHelper {
         cv.put("startTime", startTime);
         cv.put("endTime", endTime);
         cv.put("vehicleId", vehicleId);
-        cv.put("date", simpleDateFormat.format(tomorrow));
+        cv.put("date", date);
         if (!insert)
-            db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null );
+            db.update("VehicleOperatorAndLocation", cv, "vehicleId = '"+vehicleId+"' and date = '"+date+"'" , null );
         else {
             if (operator.length() > 0)
                 cv.put("username", operator);

@@ -214,9 +214,12 @@ public class AssignLocationScreen extends AppCompatActivity {
                     @Override
                     public void onClick(View v) {
                         finish();
+                        Calendar calendar = Calendar.getInstance();
+                        calendar.add(Calendar.DAY_OF_YEAR, 1);
+                        Date tomorrow = calendar.getTime();
                         OperatorDAO optdb = new OperatorDAO(AssignLocationScreen.this);
-                        if (optdb.canAssignLocation(selectedVehicleId))
-                            optdb.assignLocation(selectedLocation, selectedVehicleId, selectedStartTime, selectedEndTime);
+                        if (optdb.canAssignLocation(selectedVehicleId, operatorAssignedDate))
+                            optdb.assignLocation(selectedLocation, selectedVehicleId, selectedStartTime, selectedEndTime, operatorAssignedDate);
                         else {
                             Toast.makeText(getApplicationContext(), "Operator not assigned !!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();
