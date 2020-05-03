@@ -103,6 +103,21 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
         String date = simpleDateFormat.format(today);
         Cursor vehicleInventory = optDb.getVehicleInventory(vehicle);
 
+        EditText sandwitchesQuantity = findViewById(R.id.addSandwitchQuantity);
+        EditText snacksQuantity = findViewById(R.id.addSnacksQuantity);
+        EditText drinksQuantity = findViewById(R.id.addDrinkQuantity);
+
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+
+        Map sessionMap = sharedpreferences.getAll();
+        if (sessionMap.get("cart") != null) {
+            if (sessionMap.get("drinks") != null && Integer.parseInt(sessionMap.get("drinks").toString()) > 0)
+                drinksQuantity.setText(sessionMap.get("drinks").toString());
+            if (sessionMap.get("snacks") != null && Integer.parseInt(sessionMap.get("snacks").toString()) > 0)
+                snacksQuantity.setText(sessionMap.get("snacks").toString());
+            if (sessionMap.get("sandwitches") != null && Integer.parseInt(sessionMap.get("sandwitches").toString()) > 0)
+                sandwitchesQuantity.setText(sessionMap.get("sandwitches").toString());
+        }
         while (vehicleInventory.moveToNext()) {
             String itemId = vehicleInventory.getString(vehicleInventory.getColumnIndex("itemId"));
             if (itemId.equals("DRINKS")) {
@@ -125,7 +140,6 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View view) {
-                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
                 SharedPreferences.Editor session = sharedpreferences.edit();
 
                 EditText sandwitchesText = findViewById(R.id.addSandwitchQuantity);
