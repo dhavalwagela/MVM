@@ -21,6 +21,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 public class ViewOrders extends AppCompatActivity {
@@ -98,9 +101,19 @@ public class ViewOrders extends AppCompatActivity {
         setContentView(R.layout.activity_view_orders);
         TableLayout ll = findViewById(R.id.table_layout);
         OrderDAO orderDAO = new OrderDAO(this);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();
+        Cursor cursor = orderDAO.getOrders((String) sessionMap.get("username"));
+        while (cursor.moveToNext()) {
+            try {
+                if (cursor.getString(cursor.getColumnIndex("orderStatus")).equals("Pending") && simpleDateFormat.parse(simpleDateFormat.format(new Date())).after(simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex("orderDate")))))
+                    orderDAO.changeOrderStatus(cursor.getString(cursor.getColumnIndex("orderId")), "Not Completed");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         Cursor orders = orderDAO.getOrders((String) sessionMap.get("username"));
         OperatorDAO optDb = new OperatorDAO(this);
         int i = 2;

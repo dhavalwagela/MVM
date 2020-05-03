@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -119,14 +120,14 @@ public class ViewVehicleInventory extends AppCompatActivity {
             if ((sessionMap.get("userType")).equals("Manager"))
                 ((TextView) findViewById(R.id.location_id)).setText(optDb.getDescription("location", location));
             else {
-                ((TextView) findViewById(R.id.location_id)).setVisibility(View.INVISIBLE);
-                ((TextView) findViewById(R.id.locationLabel)).setVisibility(View.INVISIBLE);
+                ((TextView) findViewById(R.id.location_id)).setVisibility(View.GONE);
+                ((TextView) findViewById(R.id.locationLabel)).setVisibility(View.GONE);
             }
             if (receiverIntent.getStringExtra("selectedStartTime") != null)
                 ((TextView) findViewById(R.id.duration)).setText(receiverIntent.getStringExtra("selectedStartTime") + ":00 - " + receiverIntent.getStringExtra("selectedEndTime") + ": 00");
             else {
-                ((TextView) findViewById(R.id.durationLabel)).setVisibility(View.INVISIBLE);
-                ((TextView) findViewById(R.id.duration)).setVisibility(View.INVISIBLE);
+                ((TextView) findViewById(R.id.durationLabel)).setVisibility(View.GONE);
+                ((TextView) findViewById(R.id.duration)).setVisibility(View.GONE);
             }
             if (receiverIntent.getStringExtra("selectedOperator") != null)
                 ((TextView) findViewById(R.id.operator)).setText(receiverIntent.getStringExtra("selectedOperator"));
@@ -137,7 +138,8 @@ public class ViewVehicleInventory extends AppCompatActivity {
                 revenue = orderDb.getOrderRevenue(vehicle, location, date);
             else
                 revenue = orderDb.getOrderRevenue(vehicle, null, date);
-            ((TextView) findViewById(R.id.revenue)).setText("$ " + revenue);
+            DecimalFormat df = new DecimalFormat("0.00");
+            ((TextView) findViewById(R.id.revenue)).setText("$ " + df.format(Float.parseFloat(revenue)));
             vehicleInventory.close();
     }
 }

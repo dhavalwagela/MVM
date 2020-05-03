@@ -19,9 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 public class OrderDetails extends AppCompatActivity {
@@ -183,18 +181,8 @@ public class OrderDetails extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Button cancelOrder = findViewById(R.id.btn_CancelOrder);
 
-        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled")) {
+        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Not Completed") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled")) {
             cancelOrder.setEnabled(false);
-        }
-        try {
-            Date orderDate = simpleDateFormat.parse(orderDetails.getString(orderDetails.getColumnIndex("orderDate")));
-            if(simpleDateFormat.parse(simpleDateFormat.format(new Date())) .after(orderDate)) {
-                cancelOrder.setEnabled(false);
-                if (!orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed"))
-                    orderStatusText.setText(" Order Status : Not Completed");
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
         }
         int i = 2;
         while (orderItems.moveToNext()) {
