@@ -168,6 +168,7 @@ public class OrderDetailsForOperator extends AppCompatActivity {
         if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled"))
             cancelOrder.setEnabled(false);
         int i = 2;
+        float subtotal = 0;
         while (orderItems.moveToNext()) {
             TableRow row = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
@@ -196,11 +197,15 @@ public class OrderDetailsForOperator extends AppCompatActivity {
             textView.setWidth(350);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
+            subtotal += Float.parseFloat(orderItems.getString(orderItems.getColumnIndex("totalCost")));
 
             ll.addView(row, i);
             i++;
 
         }
+        float taxAmount = Float.parseFloat(orderDetails.getString(orderDetails.getColumnIndex("grandTotal")))-subtotal;
+        TextView orderTax = findViewById(R.id.taxationView);
+        orderTax.setText(orderTax.getText()+df.format(taxAmount));
         orderDetails.close();
         orderItems.close();
     }}

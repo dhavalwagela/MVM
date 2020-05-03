@@ -185,6 +185,7 @@ public class OrderDetails extends AppCompatActivity {
             cancelOrder.setEnabled(false);
         }
         int i = 2;
+        float subtotal = 0;
         while (orderItems.moveToNext()) {
             TableRow row = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
@@ -224,12 +225,15 @@ public class OrderDetails extends AppCompatActivity {
                 snacks = Integer.parseInt(orderItems.getString(orderItems.getColumnIndex("quantity")));
             else
                 sandwitches = Integer.parseInt(orderItems.getString(orderItems.getColumnIndex("quantity")));
-
+            subtotal += Float.parseFloat(orderItems.getString(orderItems.getColumnIndex("totalCost")));
 
             ll.addView(row, i);
             i++;
 
         }
+        float taxAmount = Float.parseFloat(orderDetails.getString(orderDetails.getColumnIndex("grandTotal")))-subtotal;
+        TextView orderTax = findViewById(R.id.tax_view);
+        orderTax.setText(orderTax.getText()+df.format(taxAmount));
         orderDetails.close();
         orderItems.close();
     }
