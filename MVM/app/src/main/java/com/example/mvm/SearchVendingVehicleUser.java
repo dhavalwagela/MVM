@@ -103,7 +103,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
         calendar.add(Calendar.DAY_OF_YEAR, 0);
         Date today = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+        listOfVehicles.add(null);
+        listOfVehicleNames.add("None");
         while (cursorForVehicles.moveToNext()) {
             listOfVehicles.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("vehicleId")));
             listOfVehicleNames.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("description")));
@@ -128,9 +129,11 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
 
             });
             vehicleSpinner.setAdapter(adapter1);
-            vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
+            if (selectedVehicleId != null)
+                vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
         }
-
+        listOfLocations.add(null);
+        listOfLocationNames.add("None");
         while (cursorForLocations.moveToNext()) {
             listOfLocations.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("locationId")));
             listOfLocationNames.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("description")));
@@ -154,7 +157,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
 
             });
             locationSpinner.setAdapter(locationSpinnerAdapter);
-            locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
+            if (selectedLocationId != null)
+                locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
         }
 
         TableLayout ll = findViewById(R.id.table_layout);
@@ -164,7 +168,7 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
 
         int i = 2;
 
-        if (assignedVehicles.getCount() > 0) {
+        if (assignedVehicles.getCount() > 0 && (selectedVehicleId != null || selectedLocationId != null)) {
             while (assignedVehicles.moveToNext()) {
                 if (assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId")) != null && assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId")).length() > 0) {
                     TableRow row = new TableRow(this);

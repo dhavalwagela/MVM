@@ -105,6 +105,8 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
         Date today = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+        listOfVehicles.add(null);
+        listOfVehicleNames.add("None");
         while (cursorForVehicles.moveToNext()) {
             listOfVehicles.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("vehicleId")));
             listOfVehicleNames.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("description")));
@@ -114,8 +116,6 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                     android.R.layout.simple_spinner_item, listOfVehicleNames);
 
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            if (selectedVehicleId == null)
-                selectedVehicleId = listOfVehicles.get(0);
 
             vehicleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -129,9 +129,12 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
             });
             vehicleSpinner.setAdapter(adapter1);
-            vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
+            if (selectedVehicleId != null)
+                vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
         }
 
+        listOfLocations.add(null);
+        listOfLocationNames.add("None");
         while (cursorForLocations.moveToNext()) {
             listOfLocations.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("locationId")));
             listOfLocationNames.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("description")));
@@ -141,8 +144,6 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                     android.R.layout.simple_spinner_item, listOfLocationNames);
 
             locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            if (selectedLocationId == null)
-                selectedLocationId = listOfLocations.get(0);
             locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 public void onItemSelected(AdapterView<?> parentView,
@@ -155,7 +156,8 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
             });
             locationSpinner.setAdapter(locationSpinnerAdapter);
-            locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
+            if (selectedLocationId != null)
+                locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
         }
 
         TableLayout ll = findViewById(R.id.table_layout);
@@ -165,7 +167,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
         int i = 2;
 
-        if (assignedVehicles.getCount() > 0) {
+        if (assignedVehicles.getCount() > 0 && (selectedVehicleId != null || selectedLocationId != null)) {
             while (assignedVehicles.moveToNext()) {
                 TableRow row = new TableRow(this);
                 TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);

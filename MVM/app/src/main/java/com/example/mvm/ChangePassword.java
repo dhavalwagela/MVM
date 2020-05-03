@@ -22,6 +22,14 @@ public class ChangePassword extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.parent_menu, menu);
+        sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+        Map sessionMap = sharedpreferences.getAll();
+        if (!(sessionMap.get("userType")).equals("User")) {
+            MenuItem cartItem = menu.getItem(4);
+            cartItem.setIcon(0);
+            cartItem.setTitle("");
+            cartItem.setEnabled(false);
+        }
         return true;
     }
     AlertDialog.Builder alertBuilder;
@@ -130,7 +138,11 @@ public class ChangePassword extends AppCompatActivity {
                 dialogInterface.dismiss();
             }
         });
-        AlertDialog alertDialog = alertBuilder.create();
-        alertDialog.show();
+        if (((EditText) findViewById(R.id.confirmPassword)).getText().toString().trim().length() > 0 && ((EditText) findViewById(R.id.oldpasswordText)).getText().toString().trim().length() > 0 && ((EditText) findViewById(R.id.newPassword)).getText().toString().trim().length() > 0) {
+            AlertDialog alertDialog = alertBuilder.create();
+            alertDialog.show();
+        } else
+            Toast.makeText(getApplicationContext(), "All fields are required to fill", Toast.LENGTH_SHORT).show();
+
     }
 }

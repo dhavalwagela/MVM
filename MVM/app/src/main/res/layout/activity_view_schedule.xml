@@ -13,7 +13,7 @@
             android:layout_marginTop="40dp"
             android:text="Schedule"
             android:textColor="#009688"
-            android:textSize="22sp"
+            android:textSize="24sp"
             android:typeface="serif"
             android:textAllCaps="true"
             app:fontFamily="sans-serif-condensed-medium"
@@ -27,8 +27,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
-            android:text="Assigned Vehicle Type : Truck"
-            android:textSize="18sp"
+            android:text="Assigned Vehicle Type : "
+            android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtSchedule" />
@@ -38,31 +38,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
-            android:text="Vehicle: Truck 1"
-            android:textSize="18sp"
+            android:text="Vehicle: "
+            android:textSize="22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtAssigned" />
 
-    <TextView
-            android:id="@+id/locationID"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Location: S Davis &amp; W Mitchell"
-            android:textSize="18sp"
+    <TableLayout
+            android:id="@+id/table_layout"
+            android:layout_width="409dp"
+            android:layout_height="502dp"
+            android:layout_marginStart="150dp"
+            android:layout_marginLeft="150dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="10dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/VehicleID" />
-
-    <TextView
-            android:id="@+id/timeSlot"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-            android:text="Time Slot: 13:00 - 15:00"
-            android:textSize="18sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationID" />
 </androidx.constraintlayout.widget.ConstraintLayout>

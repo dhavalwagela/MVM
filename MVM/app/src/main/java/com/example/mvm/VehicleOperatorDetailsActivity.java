@@ -72,7 +72,7 @@ public class VehicleOperatorDetailsActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.first_name_oprtr)).setText(cursor.getString(cursor.getColumnIndex("firstname")));
             ((TextView) findViewById(R.id.last_name_oprtr)).setText(cursor.getString(cursor.getColumnIndex("lastname")));
             ((TextView) findViewById(R.id.oprtr_id)).setText(cursor.getString(cursor.getColumnIndex("username")));
-            ((TextView) findViewById(R.id.email_id_oprtr)).setText(cursor.getString(cursor.getColumnIndex("email"))+"@example.com");
+            ((TextView) findViewById(R.id.email_id_oprtr)).setText(cursor.getString(cursor.getColumnIndex("email")));
             ((TextView) findViewById(R.id.ph_no_oprtr)).setText(cursor.getString(cursor.getColumnIndex("phone")));
             ((TextView) findViewById(R.id.addrs_oprtr)).setText(cursor.getString(cursor.getColumnIndex("address")));
         }

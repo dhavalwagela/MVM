@@ -136,7 +136,7 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                 int totalDrinks = Integer.parseInt(drinksTotalQuantity);
                 int totalSnacks = Integer.parseInt(snacksTotalQuantity);
 
-                if (totalSandwitches < sandwitches || totalDrinks < drinks || totalSnacks < snacks) {
+                if (totalSandwitches < sandwitches || totalDrinks < drinks || totalSnacks < snacks || (snacks == 0 && sandwitches == 0 && drinks == 0)) {
                     Toast.makeText(getApplicationContext(), "Invalid quantity of items", Toast.LENGTH_SHORT).show();
                 }
                 else {

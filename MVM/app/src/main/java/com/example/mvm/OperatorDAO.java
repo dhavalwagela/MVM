@@ -143,6 +143,14 @@ public class OperatorDAO extends SQLiteOpenHelper {
         Cursor cursor = db.query("Inventory", null, condition, null, null, null, null);
         return cursor;
     }
+    public String getVehicleType(String vehicleId) {
+        db = this.getWritableDatabase();
+        String condition = "vehicleId = '"+vehicleId+"'";
+        Cursor cursor = db.query("Vehicle", null, condition, null, null, null, null);
+        while (cursor.moveToNext())
+            return cursor.getString(cursor.getColumnIndex("vehicleType"));
+        return "Truck";
+    }
     public String getUnitCost(String itemId) {
         db = this.getWritableDatabase();
         String condition = "itemId = '"+itemId+"'";
@@ -191,6 +199,15 @@ public class OperatorDAO extends SQLiteOpenHelper {
         String condition = "vehicleId = '"+vehicleId+"' and itemId = '"+itemId+"' and thruDate = '"+date+"'";
         long result = db.update("Inventory", cv, condition, null);
         return result < 0 ? false : true;
+    }
+    //created by amol
+    public Cursor getSchedule(String username) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DAY_OF_YEAR, 0);
+        Date tomorrow = calendar.getTime();
+        db = this.getWritableDatabase();
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " username = '"+username+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null, null, null, "startTime ASC");
+        return cursor;
     }
     public void fullfilInventory() {
         db = this.getWritableDatabase();
