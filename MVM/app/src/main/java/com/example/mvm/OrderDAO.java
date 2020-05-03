@@ -62,7 +62,7 @@ public class OrderDAO extends SQLiteOpenHelper {
     }
     public Cursor getOrders(String username) {
         db = this.getWritableDatabase();
-        Cursor cursor = db.query("Orders", null, "username = '"+username+"'", null, null, null, null);
+        Cursor cursor = db.query("Orders", null, "username = '"+username+"'", null, null, null, "orderId DESC");
         return cursor;
     }
     public Cursor getOrderDetails(String orderId) {
@@ -86,7 +86,7 @@ public class OrderDAO extends SQLiteOpenHelper {
         db = this.getWritableDatabase();
         SimpleDateFormat formatForDate = new SimpleDateFormat("yyyy-MM-dd");
         String date = formatForDate.format(new Date());
-        Cursor cursor = db.query("Orders", null, "vehicleId = '"+vehicleId+"' and orderDate = '"+date+"'", null, null, null, null);
+        Cursor cursor = db.query("Orders", null, "vehicleId = '"+vehicleId+"' and orderDate = '"+date+"'", null, null, null, "orderId DESC");
         return cursor;
     }
     @Override

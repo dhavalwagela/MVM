@@ -18,7 +18,7 @@ public class OperatorDAO extends SQLiteOpenHelper {
         super(context,dbname , null, 1);
     }
 
-    public Cursor getAllVehiclesWithAssignedOperatorAndLocation(String vehicleId, String locationId, String date) {
+    public Cursor getAllVehiclesWithAssignedOperatorAndLocation(String vehicleId, String locationId, String date, String orderByField) {
         db = this.getWritableDatabase();
 
         String[] columns = new String[]{"vehicleId", "username", "locationId", "startTime", "endTime"};
@@ -31,7 +31,7 @@ public class OperatorDAO extends SQLiteOpenHelper {
             condition+= "locationId = '"+locationId+"'";
         }
 
-        Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date = '"+date+"'"+(condition.length() > 0 ? " and ("+condition+")" : "") , null, null, null, null);
+        Cursor cursor = db.query("VehicleOperatorAndLocation", columns, "date = '"+date+"'"+(condition.length() > 0 ? " and ("+condition+")" : "") , null, null, null, orderByField+" ASC, startTime ASC, endTime ASC");
         return cursor;
     }
     public String getDescription(String table, String id) {
@@ -52,7 +52,7 @@ public class OperatorDAO extends SQLiteOpenHelper {
     public Cursor getVehicles() {
         db = this.getWritableDatabase();
         String[] columns = new String[]{"vehicleId", "description"};
-        Cursor cursor = db.query("Vehicle", columns, null, null, null, null, null);
+        Cursor cursor = db.query("Vehicle", columns, null, null, null, null, "description ASC");
         return cursor;
     }
     public Cursor getLocations() {
@@ -200,7 +200,7 @@ public class OperatorDAO extends SQLiteOpenHelper {
         calendar.add(Calendar.DAY_OF_YEAR, 0);
         Date tomorrow = calendar.getTime();
         db = this.getWritableDatabase();
-        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " username = '"+username+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null, null, null, "startTime ASC");
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " username = '"+username+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null, null, null, "startTime ASC endTime DESC");
         return cursor;
     }
     public void fullfilInventory() {

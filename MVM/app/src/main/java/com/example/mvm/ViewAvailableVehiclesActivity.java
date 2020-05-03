@@ -101,7 +101,7 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
         Date tomorrow = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation(null, null, simpleDateFormat.format(tomorrow));
+        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation(null, null, simpleDateFormat.format(tomorrow), "vehicleId");
 
         int i = 2;
 

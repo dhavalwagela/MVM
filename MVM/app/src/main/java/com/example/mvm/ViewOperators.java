@@ -13,10 +13,7 @@ import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ViewOperators extends AppCompatActivity {
 
@@ -93,7 +90,7 @@ public class ViewOperators extends AppCompatActivity {
                 map.put(userDAO.getUserFullName(cursor.getString(cursor.getColumnIndex("username"))), cursor.getString(cursor.getColumnIndex("username")));
             }
         }
-
+        Collections.sort(listItemNames);
         final ListAdapter myadapter = new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,listItemNames);
         list.setAdapter(myadapter);
 

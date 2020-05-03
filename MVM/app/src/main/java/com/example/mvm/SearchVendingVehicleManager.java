@@ -162,7 +162,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
         TableLayout ll = findViewById(R.id.table_layout);
 
-        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId, simpleDateFormat.format(today));
+        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId, simpleDateFormat.format(today), "locationId");
         UserDAO userDb = new UserDAO(this);
 
         int i = 2;
