@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -149,13 +150,16 @@ public class ViewCart extends AppCompatActivity {
                 TextView textView = new TextView(this);
                 textView.setText(column);
                 textView.setWidth(310);
+                textView.setGravity(Gravity.CENTER);
                 textView.setTextSize(16);
                 if (in == 3 || in == 2) {
                     textView.setWidth(340);
+                    textView.setGravity(Gravity.CENTER);
                     textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
                 }
                 else
                     textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
                 in++;
             }

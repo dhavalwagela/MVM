@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -203,25 +204,29 @@ public class OrderDetails extends AppCompatActivity {
 
             TextView textView = new TextView(this);
             textView.setText(String.valueOf(i-1));
-            textView.setWidth(350);
+            textView.setWidth(100);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(operatorDAO.getDescription("item", orderItems.getString(orderItems.getColumnIndex("itemId"))));
-            textView.setWidth(350);
+            textView.setWidth(100);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(orderItems.getString(orderItems.getColumnIndex("quantity")));
-            textView.setWidth(350);
+            textView.setWidth(100);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText("$"+df.format(Float.parseFloat(orderItems.getString(orderItems.getColumnIndex("totalCost")))));
-            textView.setWidth(350);
+            textView.setWidth(100);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 

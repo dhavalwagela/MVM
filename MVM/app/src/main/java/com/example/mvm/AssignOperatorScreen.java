@@ -177,6 +177,7 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
                 Button okButton = dialog.findViewById(R.id.ok);
                 Button cancelButton = dialog.findViewById(R.id.assignLocation);
                 cancelButton.setText("Cancel");
+                textViewUser.setTextSize(17);
                 okButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

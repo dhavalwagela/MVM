@@ -14,203 +14,212 @@
             tools:context=".ViewVehicleInventoryUser">
 
         <TableLayout
-                android:layout_width="409dp"
-                android:layout_height="346dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginRight="2dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleLabel">
+            android:id="@+id/tableLayout"
+            android:layout_width="409dp"
+            android:layout_height="250dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleLabel">
 
             <TableRow
-                    android:layout_width="329dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Location"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/location_id"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp">
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Cooper and UTA Blvd"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Drinks"
-                        android:textSize="16dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Duration"
+                    android:textSize="16dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="10"
-                        android:id="@+id/drinksQuantity"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:id="@+id/duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="3"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
+            </TableRow>
+
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Drinks"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/drinksQuantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="10"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
 
                 <EditText
-                        android:id="@+id/addDrinkQuantity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:inputType="number"
-                        android:textSize="15dp" />
+                    android:id="@+id/addDrinkQuantity"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textSize="15dp" />
             </TableRow>
 
             <TableRow
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Sandwiches"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/sandwitchQuantity"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Sandwiches"
-                        android:textSize="16dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="24"
-                        android:textAlignment="center"
-                        android:id="@+id/sandwitchQuantity"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="24"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
 
                 <EditText
-                        android:id="@+id/addSandwitchQuantity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textSize="15dp"
-                        android:inputType="number" />
+                    android:id="@+id/addSandwitchQuantity"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:foregroundGravity="center_horizontal"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textSize="15dp" />
 
             </TableRow>
 
             <TableRow
-                    android:layout_width="match_parent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Snacks"
+                    android:textSize="16dp" />
+
+                <TextView
+                    android:id="@+id/snacksQuantity"
+                    android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Snacks"
-                        android:textSize="16dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="12"
-                        android:id="@+id/snacksQuantity"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="12"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
 
                 <EditText
-                        android:id="@+id/addSnacksQuantity"
-                        android:layout_width="wrap_content"
-                        android:layout_height="36dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:textSize="15dp"
-                        android:ems="10"
-                        android:inputType="number" />
+                    android:id="@+id/addSnacksQuantity"
+                    android:layout_width="50dp"
+                    android:layout_height="40dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:ems="10"
+                    android:foregroundGravity="center_horizontal"
+                    android:gravity="center"
+                    android:inputType="number"
+                    android:textSize="15dp" />
 
 
             </TableRow>
 
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp">
 
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Duration"
-                        android:textSize="16dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="3"
-                        android:id="@+id/duration"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
-            </TableRow>
-
-            <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="10dp">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Location"
-                        android:textSize="16dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Cooper and UTA Blvd"
-                        android:id="@+id/location_id"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
-            </TableRow>
         </TableLayout>
 
         <TextView
-                android:id="@+id/titleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Vehicle Inventory"
-                android:textAllCaps="true"
-                android:textColor="#009688"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:typeface="serif"
-                app:fontFamily="sans-serif-condensed-medium"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/titleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Vehicle Inventory"
+            android:textAllCaps="true"
+            android:textColor="#009688"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            app:fontFamily="sans-serif-condensed-medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
-                android:id="@+id/button3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="161dp"
-                android:layout_marginLeft="161dp"
-                android:layout_marginTop="473dp"
-                android:text="Add to Cart"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Add to Cart"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tableLayout" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

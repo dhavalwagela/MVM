@@ -24,16 +24,18 @@
             app:layout_constraintTop_toTopOf="@+id/homeButton" />-->
 
         <TextView
-                android:id="@+id/locationidLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="28dp"
-                android:text="Location"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toStartOf="@+id/spinner2"
-                app:layout_constraintHorizontal_bias="0.256"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
+            android:id="@+id/locationidLabel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="250dp"
+            android:layout_marginRight="250dp"
+            android:gravity="center"
+            android:text="Location"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
         <TableLayout
                 android:layout_width="400dp"
@@ -57,7 +59,7 @@
 
 
                 <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="80dp"
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:padding="20dp"
@@ -71,13 +73,13 @@
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:padding="20dp"
-                        android:text="Location"
+                        android:text="Location Intersection"
                         android:layout_gravity="center"
                         android:textColor="#fff"
                         android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
+                        android:layout_width="120dp"
                         android:layout_height="wrap_content"
                         android:layout_span="1"
                         android:padding="20dp"
@@ -192,64 +194,64 @@
         </TableLayout>
 
         <TextView
-                android:id="@+id/titleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
-                android:text="Search Vending Vehicle"
-                android:textColor="#009688"
-                android:textSize="22sp"
-                android:typeface="serif"
-                android:textAllCaps="true"
-                app:fontFamily="sans-serif-condensed-medium"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/titleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="35dp"
+            android:text="Search Vending Vehicle"
+            android:textAllCaps="true"
+            android:textColor="#009688"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            app:fontFamily="sans-serif-condensed-medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="118dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.655"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+            android:id="@+id/spinner"
+            android:layout_width="118dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="25dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/vehicleLabel"
+            app:layout_constraintTop_toBottomOf="@+id/spinner2" />
 
         <TextView
-                android:id="@+id/vehicleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                android:text="Vehicle"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.091"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/locationidLabel" />
+            android:id="@+id/vehicleLabel"
+            android:layout_width="100dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:layout_marginEnd="250dp"
+            android:layout_marginRight="250dp"
+            android:gravity="center"
+            android:text="Vehicle"
+            android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationidLabel" />
 
         <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="109dp"
-                android:layout_height="29dp"
-                android:layout_marginTop="28dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.635"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
+            android:id="@+id/spinner2"
+            android:layout_width="118dp"
+            android:layout_height="29dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/locationidLabel"
+            app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
         <Button
-                android:id="@+id/goButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Seacrh"
-                android:onClick="searchVehicle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.817"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/vehicleLabel" />
+            android:id="@+id/goButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:onClick="searchVehicle"
+            android:text="Seacrh"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/vehicleLabel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

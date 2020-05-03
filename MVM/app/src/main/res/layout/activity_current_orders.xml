@@ -22,19 +22,19 @@
                     android:layout_centerHorizontal="true">
 
                 <TextView
-                        android:layout_gravity="center"
-                        android:layout_margin="16dp"
-                        android:textStyle="bold"
-                        android:textSize="24sp"
-                        android:textColor="#000"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Current Orders"/>
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="16dp"
+                    android:text="Current Orders"
+                    android:textColor="#009688"
+                    android:textSize="24sp"
+                    android:textStyle="bold" />
 
                 <TableLayout
                         android:layout_marginTop="10dp"
+                        android:layout_width="400dp"
                         android:id="@+id/table_layout"
-                        android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
                     <TableRow
@@ -46,39 +46,39 @@
 
                         <TextView
                                 android:id="@+id/order_id"
+                                android:layout_width="60dp"
                                 android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
-                                android:textColor="#fff"
-                                android:text="Order Id"/>
+                                android:gravity="center"
+                                android:text="Order Id"
+                                android:textColor="#fff" />
                         <TextView
                                 android:id="@+id/customer_name"
                                 android:textColor="#fff"
                                 android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:layout_width="90dp"
+                                android:gravity="center"
                                 android:text="Name"/>
                         <TextView
                                 android:textColor="#fff"
                                 android:id="@+id/order_status"
                                 android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_width="80dp"
                                 android:text="Order Status"/>
                         <TextView
                                 android:textColor="#fff"
                                 android:id="@+id/date"
                                 android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:gravity="center"
+                                android:layout_width="90dp"
                                 android:text="Order Date"/>
 
                         <TextView
                                 android:id="@+id/amount"
                                 android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
-                                android:text="     Amount"
+                                android:layout_width="60dp"
+                                android:gravity="center"
+                                android:text="Amount"
                                 android:textColor="#fff" />
 
                     </TableRow>

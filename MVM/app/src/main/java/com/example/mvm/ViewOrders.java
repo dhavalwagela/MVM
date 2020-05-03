@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -112,25 +113,29 @@ public class ViewOrders extends AppCompatActivity {
 
             TextView textView = new TextView(this);
             textView.setText(orders.getString(orders.getColumnIndex("orderId")));
-            textView.setWidth(350);
+            textView.setWidth(120);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(optDb.getDescription("location", orders.getString(orders.getColumnIndex("locationId"))));
-            textView.setWidth(350);
+            textView.setWidth(160);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(orders.getString(orders.getColumnIndex("orderDate")) + "  " + orders.getString(orders.getColumnIndex("pickupTime")));
-            textView.setWidth(350);
+            textView.setWidth(60);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(orders.getString(orders.getColumnIndex("orderStatus")));
-            textView.setWidth(350);
+            textView.setWidth(60);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
