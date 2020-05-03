@@ -17,15 +17,15 @@
                 android:id="@+id/viewProfile"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginTop="30dp"
                 android:text="View Profile"
-                android:layout_gravity="center"
-                android:textColor="#009688"
-                android:textSize="22sp"
-                android:typeface="serif"
                 android:textAllCaps="true"
-                app:fontFamily="sans-serif-condensed-medium"
+                android:textColor="#009688"
+                android:textSize="24sp"
                 android:textStyle="bold"
+                android:typeface="serif"
+                app:fontFamily="sans-serif-condensed-medium"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.531"
                 app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
                 android:id="@+id/usernameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
@@ -63,17 +63,17 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.924"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/usertypeText" />
+                app:layout_constraintTop_toBottomOf="@+id/usertypeText" />
 
         <TextView
                 android:id="@+id/usertypeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
+                android:layout_marginTop="33dp"
                 android:text="Usertype"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.113"
+                app:layout_constraintHorizontal_bias="0.099"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/viewProfile" />
 
@@ -83,7 +83,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="28dp"
                 android:text="Username"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.099"
                 app:layout_constraintStart_toStartOf="parent"
@@ -93,7 +93,7 @@
                 android:id="@+id/firstnameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
@@ -104,37 +104,37 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.924"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usertypeText" />
+                app:layout_constraintTop_toBottomOf="@+id/usernameText" />
 
         <TextView
                 android:id="@+id/firstnameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="25dp"
                 android:text="Firstname"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.107"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/usernameLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/usernameLabel" />
 
         <TextView
                 android:id="@+id/lastnameLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="88dp"
+                android:layout_marginTop="25dp"
                 android:text="Lastname"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.113"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/usernameLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/firstnameLabel" />
 
         <EditText
                 android:id="@+id/lastnameText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
@@ -145,25 +145,25 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.924"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/firstnameText" />
+                app:layout_constraintTop_toBottomOf="@+id/firstnameText" />
 
         <TextView
                 android:id="@+id/phoneLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="25dp"
                 android:text="Phone"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/lastnameLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/lastnameLabel" />
 
         <EditText
                 android:id="@+id/phoneText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="76dp"
+                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
@@ -174,19 +174,19 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.924"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/firstnameText" />
+                app:layout_constraintTop_toBottomOf="@+id/lastnameText" />
 
         <TextView
                 android:id="@+id/emailLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="25dp"
                 android:text="Email"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.098"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/phoneLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/phoneLabel" />
 
         <EditText
                 android:id="@+id/emailText"
@@ -209,19 +209,19 @@
                 android:id="@+id/streetaddressLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="26dp"
                 android:text="StreetAddress"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.12"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/emailLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/emailLabel" />
 
         <EditText
                 android:id="@+id/streetaddressText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="18dp"
+                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
@@ -238,19 +238,19 @@
                 android:id="@+id/cityLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
+                android:layout_marginTop="20dp"
                 android:text="City"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.088"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/streetaddressLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/streetaddressLabel" />
 
         <EditText
                 android:id="@+id/cityText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="60dp"
+                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
@@ -261,25 +261,25 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.924"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/streetaddressText" />
+                app:layout_constraintTop_toBottomOf="@+id/streetaddressText" />
 
         <TextView
                 android:id="@+id/stateLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="25dp"
                 android:text="State"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.093"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cityLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/cityLabel" />
 
         <EditText
                 android:id="@+id/stateText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
@@ -290,25 +290,25 @@
                 app:layout_constraintEnd_toEndOf="@+id/cityText"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/cityText" />
+                app:layout_constraintTop_toBottomOf="@+id/cityText" />
 
         <TextView
                 android:id="@+id/zipcodeLabel"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="104dp"
+                android:layout_marginTop="25dp"
                 android:text="Zip Code"
-                android:textSize="24sp"
+                android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.11"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/cityLabel" />
+                app:layout_constraintTop_toBottomOf="@+id/stateLabel" />
 
         <EditText
                 android:id="@+id/zipcodeText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="64dp"
+                android:layout_marginTop="10dp"
                 android:clickable="false"
                 android:cursorVisible="false"
                 android:ems="10"
@@ -319,8 +319,8 @@
                 app:layout_constraintEnd_toEndOf="@+id/stateText"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/stateText" />
-<!--
+                app:layout_constraintTop_toBottomOf="@+id/stateText" />
+        <!--
         <TextView
                 android:id="@+id/employeeidLabel"
                 android:layout_width="wrap_content"
@@ -354,12 +354,11 @@
                 android:id="@+id/updateprofileButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="35dp"
+                android:layout_marginTop="25dp"
                 android:onClick="update_profile"
                 android:text="Update Profile"
                 android:textSize="22sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.38"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/zipcodeLabel" />
 
@@ -368,13 +367,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:layout_marginBottom="10dp"
                 android:onClick="changePasswordScreen"
                 android:text="Change Password"
                 android:textSize="22sp"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.377"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/updateprofileButton" />
 
