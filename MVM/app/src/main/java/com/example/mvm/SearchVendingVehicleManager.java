@@ -206,6 +206,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                 } else
                     textView.setText("-");
                 textView.setWidth(85);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 ll.addView(row, i);

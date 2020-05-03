@@ -1,15 +1,13 @@
 package com.example.mvm;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -77,6 +75,7 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -177,7 +176,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
 
                     TextView textView = new TextView(this);
                     textView.setText(optDb.getDescription("vehicle", assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"))));
-                    textView.setWidth(85);
+                    textView.setWidth(80);
+                    textView.setGravity(Gravity.CENTER);
                     row.addView(textView);
 
                     textView = new TextView(this);
@@ -186,7 +186,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
                         textView.setText(optDb.getDescription("location", assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"))));
                     } else
                         textView.setText("-");
-                    textView.setWidth(85);
+                    textView.setWidth(200);
+                    textView.setGravity(Gravity.CENTER);
                     row.addView(textView);
 
                     textView = new TextView(this);
@@ -194,7 +195,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
                         textView.setText(assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) + ":00  -  " + assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime")) + ":00");
                     else
                         textView.setText("-");
-                    textView.setWidth(90);
+                    textView.setWidth(120);
+                    textView.setGravity(Gravity.CENTER);
                     row.addView(textView);
 
                     ll.addView(row, i);
