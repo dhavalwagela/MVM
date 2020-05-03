@@ -1,117 +1,115 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="190dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="190dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:id="@+id/layout"
-            android:layout_height="match_parent"
-            tools:context=".ViewVehicleInventory">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ViewVehicleInventoryManager">
 
         <TableLayout
-                android:layout_width="409dp"
-                android:layout_height="346dp"
-                android:layout_marginEnd="2dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="30dp"
-                android:id="@+id/table_layout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleLabel">
+            android:layout_width="409dp"
+            android:layout_height="346dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginRight="2dp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleLabel">
 
             <TableRow
-                    android:layout_width="329dp"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
+                android:layout_width="100dp"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent">
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Drinks"
-                        android:textSize="16dp" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Drinks"
+                    android:textSize="16dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="10"
-                        android:id="@+id/drinksQuantity"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:layout_width="250dp"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="10"
+                    android:id="@+id/drinksQuantity"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
 
 
             </TableRow>
 
             <TableRow
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent">
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Sandwiches"
+                    android:textSize="16dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Sandwiches"
-                        android:textSize="16dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="24"
-                        android:id="@+id/sandwitchQuantity"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="24"
+                    android:id="@+id/sandwitchQuantity"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
 
 
             </TableRow>
 
             <TableRow
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Snacks"
+                    android:textSize="16dp" />
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Snacks"
-                        android:textSize="16dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="12"
-                        android:id="@+id/snacksQuantity"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="12"
+                    android:id="@+id/snacksQuantity"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
 
 
 
             </TableRow>
 
             <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent">
 
 
                 <TextView
@@ -124,22 +122,22 @@
                         android:textSize="16dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="3"
-                        android:id="@+id/duration"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="3"
+                    android:id="@+id/duration"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
             </TableRow>
 
             <TableRow
-                    android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent"
-                    >
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent"
+                >
 
                 <TextView
                         android:layout_width="wrap_content"
@@ -151,84 +149,84 @@
                         android:textSize="16dp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Cooper and UTA Blvd"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        android:id="@+id/location_id"
-                        tools:ignore="RtlCompat" />
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Cooper and UTA Blvd"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    android:id="@+id/location_id"
+                    tools:ignore="RtlCompat" />
             </TableRow>
             <TableRow
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Total Revenue"
+                    android:textSize="16dp" />
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Total Revenue"
-                        android:textSize="16dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="$"
-                        android:id="@+id/revenue"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="$"
+                    android:id="@+id/revenue"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
             </TableRow>
 
             <TableRow
+                android:layout_width="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Operator Name"
+                    android:textSize="16dp" />
+
+                <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginLeft="10dp"
-                    android:layout_height="match_parent">
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="Operator Name"
-                        android:textSize="16dp" />
-
-                <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_span="1"
-                        android:padding="5dp"
-                        android:text="David"
-                        android:id="@+id/operator"
-                        android:textAlignment="center"
-                        android:textSize="16dp"
-                        tools:ignore="RtlCompat" />
+                    android:layout_height="wrap_content"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="David"
+                    android:id="@+id/operator"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
 
             </TableRow>
         </TableLayout>
 
 
         <TextView
-                android:id="@+id/titleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="40dp"
-                android:text="Vehicle Inventory"
-                android:textColor="#009688"
-                android:textSize="22sp"
-                android:typeface="serif"
-                android:textAllCaps="true"
-                app:fontFamily="sans-serif-condensed-medium"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/titleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="40dp"
+            android:text="Vehicle Inventory"
+            android:textColor="#009688"
+            android:textSize="22sp"
+            android:typeface="serif"
+            android:textAllCaps="true"
+            app:fontFamily="sans-serif-condensed-medium"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

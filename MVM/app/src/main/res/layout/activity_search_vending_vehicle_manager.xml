@@ -1,98 +1,97 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="190dp">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:layout_editor_absoluteX="0dp"
+    tools:layout_editor_absoluteY="190dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            tools:context=".SearchVendingVehicleManager">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".SearchVendingVehicleManager">
 
         <TextView
-                android:id="@+id/locationidLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Location"
-                android:textSize="24sp"
-                android:layout_marginTop="56dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.095"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+            android:id="@+id/locationidLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="Location :"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.095"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
         <TableLayout
-                android:id="@+id/table_layout"
-                android:layout_width="400dp"
-                android:layout_height="346dp"
-                android:layout_marginStart="10dp"
-                android:layout_marginLeft="10dp"
-                android:layout_marginEnd="10dp"
-                android:layout_marginRight="2dp"
-                android:layout_marginTop="30dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/goButton">
+            android:id="@+id/table_layout"
+            android:layout_width="400dp"
+            android:layout_height="346dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginRight="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/goButton">
 
             <TableRow
-                    android:layout_width="100dp"
-                    android:layout_height="match_parent"
-                    android:background="@color/colorBlack">
-
+                android:layout_height="match_parent"
+                android:background="@color/colorBlack">
 
 
                 <TextView
-                        android:layout_width="85dp"
-                        android:layout_height="40dp"
-                        android:layout_span="1"
-                        android:paddingTop="10dp"
-                        android:text="Vehicle"
-                        android:layout_gravity="center"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
+                    android:layout_width="70dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_span="1"
+                    android:paddingTop="10dp"
+                    android:text="Vehicle"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="140dp"
-                        android:layout_height="40dp"
-                        android:layout_span="1"
-                        android:paddingTop="10dp"
-                        android:text="Location"
-                        android:layout_gravity="center"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
+                    android:layout_width="140dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_span="1"
+                    android:paddingTop="10dp"
+                    android:text="Location Intersection"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="85dp"
-                        android:layout_height="40dp"
-                        android:layout_span="1"
-                        android:paddingTop="10dp"
-                        android:text="Time Slot"
-                        android:layout_gravity="center"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
+                    android:layout_width="95dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_span="1"
+                    android:paddingTop="10dp"
+                    android:text="Time Slot"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
 
                 <TextView
-                        android:layout_width="85dp"
-                        android:layout_height="40dp"
-                        android:layout_span="1"
-                        android:paddingTop="10dp"
-                        android:text="Operator"
-                        android:layout_gravity="center"
-                        android:textColor="#fff"
-                        android:textSize="12dp" />
+                    android:layout_width="90dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:layout_span="1"
+                    android:paddingTop="10dp"
+                    android:text="Operator Name"
+                    android:textColor="#fff"
+                    android:textSize="12dp" />
 
 
             </TableRow>
 
             <View
-                    android:layout_width="match_parent"
-                    android:layout_height="3dip"
-                    android:background="#ff0000" />
+                android:layout_width="match_parent"
+                android:layout_height="3dip"
+                android:background="#ff0000" />
 
             <!--<TableRow
                     android:layout_width="match_parent"
@@ -220,69 +219,69 @@
         </TableLayout>
 
 
-
-
         <TextView
-                android:id="@+id/titleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="30dp"
-                android:text="Search Vending Vehicle"
-                android:textColor="#009688"
-                android:textSize="22sp"
-                android:typeface="serif"
-                android:textAllCaps="true"
-                app:fontFamily="sans-serif-condensed-medium"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/titleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:text="Search Vending Vehicle"
+            android:textAllCaps="true"
+            android:textColor="#009688"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            android:typeface="serif"
+            app:fontFamily="sans-serif-condensed-medium"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="118dp"
-                android:layout_height="34dp"
-                android:layout_marginTop="56dp"
-                android:prompt="@string/country_prompt"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.576"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+            android:id="@+id/spinner"
+            android:layout_width="118dp"
+            android:layout_height="30dp"
+            android:layout_marginTop="25dp"
+            android:prompt="@string/country_prompt"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.576"
+            app:layout_constraintStart_toEndOf="@+id/locationidLabel"
+            app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
         <TextView
-                android:id="@+id/vehicleLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="56dp"
-                android:text="Vehicle"
-                android:textSize="24sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.091"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/locationidLabel" />
+            android:id="@+id/vehicleLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="Vehicle :"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.091"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/locationidLabel" />
 
         <Spinner
-                android:id="@+id/spinner2"
-                android:layout_width="109dp"
-                android:layout_height="29dp"
-                android:layout_marginTop="92dp"
-                android:prompt="@string/country_prompt1"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.567"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
+            android:id="@+id/spinner2"
+            android:layout_width="109dp"
+            android:layout_height="29dp"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="25dp"
+            android:prompt="@string/country_prompt1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.567"
+            app:layout_constraintStart_toEndOf="@+id/vehicleLabel"
+            app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
         <Button
-                android:id="@+id/goButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="176dp"
-                android:text="Search"
-                android:onClick="searchVehicle"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.811"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/titleLabel" />
+            android:id="@+id/goButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="160dp"
+            android:onClick="searchVehicle"
+            android:text="Search"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

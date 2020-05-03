@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -169,7 +170,8 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
                 TextView textView = new TextView(this);
                 textView.setText(optDb.getDescription("vehicle", assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"))));
-                textView.setWidth(85);
+                textView.setWidth(70);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
@@ -178,7 +180,8 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                     textView.setText(optDb.getDescription("location", assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"))));
                 } else
                     textView.setText("-");
-                textView.setWidth(85);
+                textView.setWidth(140);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
@@ -186,7 +189,8 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                     textView.setText(assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) + ":00  -  " + assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime")) + ":00");
                 else
                     textView.setText("-");
-                textView.setWidth(90);
+                textView.setWidth(95);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
