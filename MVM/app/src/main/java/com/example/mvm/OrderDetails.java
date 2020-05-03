@@ -77,7 +77,7 @@ public class OrderDetails extends AppCompatActivity {
                     operatorDAO.refillOrderItems(vehicleId, "SANDWITCHES", sandwitches);
                 if (snacks > 0)
                     operatorDAO.refillOrderItems(vehicleId, "SNACKS", snacks);
-                startActivity(new Intent(OrderDetails.this,OrderDetails.class));
+                startActivity(new Intent(context,ViewOrders.class));
                 dialogInterface.dismiss();
             }
         });

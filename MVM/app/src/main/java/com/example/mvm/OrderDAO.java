@@ -7,7 +7,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class OrderDAO extends SQLiteOpenHelper {
@@ -36,15 +35,12 @@ public class OrderDAO extends SQLiteOpenHelper {
         ContentValues cv = new ContentValues();
         SimpleDateFormat formatForDate = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.add(Calendar.DAY_OF_YEAR, -1);
-        Date tomorrow = calendar.getTime();
         cv.put("orderId", orderId);
         cv.put("username", username);
         cv.put("vehicleId", vehicleId);
         cv.put("locationId", locationId);
         cv.put("pickupTime", pickupTime);
-        cv.put("orderDate", formatForDate.format(tomorrow));
+        cv.put("orderDate", formatForDate.format(date));
         cv.put("grandTotal", grandTotal);
         cv.put("orderStatus", "Pending");
         long result  = db.insert("Orders",null, cv);
