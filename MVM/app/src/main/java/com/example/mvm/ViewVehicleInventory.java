@@ -117,7 +117,13 @@ public class ViewVehicleInventory extends AppCompatActivity {
             (findViewById(R.id.table_layout)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.titleLabel)).setText(((TextView) findViewById(R.id.titleLabel)).getText()+"\n \n No Vehicle assigned \n to you");
         }
-            if ((sessionMap.get("userType")).equals("Manager"))
+        if (receiverIntent.getStringExtra("selectedOperator") != null)
+            ((TextView) findViewById(R.id.operator)).setText(receiverIntent.getStringExtra("selectedOperator"));
+        else {
+            ((TextView) findViewById(R.id.operator)).setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.operatorText)).setVisibility(View.GONE);
+        }
+        if ((sessionMap.get("userType")).equals("Manager"))
                 ((TextView) findViewById(R.id.location_id)).setText(optDb.getDescription("location", location));
             else {
                 ((TextView) findViewById(R.id.location_id)).setVisibility(View.GONE);
@@ -129,10 +135,6 @@ public class ViewVehicleInventory extends AppCompatActivity {
                 ((TextView) findViewById(R.id.durationLabel)).setVisibility(View.GONE);
                 ((TextView) findViewById(R.id.duration)).setVisibility(View.GONE);
             }
-            if (receiverIntent.getStringExtra("selectedOperator") != null)
-                ((TextView) findViewById(R.id.operator)).setText(receiverIntent.getStringExtra("selectedOperator"));
-            else
-                ((TextView) findViewById(R.id.operator)).setText(userDAO.getUserFullName(sessionMap.get("username").toString()));
             String revenue;
             if ((sessionMap.get("userType")).equals("Manager"))
                 revenue = orderDb.getOrderRevenue(vehicle, location, date);

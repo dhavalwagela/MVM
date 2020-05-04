@@ -246,6 +246,7 @@
                     android:layout_span="1"
                     android:padding="5dp"
                     android:text="Operator Name"
+                    android:id="@+id/operatorText"
                     android:textSize="16dp" />
 
                 <TextView
