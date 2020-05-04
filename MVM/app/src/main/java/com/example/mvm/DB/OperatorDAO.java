@@ -194,7 +194,6 @@ public class OperatorDAO extends SQLiteOpenHelper {
         long result = db.update("Inventory", cv, condition, null);
         return result < 0 ? false : true;
     }
-    //created by amol
     public Cursor getSchedule(String username) {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DAY_OF_YEAR, 0);
