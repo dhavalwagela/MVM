@@ -70,7 +70,7 @@ public class OrderDetailsForOperator extends AppCompatActivity {
                 String orderId = getIntent().getStringExtra("orderId");
                 OrderDAO orderDAO = new OrderDAO(OrderDetailsForOperator.this);
                 orderDAO.changeOrderStatus(orderId, "Completed");
-                Toast.makeText(getApplicationContext(), "Order "+orderId +" Completed !!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Order Completed Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(context,ViewCurrentOrders.class));
                 dialogInterface.dismiss();
             }

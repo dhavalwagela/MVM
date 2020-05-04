@@ -200,7 +200,7 @@ public class OperatorDAO extends SQLiteOpenHelper {
         calendar.add(Calendar.DAY_OF_YEAR, 0);
         Date tomorrow = calendar.getTime();
         db = this.getWritableDatabase();
-        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " username = '"+username+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null, null, null, "startTime ASC endTime DESC");
+        Cursor cursor = db.query("VehicleOperatorAndLocation", null, " username = '"+username+"' and date = '"+simpleDateFormat.format(tomorrow)+"'" , null, null, null, "startTime ASC, endTime DESC");
         return cursor;
     }
     public void fullfilInventory() {

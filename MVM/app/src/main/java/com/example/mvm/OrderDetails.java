@@ -77,6 +77,7 @@ public class OrderDetails extends AppCompatActivity {
                     operatorDAO.refillOrderItems(vehicleId, "SANDWITCHES", sandwitches);
                 if (snacks > 0)
                     operatorDAO.refillOrderItems(vehicleId, "SNACKS", snacks);
+                Toast.makeText(getApplicationContext(), "Order Cancelled Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(context,ViewOrders.class));
                 dialogInterface.dismiss();
             }
