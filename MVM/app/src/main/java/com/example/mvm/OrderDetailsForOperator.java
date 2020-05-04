@@ -26,6 +26,10 @@ public class OrderDetailsForOperator extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.parent_menu, menu);
+        MenuItem cartItem = menu.getItem(4);
+        cartItem.setIcon(0);
+        cartItem.setTitle("");
+        cartItem.setEnabled(false);
         return true;
     }
     AlertDialog.Builder alertBuilder;
@@ -165,7 +169,7 @@ public class OrderDetailsForOperator extends AppCompatActivity {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Button cancelOrder = findViewById(R.id.btn_CancelOrder);
-        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled"))
+        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed"))
             cancelOrder.setEnabled(false);
         int i = 2;
         float subtotal = 0;

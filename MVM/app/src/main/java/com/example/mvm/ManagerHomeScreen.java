@@ -55,6 +55,9 @@ public class ManagerHomeScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.manager_home_screen);
     }
+    public void onBackPressed() {
+        onLogoutClick(getApplicationContext());
+    }
     public void viewAvailableVehicles(View view) {
         startActivity(new Intent(this,ViewAvailableVehiclesActivity.class));
     }

@@ -26,6 +26,9 @@ public class OperatorHomeScreen extends AppCompatActivity {
         cartItem.setEnabled(false);
         return true;
     }
+    public void onBackPressed() {
+        onLogoutClick(getApplicationContext());
+    }
     AlertDialog.Builder alertBuilder;
     public void onLogoutClick(final Context context) {
         alertBuilder = new AlertDialog.Builder(OperatorHomeScreen.this);
