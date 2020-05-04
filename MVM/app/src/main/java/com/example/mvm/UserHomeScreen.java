@@ -23,6 +23,10 @@ public class UserHomeScreen extends AppCompatActivity {
         return true;
     }
 
+    public void onBackPressed() {
+        onLogoutClick(getApplicationContext());
+    }
+
     public boolean onOptionsItemSelected(MenuItem item) {
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();
