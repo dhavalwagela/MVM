@@ -26,12 +26,10 @@ public class UpdateProfile extends AppCompatActivity {
         inflater.inflate(R.menu.parent_menu, menu);
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();
-        if (!(sessionMap.get("userType")).equals("User")) {
-            MenuItem cartItem = menu.getItem(4);
-            cartItem.setIcon(0);
-            cartItem.setTitle("");
-            cartItem.setEnabled(false);
-        }
+        MenuItem cartItem = menu.getItem(4);
+        cartItem.setIcon(0);
+        cartItem.setTitle("");
+        cartItem.setEnabled(false);
         return true;
     }
     AlertDialog.Builder alertBuilder;

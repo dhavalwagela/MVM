@@ -183,6 +183,7 @@ public class ViewVehicleInventoryUser extends AppCompatActivity {
                         intent.putExtra("selectedLocationId", location);
                         intent.putExtra("selectedStartTime", receiverIntent.getStringExtra("selectedStartTime"));
                         intent.putExtra("selectedEndTime", receiverIntent.getStringExtra("selectedEndTime"));
+                        Toast.makeText(getApplicationContext(), "Items added to the cart", Toast.LENGTH_SHORT).show();
                         startActivityForResult(intent, 0);
                     }
                 }
