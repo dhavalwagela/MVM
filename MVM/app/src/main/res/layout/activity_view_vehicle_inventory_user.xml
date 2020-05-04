@@ -16,7 +16,7 @@
         <TableLayout
             android:id="@+id/tableLayout"
             android:layout_width="409dp"
-            android:layout_height="250dp"
+            android:layout_height="310dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="2dp"
             android:layout_marginRight="2dp"
@@ -35,7 +35,7 @@
                     android:layout_height="40dp"
                     android:layout_span="1"
                     android:padding="5dp"
-                    android:text="Location"
+                    android:text="Location :"
                     android:textSize="16dp" />
 
                 <TextView
@@ -61,7 +61,7 @@
                     android:layout_height="40dp"
                     android:layout_span="1"
                     android:padding="5dp"
-                    android:text="Duration"
+                    android:text="Time Slot :"
                     android:textSize="16dp" />
 
                 <TextView
@@ -75,6 +75,67 @@
                     android:textSize="16dp"
                     tools:ignore="RtlCompat" />
             </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_span="1"
+                    android:padding="5dp"
+
+                    android:textSize="16dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_span="1"
+                    android:padding="5dp"
+
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
+            </TableRow>
+            <TableRow
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp">
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_span="1"
+                    android:padding="5dp"
+
+                    android:textSize="16dp" />
+
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Available Quantity"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
+                <TextView
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_span="1"
+                    android:padding="5dp"
+                    android:text="Add Item"
+                    android:textAlignment="center"
+                    android:textSize="16dp"
+                    tools:ignore="RtlCompat" />
+            </TableRow>
+
 
             <TableRow
                 android:layout_width="match_parent"

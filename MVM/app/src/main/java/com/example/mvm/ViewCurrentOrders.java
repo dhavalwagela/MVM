@@ -110,35 +110,28 @@ public class ViewCurrentOrders extends AppCompatActivity {
 
                 TextView textView = new TextView(this);
                 textView.setText(orders.getString(orders.getColumnIndex("orderId")));
-                textView.setWidth(80);
+                textView.setWidth(110);
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
                 textView.setText(new UserDAO(this).getUserFullName(orders.getString(orders.getColumnIndex("username"))));
-                textView.setWidth(90);
+                textView.setWidth(140);
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
                 textView.setText(orders.getString(orders.getColumnIndex("orderStatus")));
-                textView.setWidth(80);
-                textView.setGravity(Gravity.CENTER);
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                row.addView(textView);
-
-                textView = new TextView(this);
-                textView.setText(orders.getString(orders.getColumnIndex("orderDate")));
-                textView.setWidth(80);
+                textView.setWidth(110);
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
                 textView.setText("$"+ df.format(Float.parseFloat(orders.getString(orders.getColumnIndex("grandTotal")))));
-                textView.setWidth(50);
+                textView.setWidth(80);
                 textView.setGravity(Gravity.CENTER);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 row.addView(textView);
