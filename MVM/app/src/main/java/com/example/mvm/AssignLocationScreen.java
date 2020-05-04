@@ -36,6 +36,10 @@ public class AssignLocationScreen extends AppCompatActivity {
         cartItem.setEnabled(false);
         return true;
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,ViewAvailableVehiclesActivity.class));
+        finish();
+    }
     public void onLogoutClick(final Context context) {
         alertBuilder = new AlertDialog.Builder(AssignLocationScreen.this);
         alertBuilder.setTitle("Confirm Logout");
@@ -211,8 +215,8 @@ public class AssignLocationScreen extends AppCompatActivity {
                     public void onClick(View v) {
                         finish();
                         OperatorDAO optdb = new OperatorDAO(AssignLocationScreen.this);
-                        if (optdb.canAssignLocation(selectedVehicleId))
-                            optdb.assignLocation(selectedLocation, selectedVehicleId, selectedStartTime, selectedEndTime);
+                        if (optdb.canAssignLocation(selectedVehicleId, operatorAssignedDate))
+                            optdb.assignLocation(selectedLocation, selectedVehicleId, selectedStartTime, selectedEndTime, operatorAssignedDate);
                         else {
                             Toast.makeText(getApplicationContext(), "Operator not assigned !!", Toast.LENGTH_SHORT).show();
                             dialog.dismiss();

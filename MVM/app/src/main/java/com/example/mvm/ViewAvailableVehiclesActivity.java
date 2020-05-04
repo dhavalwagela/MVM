@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -44,6 +45,10 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -56,6 +61,10 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
         });
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
+    }
+    public void onBackPressed() {
+        startActivity(new Intent(this,ManagerHomeScreen.class));
+        finish();
     }
     public boolean onOptionsItemSelected(MenuItem item) {
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
@@ -92,7 +101,7 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
         Date tomorrow = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation(null, null, simpleDateFormat.format(tomorrow));
+        Cursor cursor = optDb.getAllVehiclesWithAssignedOperatorAndLocation(null, null, simpleDateFormat.format(tomorrow), "vehicleId");
 
         int i = 2;
 
@@ -104,7 +113,8 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
 
                 TextView textView = new TextView(this);
                 textView.setText(optDb.getDescription("vehicle", cursor.getString(cursor.getColumnIndex("vehicleId"))));
-                textView.setWidth(250);
+                textView.setWidth(70);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
@@ -113,7 +123,8 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
                     textView.setText(userDb.getUserFullName(username));
                 } else
                     textView.setText("-");
-                textView.setWidth(250);
+                textView.setWidth(90);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
@@ -122,7 +133,8 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
                     textView.setText(optDb.getDescription("location", cursor.getString(cursor.getColumnIndex("locationId"))));
                 } else
                     textView.setText("-");
-                textView.setWidth(250);
+                textView.setWidth(140);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
@@ -130,7 +142,8 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
                     textView.setText(cursor.getString(cursor.getColumnIndex("startTime")) + ":00  -  " + cursor.getString(cursor.getColumnIndex("endTime")) + ":00");
                 else
                     textView.setText("-");
-                textView.setWidth(550);
+                textView.setWidth(95);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 ll.addView(row, i);
@@ -145,21 +158,25 @@ public class ViewAvailableVehiclesActivity extends AppCompatActivity {
 
                 TextView textView = new TextView(this);
                 textView.setText(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("description")));
-                textView.setWidth(250);
+                textView.setWidth(70);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
                 textView.setText("-");
-                textView.setWidth(250);
+                textView.setWidth(90);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
-                textView.setWidth(250);
+                textView.setWidth(140);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
                 textView.setText("-");
-                textView.setWidth(550);
+                textView.setWidth(95);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 ll.addView(row, i);

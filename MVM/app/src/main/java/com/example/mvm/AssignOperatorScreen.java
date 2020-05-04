@@ -78,6 +78,11 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
         }
     }
     @Override
+    public void onBackPressed() {
+        startActivity(new Intent(this,ViewAvailableVehiclesActivity.class));
+        finish();
+    }
+    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_assign_operator_screen);
@@ -164,6 +169,7 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
                 final Dialog dialog = new Dialog(AssignOperatorScreen.this);
                 dialog.setContentView(R.layout.activity_dialog);
                 TextView textViewUser = (TextView) dialog.findViewById(R.id.textBrand);
+                dialog.setTitle("Confirmation");
                 if (listOfOperators.size() > 0)
                     textViewUser.setText("Vehicle: " + vehicleName.getSelectedItem().toString() + "\n" + "Assigned Operator: " + operatorName.getSelectedItem().toString());
                 else
@@ -171,6 +177,7 @@ public class AssignOperatorScreen extends AppCompatActivity implements AdapterVi
                 Button okButton = dialog.findViewById(R.id.ok);
                 Button cancelButton = dialog.findViewById(R.id.assignLocation);
                 cancelButton.setText("Cancel");
+                textViewUser.setTextSize(17);
                 okButton.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {

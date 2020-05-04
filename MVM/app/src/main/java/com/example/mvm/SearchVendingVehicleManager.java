@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.Menu;
@@ -12,6 +13,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.*;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -74,6 +76,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +90,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
         Spinner locationSpinner = (Spinner) findViewById(R.id.spinner);
         Spinner vehicleSpinner = (Spinner) findViewById(R.id.spinner2);
         OperatorDAO optDb = new OperatorDAO(this);
-
+        optDb.fullfilInventory();
         Cursor cursorForVehicles = optDb.getVehicles();
         Cursor cursorForLocations = optDb.getLocations();
 
@@ -102,6 +105,8 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
         Date today = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
+        listOfVehicles.add(null);
+        listOfVehicleNames.add("None");
         while (cursorForVehicles.moveToNext()) {
             listOfVehicles.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("vehicleId")));
             listOfVehicleNames.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("description")));
@@ -111,8 +116,6 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                     android.R.layout.simple_spinner_item, listOfVehicleNames);
 
             adapter1.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            if (selectedVehicleId == null)
-                selectedVehicleId = listOfVehicles.get(0);
 
             vehicleSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
@@ -126,9 +129,12 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
             });
             vehicleSpinner.setAdapter(adapter1);
-            vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
+            if (selectedVehicleId != null)
+                vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
         }
 
+        listOfLocations.add(null);
+        listOfLocationNames.add("None");
         while (cursorForLocations.moveToNext()) {
             listOfLocations.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("locationId")));
             listOfLocationNames.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("description")));
@@ -138,8 +144,6 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                     android.R.layout.simple_spinner_item, listOfLocationNames);
 
             locationSpinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-            if (selectedLocationId == null)
-                selectedLocationId = listOfLocations.get(0);
             locationSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
 
                 public void onItemSelected(AdapterView<?> parentView,
@@ -152,17 +156,18 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
 
             });
             locationSpinner.setAdapter(locationSpinnerAdapter);
-            locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
+            if (selectedLocationId != null)
+                locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
         }
 
         TableLayout ll = findViewById(R.id.table_layout);
 
-        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId, simpleDateFormat.format(today));
+        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId, simpleDateFormat.format(today), "locationId");
         UserDAO userDb = new UserDAO(this);
 
         int i = 2;
 
-        if (assignedVehicles.getCount() > 0) {
+        if (assignedVehicles.getCount() > 0 && (selectedVehicleId != null || selectedLocationId != null)) {
             while (assignedVehicles.moveToNext()) {
                 TableRow row = new TableRow(this);
                 TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT);
@@ -201,6 +206,7 @@ public class SearchVendingVehicleManager extends AppCompatActivity {
                 } else
                     textView.setText("-");
                 textView.setWidth(85);
+                textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
 
                 ll.addView(row, i);

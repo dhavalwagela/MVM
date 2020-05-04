@@ -1,15 +1,13 @@
 package com.example.mvm;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
-import android.view.View;
+import android.view.*;
 import android.widget.*;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -34,6 +32,10 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -55,8 +57,10 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                if (sessionMap.get("cart") != null)
-                    startActivity(new Intent(this,ViewCart.class));
+                if (sessionMap.get("cart") != null) {
+                    startActivity(new Intent(this, ViewCart.class));
+                    return true;
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
                     return false;
@@ -75,6 +79,7 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
                 return super.onOptionsItemSelected(item);
         }
     }
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -87,7 +92,7 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
         Spinner vehicleSpinner = (Spinner) findViewById(R.id.spinner);
         Spinner locationSpinner = (Spinner) findViewById(R.id.spinner2);
         OperatorDAO optDb = new OperatorDAO(this);
-
+        optDb.fullfilInventory();
         Cursor cursorForVehicles = optDb.getVehicles();
         Cursor cursorForLocations = optDb.getLocations();
 
@@ -101,7 +106,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
         calendar.add(Calendar.DAY_OF_YEAR, 0);
         Date today = calendar.getTime();
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
+        listOfVehicles.add(null);
+        listOfVehicleNames.add("None");
         while (cursorForVehicles.moveToNext()) {
             listOfVehicles.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("vehicleId")));
             listOfVehicleNames.add(cursorForVehicles.getString(cursorForVehicles.getColumnIndex("description")));
@@ -126,9 +132,11 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
 
             });
             vehicleSpinner.setAdapter(adapter1);
-            vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
+            if (selectedVehicleId != null)
+                vehicleSpinner.setSelection(listOfVehicles.indexOf(selectedVehicleId));
         }
-
+        listOfLocations.add(null);
+        listOfLocationNames.add("None");
         while (cursorForLocations.moveToNext()) {
             listOfLocations.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("locationId")));
             listOfLocationNames.add(cursorForLocations.getString(cursorForLocations.getColumnIndex("description")));
@@ -152,17 +160,18 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
 
             });
             locationSpinner.setAdapter(locationSpinnerAdapter);
-            locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
+            if (selectedLocationId != null)
+                locationSpinner.setSelection(listOfLocations.indexOf(selectedLocationId));
         }
 
         TableLayout ll = findViewById(R.id.table_layout);
 
-        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId, simpleDateFormat.format(today));
+        Cursor assignedVehicles = optDb.getAllVehiclesWithAssignedOperatorAndLocation(selectedVehicleId, selectedLocationId, simpleDateFormat.format(today), "locationId");
         UserDAO userDb = new UserDAO(this);
 
         int i = 2;
 
-        if (assignedVehicles.getCount() > 0) {
+        if (assignedVehicles.getCount() > 0 && (selectedVehicleId != null || selectedLocationId != null)) {
             while (assignedVehicles.moveToNext()) {
                 if (assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId")) != null && assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId")).length() > 0) {
                     TableRow row = new TableRow(this);
@@ -171,7 +180,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
 
                     TextView textView = new TextView(this);
                     textView.setText(optDb.getDescription("vehicle", assignedVehicles.getString(assignedVehicles.getColumnIndex("vehicleId"))));
-                    textView.setWidth(85);
+                    textView.setWidth(80);
+                    textView.setGravity(Gravity.CENTER);
                     row.addView(textView);
 
                     textView = new TextView(this);
@@ -180,7 +190,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
                         textView.setText(optDb.getDescription("location", assignedVehicles.getString(assignedVehicles.getColumnIndex("locationId"))));
                     } else
                         textView.setText("-");
-                    textView.setWidth(85);
+                    textView.setWidth(200);
+                    textView.setGravity(Gravity.CENTER);
                     row.addView(textView);
 
                     textView = new TextView(this);
@@ -188,7 +199,8 @@ public class SearchVendingVehicleUser extends AppCompatActivity {
                         textView.setText(assignedVehicles.getString(assignedVehicles.getColumnIndex("startTime")) + ":00  -  " + assignedVehicles.getString(assignedVehicles.getColumnIndex("endTime")) + ":00");
                     else
                         textView.setText("-");
-                    textView.setWidth(90);
+                    textView.setWidth(120);
+                    textView.setGravity(Gravity.CENTER);
                     row.addView(textView);
 
                     ll.addView(row, i);

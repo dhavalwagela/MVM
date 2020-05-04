@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -20,6 +21,9 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Map;
 
 public class ViewOrders extends AppCompatActivity {
@@ -38,6 +42,10 @@ public class ViewOrders extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -51,6 +59,10 @@ public class ViewOrders extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,UserHomeScreen.class));
+        finish();
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();
@@ -59,8 +71,10 @@ public class ViewOrders extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                if (sessionMap.get("cart") != null)
-                    startActivity(new Intent(this,ViewCart.class));
+                if (sessionMap.get("cart") != null) {
+                    startActivity(new Intent(this, ViewCart.class));
+                    return true;
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
                     return false;
@@ -87,9 +101,19 @@ public class ViewOrders extends AppCompatActivity {
         setContentView(R.layout.activity_view_orders);
         TableLayout ll = findViewById(R.id.table_layout);
         OrderDAO orderDAO = new OrderDAO(this);
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();
+        Cursor cursor = orderDAO.getOrders((String) sessionMap.get("username"));
+        while (cursor.moveToNext()) {
+            try {
+                if (cursor.getString(cursor.getColumnIndex("orderStatus")).equals("Pending") && simpleDateFormat.parse(simpleDateFormat.format(new Date())).after(simpleDateFormat.parse(cursor.getString(cursor.getColumnIndex("orderDate")))))
+                    orderDAO.changeOrderStatus(cursor.getString(cursor.getColumnIndex("orderId")), "Not Completed");
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
         Cursor orders = orderDAO.getOrders((String) sessionMap.get("username"));
         OperatorDAO optDb = new OperatorDAO(this);
         int i = 2;
@@ -102,25 +126,29 @@ public class ViewOrders extends AppCompatActivity {
 
             TextView textView = new TextView(this);
             textView.setText(orders.getString(orders.getColumnIndex("orderId")));
-            textView.setWidth(350);
+            textView.setWidth(120);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(optDb.getDescription("location", orders.getString(orders.getColumnIndex("locationId"))));
-            textView.setWidth(350);
+            textView.setWidth(160);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(orders.getString(orders.getColumnIndex("orderDate")) + "  " + orders.getString(orders.getColumnIndex("pickupTime")));
-            textView.setWidth(350);
+            textView.setWidth(60);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(orders.getString(orders.getColumnIndex("orderStatus")));
-            textView.setWidth(350);
+            textView.setWidth(60);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 

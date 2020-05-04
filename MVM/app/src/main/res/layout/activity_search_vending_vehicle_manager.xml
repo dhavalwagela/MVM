@@ -227,7 +227,7 @@
             android:text="Search Vending Vehicle"
             android:textAllCaps="true"
             android:textColor="#009688"
-            android:textSize="26sp"
+            android:textSize="24sp"
             android:textStyle="bold"
             android:typeface="serif"
             app:fontFamily="sans-serif-condensed-medium"

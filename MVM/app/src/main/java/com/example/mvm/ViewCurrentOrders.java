@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -34,6 +35,10 @@ public class ViewCurrentOrders extends AppCompatActivity {
         cartItem.setEnabled(false);
         return true;
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,OperatorHomeScreen.class));
+        finish();
+    }
     AlertDialog.Builder alertBuilder;
     public void onLogoutClick(final Context context) {
         alertBuilder = new AlertDialog.Builder(ViewCurrentOrders.this);
@@ -42,6 +47,10 @@ public class ViewCurrentOrders extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -101,31 +110,29 @@ public class ViewCurrentOrders extends AppCompatActivity {
 
                 TextView textView = new TextView(this);
                 textView.setText(orders.getString(orders.getColumnIndex("orderId")));
-                textView.setWidth(250);
+                textView.setWidth(110);
+                textView.setGravity(Gravity.CENTER);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
                 textView.setText(new UserDAO(this).getUserFullName(orders.getString(orders.getColumnIndex("username"))));
-                textView.setWidth(250);
+                textView.setWidth(140);
+                textView.setGravity(Gravity.CENTER);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
                 textView.setText(orders.getString(orders.getColumnIndex("orderStatus")));
-                textView.setWidth(250);
-                textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
-                row.addView(textView);
-
-                textView = new TextView(this);
-                textView.setText(orders.getString(orders.getColumnIndex("orderDate")));
-                textView.setWidth(300);
+                textView.setWidth(110);
+                textView.setGravity(Gravity.CENTER);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 row.addView(textView);
 
                 textView = new TextView(this);
                 textView.setText("$"+ df.format(Float.parseFloat(orders.getString(orders.getColumnIndex("grandTotal")))));
-                textView.setWidth(250);
+                textView.setWidth(80);
+                textView.setGravity(Gravity.CENTER);
                 textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
                 row.addView(textView);
 

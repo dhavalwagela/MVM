@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -30,6 +31,10 @@ public class ViewCart extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.parent_menu, menu);
+        MenuItem cartItem = menu.getItem(4);
+        cartItem.setIcon(0);
+        cartItem.setTitle("");
+        cartItem.setEnabled(false);
         return true;
     }
     AlertDialog.Builder alertBuilder;
@@ -40,6 +45,10 @@ public class ViewCart extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -61,8 +70,10 @@ public class ViewCart extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                if (sessionMap.get("cart") != null)
-                    startActivity(new Intent(this,ViewCart.class));
+                if (sessionMap.get("cart") != null) {
+                    startActivity(new Intent(this, ViewCart.class));
+                    return true;
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
                     return false;
@@ -143,13 +154,16 @@ public class ViewCart extends AppCompatActivity {
                 TextView textView = new TextView(this);
                 textView.setText(column);
                 textView.setWidth(310);
+                textView.setGravity(Gravity.CENTER);
                 textView.setTextSize(16);
                 if (in == 3 || in == 2) {
                     textView.setWidth(340);
+                    textView.setGravity(Gravity.CENTER);
                     textView.setTextAlignment(View.TEXT_ALIGNMENT_TEXT_END);
                 }
                 else
                     textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
+                    textView.setGravity(Gravity.CENTER);
                 row.addView(textView);
                 in++;
             }

@@ -14,6 +14,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -39,6 +40,10 @@ public class ViewVehicleInventory extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -112,28 +117,31 @@ public class ViewVehicleInventory extends AppCompatActivity {
             (findViewById(R.id.table_layout)).setVisibility(View.GONE);
             ((TextView) findViewById(R.id.titleLabel)).setText(((TextView) findViewById(R.id.titleLabel)).getText()+"\n \n No Vehicle assigned \n to you");
         }
-            if ((sessionMap.get("userType")).equals("Manager"))
+        if (receiverIntent.getStringExtra("selectedOperator") != null)
+            ((TextView) findViewById(R.id.operator)).setText(receiverIntent.getStringExtra("selectedOperator"));
+        else {
+            ((TextView) findViewById(R.id.operator)).setVisibility(View.GONE);
+            ((TextView) findViewById(R.id.operatorText)).setVisibility(View.GONE);
+        }
+        if ((sessionMap.get("userType")).equals("Manager"))
                 ((TextView) findViewById(R.id.location_id)).setText(optDb.getDescription("location", location));
             else {
-                ((TextView) findViewById(R.id.location_id)).setVisibility(View.INVISIBLE);
-                ((TextView) findViewById(R.id.locationLabel)).setVisibility(View.INVISIBLE);
+                ((TextView) findViewById(R.id.location_id)).setVisibility(View.GONE);
+                ((TextView) findViewById(R.id.locationLabel)).setVisibility(View.GONE);
             }
             if (receiverIntent.getStringExtra("selectedStartTime") != null)
                 ((TextView) findViewById(R.id.duration)).setText(receiverIntent.getStringExtra("selectedStartTime") + ":00 - " + receiverIntent.getStringExtra("selectedEndTime") + ": 00");
             else {
-                ((TextView) findViewById(R.id.durationLabel)).setVisibility(View.INVISIBLE);
-                ((TextView) findViewById(R.id.duration)).setVisibility(View.INVISIBLE);
+                ((TextView) findViewById(R.id.durationLabel)).setVisibility(View.GONE);
+                ((TextView) findViewById(R.id.duration)).setVisibility(View.GONE);
             }
-            if (receiverIntent.getStringExtra("selectedOperator") != null)
-                ((TextView) findViewById(R.id.operator)).setText(receiverIntent.getStringExtra("selectedOperator"));
-            else
-                ((TextView) findViewById(R.id.operator)).setText(userDAO.getUserFullName(sessionMap.get("username").toString()));
             String revenue;
             if ((sessionMap.get("userType")).equals("Manager"))
                 revenue = orderDb.getOrderRevenue(vehicle, location, date);
             else
                 revenue = orderDb.getOrderRevenue(vehicle, null, date);
-            ((TextView) findViewById(R.id.revenue)).setText("$ " + revenue);
+            DecimalFormat df = new DecimalFormat("0.00");
+            ((TextView) findViewById(R.id.revenue)).setText("$ " + df.format(Float.parseFloat(revenue)));
             vehicleInventory.close();
     }
 }

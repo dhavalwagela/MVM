@@ -26,6 +26,10 @@ public class OrderDetailsForOperator extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.parent_menu, menu);
+        MenuItem cartItem = menu.getItem(4);
+        cartItem.setIcon(0);
+        cartItem.setTitle("");
+        cartItem.setEnabled(false);
         return true;
     }
     AlertDialog.Builder alertBuilder;
@@ -36,6 +40,10 @@ public class OrderDetailsForOperator extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -48,6 +56,10 @@ public class OrderDetailsForOperator extends AppCompatActivity {
         });
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
+    }
+    public void onBackPressed() {
+        startActivity(new Intent(this,ViewCurrentOrders.class));
+        finish();
     }
     public void completeOrder(View view) {
         onCompleteOrder(getApplicationContext());
@@ -62,7 +74,7 @@ public class OrderDetailsForOperator extends AppCompatActivity {
                 String orderId = getIntent().getStringExtra("orderId");
                 OrderDAO orderDAO = new OrderDAO(OrderDetailsForOperator.this);
                 orderDAO.changeOrderStatus(orderId, "Completed");
-                Toast.makeText(getApplicationContext(), "Order "+orderId +" Completed !!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Order Completed Successfully", Toast.LENGTH_SHORT).show();
                 startActivity(new Intent(context,ViewCurrentOrders.class));
                 dialogInterface.dismiss();
             }
@@ -157,9 +169,10 @@ public class OrderDetailsForOperator extends AppCompatActivity {
 
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Button cancelOrder = findViewById(R.id.btn_CancelOrder);
-        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled"))
+        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed"))
             cancelOrder.setEnabled(false);
         int i = 2;
+        float subtotal = 0;
         while (orderItems.moveToNext()) {
             TableRow row = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
@@ -188,11 +201,15 @@ public class OrderDetailsForOperator extends AppCompatActivity {
             textView.setWidth(350);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
+            subtotal += Float.parseFloat(orderItems.getString(orderItems.getColumnIndex("totalCost")));
 
             ll.addView(row, i);
             i++;
 
         }
+        float taxAmount = Float.parseFloat(orderDetails.getString(orderDetails.getColumnIndex("grandTotal")))-subtotal;
+        TextView orderTax = findViewById(R.id.taxationView);
+        orderTax.setText(orderTax.getText()+df.format(taxAmount));
         orderDetails.close();
         orderItems.close();
     }}

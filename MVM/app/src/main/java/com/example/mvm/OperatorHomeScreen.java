@@ -26,6 +26,9 @@ public class OperatorHomeScreen extends AppCompatActivity {
         cartItem.setEnabled(false);
         return true;
     }
+    public void onBackPressed() {
+        onLogoutClick(getApplicationContext());
+    }
     AlertDialog.Builder alertBuilder;
     public void onLogoutClick(final Context context) {
         alertBuilder = new AlertDialog.Builder(OperatorHomeScreen.this);
@@ -34,6 +37,10 @@ public class OperatorHomeScreen extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -71,6 +78,8 @@ public class OperatorHomeScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.operator_home_screen);
+        OperatorDAO oprdb = new OperatorDAO(this);
+        oprdb.fullfilInventory();
     }
     public void contactUs(View view) {
         startActivity(new Intent(this,ContactUsActivity.class));

@@ -26,63 +26,76 @@
                         android:layout_gravity="center"
                         android:layout_margin="16dp"
                         android:textColor="#009688"
-                        android:textSize="22sp"
+                        android:textSize="24sp"
                         android:typeface="serif"
                         android:textAllCaps="true"
                         app:fontFamily="sans-serif-condensed-medium"
                         android:textStyle="bold"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
                         android:text="View Available Vehicles"/>
+                <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:text="List of vehicles assigned" />
                 <TableLayout
                         android:layout_marginTop="10dp"
                         android:id="@+id/table_layout"
-                        android:layout_width="match_parent"
+                        android:layout_width="400dp"
                         android:layout_height="wrap_content">
 
                     <TableRow
-                            android:layout_height="wrap_content"
-                            android:layout_width="match_parent"
-                            android:id="@+id/table_row1"
-                            android:background="@color/colorBlack"
-                            android:padding="10dp">
 
+                        android:id="@+id/table_row1"
+                        android:layout_height="match_parent"
+                        android:background="@color/colorBlack">
 
                         <TextView
                                 android:id="@+id/vehicle_id"
-                                android:background="@color/colorBlack"
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
+                                android:layout_width="70dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:layout_span="1"
+                                android:paddingTop="10dp"
+                                android:text="Vehicle"
                                 android:textColor="#fff"
-                                android:text="Vehicle"/>
+                                android:textSize="12dp" />
                         <TextView
                                 android:id="@+id/optr_name"
+                                android:layout_width="90dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:layout_span="1"
+                                android:paddingTop="10dp"
+                                android:text="Operator Name"
                                 android:textColor="#fff"
-                                android:background="@color/colorBlack"
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="center"
-                                android:text="Operator name"/>
+                                android:textSize="12dp"/>
 
                         <TextView
                                 android:id="@+id/locn_id"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:gravity="right"
-                                android:background="@color/colorBlack"
+                                android:layout_width="140dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:layout_span="1"
+                                android:paddingTop="10dp"
                                 android:text="Location Intersection"
-                                android:textColor="#fff" />
-                        <TextView
                                 android:textColor="#fff"
+                                android:textSize="12dp" />
+                        <TextView
                                 android:id="@+id/time_slt"
-                                android:layout_height="wrap_content"
-                                android:layout_width="match_parent"
-                                android:layout_weight="1"
-                                android:gravity="right"
-                                android:text="Time slot"/>
+                                android:layout_width="95dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center"
+                                android:layout_span="1"
+                                android:paddingTop="10dp"
+                                android:text="Time Slot"
+                                android:textColor="#fff"
+                                android:textSize="12dp"/>
 
                     </TableRow>
                     <View
@@ -95,9 +108,10 @@
                         android:id="@+id/assgn_optr"
                         android:layout_width="wrap_content"
                         android:layout_height="48dp"
-                        android:layout_marginLeft="120dp"
                         android:layout_marginTop="20dp"
-                        android:layout_marginBottom="20dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_gravity="center"
+                        android:textSize="20sp"
                         android:onClick="assignOperatorScreen"
                         android:text="Assign Operator"
                         android:textAllCaps="false" />
@@ -106,8 +120,9 @@
                         android:id="@+id/assgn_optr2"
                         android:layout_width="wrap_content"
                         android:layout_height="46dp"
-                        android:layout_marginLeft="120dp"
                         android:layout_marginTop="20dp"
+                        android:textSize="20sp"
+                        android:layout_gravity="center"
                         android:layout_marginBottom="20dp"
                         android:onClick="assignLocationScreen"
                         android:text="Assign Location"

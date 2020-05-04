@@ -8,6 +8,7 @@ import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -18,9 +19,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 public class OrderDetails extends AppCompatActivity {
@@ -41,6 +40,10 @@ public class OrderDetails extends AppCompatActivity {
         alertBuilder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
+                sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
+                SharedPreferences.Editor session = sharedpreferences.edit();
+                session.clear();
+                session.commit();
                 startActivity(new Intent(context,MainActivity.class));
                 dialogInterface.dismiss();
             }
@@ -74,7 +77,8 @@ public class OrderDetails extends AppCompatActivity {
                     operatorDAO.refillOrderItems(vehicleId, "SANDWITCHES", sandwitches);
                 if (snacks > 0)
                     operatorDAO.refillOrderItems(vehicleId, "SNACKS", snacks);
-
+                Toast.makeText(getApplicationContext(), "Order Cancelled Successfully", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(context,ViewOrders.class));
                 dialogInterface.dismiss();
             }
         });
@@ -87,6 +91,10 @@ public class OrderDetails extends AppCompatActivity {
         AlertDialog alertDialog = alertBuilder.create();
         alertDialog.show();
     }
+    public void onBackPressed() {
+        startActivity(new Intent(this,ViewOrders.class));
+        finish();
+    }
     public boolean onOptionsItemSelected(MenuItem item) {
         sharedpreferences = getSharedPreferences(MainActivity.MyPREFERENCES, Context.MODE_PRIVATE);
         Map sessionMap = sharedpreferences.getAll();
@@ -95,8 +103,10 @@ public class OrderDetails extends AppCompatActivity {
                 onLogoutClick(getApplicationContext());
                 return true;
             case R.id.cart:
-                if (sessionMap.get("cart") != null)
-                    startActivity(new Intent(this,ViewCart.class));
+                if (sessionMap.get("cart") != null) {
+                    startActivity(new Intent(this, ViewCart.class));
+                    return true;
+                }
                 else {
                     Toast.makeText(getApplicationContext(), "Cart is empty", Toast.LENGTH_SHORT).show();
                     return false;
@@ -172,20 +182,11 @@ public class OrderDetails extends AppCompatActivity {
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
         Button cancelOrder = findViewById(R.id.btn_CancelOrder);
 
-        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled")) {
+        if (orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Not Completed") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed") || orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Cancelled")) {
             cancelOrder.setEnabled(false);
         }
-        try {
-            Date orderDate = simpleDateFormat.parse(orderDetails.getString(orderDetails.getColumnIndex("orderDate")));
-            if(simpleDateFormat.parse(simpleDateFormat.format(new Date())) .after(orderDate)) {
-                cancelOrder.setEnabled(false);
-                if (!orderDetails.getString(orderDetails.getColumnIndex("orderStatus")).equals("Completed"))
-                    orderStatusText.setText(" Order Status : Not Completed");
-            }
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
         int i = 2;
+        float subtotal = 0;
         while (orderItems.moveToNext()) {
             TableRow row = new TableRow(this);
             TableRow.LayoutParams lp = new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT);
@@ -193,25 +194,29 @@ public class OrderDetails extends AppCompatActivity {
 
             TextView textView = new TextView(this);
             textView.setText(String.valueOf(i-1));
-            textView.setWidth(350);
+            textView.setWidth(100);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(operatorDAO.getDescription("item", orderItems.getString(orderItems.getColumnIndex("itemId"))));
-            textView.setWidth(350);
+            textView.setWidth(100);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText(orderItems.getString(orderItems.getColumnIndex("quantity")));
-            textView.setWidth(350);
+            textView.setWidth(100);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
             textView = new TextView(this);
             textView.setText("$"+df.format(Float.parseFloat(orderItems.getString(orderItems.getColumnIndex("totalCost")))));
-            textView.setWidth(350);
+            textView.setWidth(100);
+            textView.setGravity(Gravity.CENTER);
             textView.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
             row.addView(textView);
 
@@ -221,12 +226,15 @@ public class OrderDetails extends AppCompatActivity {
                 snacks = Integer.parseInt(orderItems.getString(orderItems.getColumnIndex("quantity")));
             else
                 sandwitches = Integer.parseInt(orderItems.getString(orderItems.getColumnIndex("quantity")));
-
+            subtotal += Float.parseFloat(orderItems.getString(orderItems.getColumnIndex("totalCost")));
 
             ll.addView(row, i);
             i++;
 
         }
+        float taxAmount = Float.parseFloat(orderDetails.getString(orderDetails.getColumnIndex("grandTotal")))-subtotal;
+        TextView orderTax = findViewById(R.id.tax_view);
+        orderTax.setText(orderTax.getText()+df.format(taxAmount));
         orderDetails.close();
         orderItems.close();
     }
