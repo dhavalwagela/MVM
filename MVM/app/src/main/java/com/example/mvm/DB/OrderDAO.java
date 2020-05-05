@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -24,10 +25,12 @@ public class OrderDAO extends SQLiteOpenHelper {
         else
             condition = "vehicleId = '"+vehicleId+"' and orderDate = '"+date+"'";
         Cursor cursor = db.query("Orders", null, condition, null, null, null, null);
+        float revenue = 0;
         while(cursor.moveToNext()) {
-            return cursor.getString(cursor.getColumnIndex("grandTotal"));
+            revenue+= Float.parseFloat(cursor.getString(cursor.getColumnIndex("grandTotal")));
         }
-        return "0.00";
+        DecimalFormat df = new DecimalFormat("0.00");
+        return df.format(revenue);
     }
 
     public boolean placeOrder(String orderId, String username, String vehicleId, String locationId, String pickupTime, float grandTotal) {
