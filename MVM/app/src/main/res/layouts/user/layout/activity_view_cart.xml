@@ -38,34 +38,34 @@
 
 
                 <TextView
-                        android:id="@+id/vehicle_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_margin="16dp"
-                        android:text="Vehicle : "
-                        android:textColor="#000"
-                        android:textSize="16sp" />
+                    android:id="@+id/vehicle_id"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_margin="16dp"
+                    android:text="Vehicle : "
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
                 <TextView
-                        android:id="@+id/location_id"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_margin="16dp"
-                        android:text="Location : "
-                        android:textColor="#000"
-                        android:textSize="16sp" />
+                    android:id="@+id/location_id"
+                    android:layout_width="115dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_margin="16dp"
+                    android:text="Location Intersection : "
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
                 <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="left"
-                        android:layout_margin="16dp"
-                        android:id="@+id/duration"
-                        android:text="Time Slot : "
-                        android:textColor="#000"
-                        android:textSize="16sp" />
+                    android:id="@+id/duration"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left"
+                    android:layout_margin="16dp"
+                    android:text="Time Slot : "
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
                 <TableLayout
                         android:id="@+id/table_layout"

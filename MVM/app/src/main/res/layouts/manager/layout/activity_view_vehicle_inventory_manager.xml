@@ -195,7 +195,7 @@
                     android:layout_height="wrap_content"
                     android:layout_span="1"
                     android:padding="5dp"
-                    android:text="Location"
+                    android:text="Location Intersection"
                     android:textSize="16dp" />
 
                 <TextView

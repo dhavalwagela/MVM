@@ -172,7 +172,7 @@ public class OrderDetails extends AppCompatActivity {
         vehicleText.setText("Vehicle : "+operatorDAO.getDescription("vehicle", orderDetails.getString(orderDetails.getColumnIndex("vehicleId"))));
 
         TextView locationText = findViewById(R.id.locationId);
-        locationText.setText("Location : "+operatorDAO.getDescription("location", orderDetails.getString(orderDetails.getColumnIndex("locationId"))));
+        locationText.setText("Location Intersection: "+operatorDAO.getDescription("location", orderDetails.getString(orderDetails.getColumnIndex("locationId"))));
 
         TextView orderStatusText = findViewById(R.id.orderStatus);
         orderStatusText.setText(" Order Status : "+orderDetails.getString(orderDetails.getColumnIndex("orderStatus")));

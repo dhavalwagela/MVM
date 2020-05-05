@@ -108,7 +108,7 @@ public class ViewSchedule extends AppCompatActivity {
             row.setLayoutParams(lp);
 
             TextView textView = new TextView(this);
-            textView.setText("Location : "+operatorDAO.getDescription("location", operatorDetails.getString(operatorDetails.getColumnIndex("locationId"))));
+            textView.setText("Location Intersection: "+operatorDAO.getDescription("location", operatorDetails.getString(operatorDetails.getColumnIndex("locationId"))));
             textView.setGravity(Gravity.CENTER);
             textView.setTextSize(18);
             row.addView(textView);

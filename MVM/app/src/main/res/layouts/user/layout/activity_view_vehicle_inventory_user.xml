@@ -31,12 +31,12 @@
                 android:layout_marginLeft="10dp">
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
+                    android:layout_width="115dp"
+                    android:layout_height="wrap_content"
                     android:layout_span="1"
                     android:padding="5dp"
-                    android:text="Location :"
-                    android:textSize="16dp" />
+                    android:text="Location Intersection:"
+                    android:textSize="16sp" />
 
                 <TextView
                     android:id="@+id/location_id"

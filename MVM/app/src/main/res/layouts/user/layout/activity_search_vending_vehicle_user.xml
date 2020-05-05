@@ -25,14 +25,14 @@
 
         <TextView
             android:id="@+id/locationidLabel"
-            android:layout_width="100dp"
+            android:layout_width="120dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="250dp"
             android:layout_marginRight="250dp"
             android:gravity="center"
-            android:text="Location :"
-            android:textSize="22sp"
+            android:text="Location  Intersection:"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
@@ -213,7 +213,7 @@
             android:id="@+id/spinner"
             android:layout_width="118dp"
             android:layout_height="29dp"
-            android:layout_marginTop="25dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/vehicleLabel"
             app:layout_constraintTop_toBottomOf="@+id/spinner2" />
@@ -227,7 +227,7 @@
             android:layout_marginRight="250dp"
             android:gravity="center"
             android:text="Vehicle :"
-            android:textSize="22sp"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/locationidLabel" />
@@ -236,7 +236,7 @@
             android:id="@+id/spinner2"
             android:layout_width="118dp"
             android:layout_height="29dp"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="40dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/locationidLabel"
             app:layout_constraintTop_toBottomOf="@+id/titleLabel" />
