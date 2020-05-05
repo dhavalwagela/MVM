@@ -45,15 +45,11 @@
         app:layout_constraintTop_toBottomOf="@+id/txtAssigned" />
 
     <TableLayout
-            android:id="@+id/table_layout"
-            android:layout_width="409dp"
-            android:layout_height="502dp"
-            android:layout_marginStart="150dp"
-            android:layout_marginLeft="150dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginEnd="10dp"
-            android:layout_marginRight="10dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/VehicleID" />
+        android:id="@+id/table_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="502dp"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/VehicleID" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -214,7 +214,7 @@ public class AssignLocationScreen extends AppCompatActivity {
                 cancelButton.setText("Cancel");
                 textViewUser.setTextSize(17);
                 dialog.setTitle("Confirmation");
-                textViewUser.setText("Vehicle: " + vehicleName.getSelectedItem().toString() + "\n" + "Location: " + locationName.getSelectedItem().toString() +"\nTime slot:   " + selectedStartTime+":00 - "+selectedEndTime+":00");
+                textViewUser.setText("Vehicle: " + vehicleName.getSelectedItem().toString() + "\n" + "Location Intersection: " + locationName.getSelectedItem().toString() +"\nTime slot:   " + selectedStartTime+":00 - "+selectedEndTime+":00");
 
                 okButton.setOnClickListener(new View.OnClickListener() {
                     @Override
