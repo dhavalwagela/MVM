@@ -27,7 +27,8 @@ public class OrderDAO extends SQLiteOpenHelper {
         Cursor cursor = db.query("Orders", null, condition, null, null, null, null);
         float revenue = 0;
         while(cursor.moveToNext()) {
-            revenue+= Float.parseFloat(cursor.getString(cursor.getColumnIndex("grandTotal")));
+            if (cursor.getString(cursor.getColumnIndex("orderStatus")).equals("Pending") || cursor.getString(cursor.getColumnIndex("orderStatus")).equals("Completed"))
+                revenue += Float.parseFloat(cursor.getString(cursor.getColumnIndex("grandTotal")));
         }
         DecimalFormat df = new DecimalFormat("0.00");
         return df.format(revenue);
