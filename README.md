@@ -1,45 +1,39 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
+UTA Mobile Vending System.  
+This system is used to manage mobile food vending locations, contents and sell products to users.
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
+Vehicle search. The vending user shall be able to list vehicle locations showing the vehicle name, type, and assigned location (location id).
+Vehicle Inventory. The system shall show the vending user the results of the inventory search as follows (the user shall input a vending vehicle name:
+    1. Number of drinks remaining
+    2. Number of sandwiches remaining
+    3. Number of snacks remaining
+    4. Currently assigned duration ending time
+    5. Currently assigned location
+The Vending manager/operator will be able to see additional details.
+    6. Total revenue today
+    7. Next assigned location today
+    8. Name of operator (Vending manager only)
+Three different kinds of users for the system:
+    1. Vending manager 
+        a. creates own profile
+        b. performs a vehicle search
+        c. views a vehicle inventory (current day only)
+        d. determines available vending vehicle for next day (returns a search of all vending vehicles that are available the next day)
+        e. views details of a specific vehicle operator
+        f. assigns a location to a vending vehicle for the next day
+        g. assigns an operator to a vending vehicle (assigned the entire day)
+        h. updates his own profile
+    2. Vending user (student, faculty, staff, non-student)
+        a. creates own profile
+        b. performs a vehicle search
+        c. views inventory of a specific vehicle
+        d. purchases item(s) (item type, quantity and cost are given) - this can be performed both remotely and at the vehicle
+        e. updates his own profile
+    3. Vending Operator
+        a. creates own profile
+        b. views inventory of his vehicle
+        c. views today's schedule and location
+        d. updates his own profile
+The vending manager assigns all available vending vehicles late afternoon for the next day by location. Each location has an assigned slot starting at 8am with the next available slot determined by the duration for that location. The vending manager, not the software, makes sure not to overbook a vending vehicle and/or operator.
+All users will have the standard functions like register, login, logout. Each system user must register and for simplicity selects their role during registration. Assume that System users do not have to be UTA students.
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
-
----
-
-## Edit a file
-
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
-
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
-
----
-
-## Create a file
-
-Next, you’ll add a new file to this repository.
-
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
-
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
-
----
-
-## Clone a repository
-
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
-
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
-
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
+This project uses SQLite and a local database, which was made just for learning Android and Software Development Life Cycle.

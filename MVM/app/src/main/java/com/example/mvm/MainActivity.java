@@ -17,6 +17,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatCheckBox;
+import com.example.mvm.EndUser.ForgotPasswordScreen;
+import com.example.mvm.EndUser.Register;
+import com.example.mvm.Manager.ManagerHomeScreen;
+import com.example.mvm.Operator.OperatorHomeScreen;
+import com.example.mvm.User.UserHomeScreen;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -99,9 +104,9 @@ public class MainActivity extends AppCompatActivity {
         }
     }
     public void registerDetails(View view) {
-        startActivity(new Intent(this,Register.class));
+        startActivity(new Intent(this, Register.class));
     }
     public void forgotPassword(View view) {
-        startActivity(new Intent(this,ForgotPasswordScreen.class));
+        startActivity(new Intent(this, ForgotPasswordScreen.class));
     }
 }
