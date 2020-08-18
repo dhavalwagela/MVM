@@ -17,46 +17,46 @@ The Vending manager/operator will be able to see additional details.
     8. Name of operator (Vending manager only)
 
 Three different kinds of users for the system:
-    
-    1. Vending manager 
+
+ 1. Vending manager 
         
-        a. creates own profile
+       a. creates own profile
         
-        b. performs a vehicle search
+       b. performs a vehicle search
         
-        c. views a vehicle inventory (current day only)
+       c. views a vehicle inventory (current day only)
         
-        d. determines available vending vehicle for next day (returns a search of all vending vehicles that are available the next day)
+       d. determines available vending vehicle for next day (returns a search of all vending vehicles that are available the next day)
         
-        e. views details of a specific vehicle operator
+       e. views details of a specific vehicle operator
         
-        f. assigns a location to a vending vehicle for the next day
+       f. assigns a location to a vending vehicle for the next day
         
-        g. assigns an operator to a vending vehicle (assigned the entire day)
+       g. assigns an operator to a vending vehicle (assigned the entire day)
         
-        h. updates his own profile
+       h. updates his own profile
     
     2. Vending user (student, faculty, staff, non-student)
         
-        a. creates own profile
+       a. creates own profile
         
-        b. performs a vehicle search
+       b. performs a vehicle search
         
-        c. views inventory of a specific vehicle
+       c. views inventory of a specific vehicle
         
-        d. purchases item(s) (item type, quantity and cost are given) - this can be performed both remotely and at the vehicle
+       d. purchases item(s) (item type, quantity and cost are given) - this can be performed both remotely and at the vehicle
         
-        e. updates his own profile
+       e. updates his own profile
     
     3. Vending Operator
     
-        a. creates own profile
+       a. creates own profile
         
-        b. views inventory of his vehicle
+       b. views inventory of his vehicle
         
-        c. views today's schedule and location
+       c. views today's schedule and location
         
-        d. updates his own profile
+       d. updates his own profile
 
 The vending manager assigns all available vending vehicles late afternoon for the next day by location. Each location has an assigned slot starting at 8am with the next available slot determined by the duration for that location. The vending manager, not the software, makes sure not to overbook a vending vehicle and/or operator.
 
