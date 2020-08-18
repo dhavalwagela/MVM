@@ -36,7 +36,7 @@ Three different kinds of users for the system:
         
        h. updates his own profile
     
-    2. Vending user (student, faculty, staff, non-student)
+ 2. Vending user (student, faculty, staff, non-student)
         
        a. creates own profile
         
@@ -48,7 +48,7 @@ Three different kinds of users for the system:
         
        e. updates his own profile
     
-    3. Vending Operator
+ 3. Vending Operator
     
        a. creates own profile
         
